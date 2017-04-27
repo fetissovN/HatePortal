@@ -27,7 +27,7 @@
             </div>
             <tr>
                 <td><p><spring:message code="label.username"/></p></td>
-                <td><s:input path="username"/></td>
+                <td><s:input path="email"/></td>
             </tr>
             <tr>
                 <td><p><spring:message code="label.password"/></p></td>

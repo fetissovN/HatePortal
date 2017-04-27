@@ -21,7 +21,7 @@
             <ul class="menu">
                 <li class="hide-for-small-only"><a href="#">LEAVE FEEDBACK</a></li>
                 <li class="hide-for-small-only"><a href="#">ABOUT</a></li>
-                <li class="hide-for-small-only"><a href="#">LOGIN</a></li>
+                <li class="hide-for-small-only"><a href="/log/">LOGIN</a></li>
                 <li>
                 <li>
                     <button class="offcanvas-trigger" type="button" data-open="offCanvasRight">
