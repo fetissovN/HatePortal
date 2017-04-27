@@ -1,0 +1,47 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Bar</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
+
+</head>
+<body>
+
+
+<div class="off-canvas-content" data-off-canvas-content>
+    <div class="nav-bar">
+        <div class="nav-bar-left">
+            <a class="nav-bar-logo"><img class="logo" src="<c:url value="/resources/images/logo.png"/>"></a>
+        </div>
+        <div class="nav-bar-right">
+            <ul class="menu">
+                <li class="hide-for-small-only"><a href="#">LEAVE FEEDBACK</a></li>
+                <li class="hide-for-small-only"><a href="#">ABOUT</a></li>
+                <li class="hide-for-small-only"><a href="#">LOGIN</a></li>
+                <li>
+                <li>
+                    <button class="offcanvas-trigger" type="button" data-open="offCanvasRight">
+                        <span class="offcanvas-trigger-text hide-for-small-only">INFO</span>
+                        <div class="hamburger">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </div>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="/resources/js/vendor/jquery.js"></script>
+<script src="/resources/js/vendor/foundation.js"></script>
+<script src="/resources/js/vendor/what-input.js"></script>
+<script src="/resources/js/vendor/app.js"></script>
+
+</body>
+</html>
