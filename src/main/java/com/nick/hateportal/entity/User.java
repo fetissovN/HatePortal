@@ -1,25 +1,36 @@
 package com.nick.hateportal.entity;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "surname")
     private String surname;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "rate")
     private Double rate;
 
+    @Column(name = "role")
     private Role role;
 
     public User() {

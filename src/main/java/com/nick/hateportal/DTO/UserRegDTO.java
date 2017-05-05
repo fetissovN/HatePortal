@@ -1,7 +1,11 @@
 package com.nick.hateportal.DTO;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 
 public class UserRegDTO {
+
 
     private String username;
 

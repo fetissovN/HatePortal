@@ -7,7 +7,8 @@ CREATE TABLE users(
   surname VARCHAR(255) NOT NULL ,
   email VARCHAR(100) NOT NULL ,
   phone VARCHAR(100) NOT NULL ,
-  rate INT NOT NULL
+  rate INT NOT NULL,
+  role INT NOT NULL
 )
   ENGINE = InnoDB;
 
