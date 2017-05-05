@@ -23,11 +23,6 @@
             <div align="center">
                 <legend><spring:message code="label.reg.reg"/></legend>
                 <p align="center">
-            <span style="float: inherit">
-                <a href="?lang=en">en</a>
-                |
-                <a href="?lang=ru">ru</a>
-            </span>
                 </p>
             </div>
             <table>
@@ -37,7 +32,7 @@
                     <td><span class="error"><s:errors path="username" /></span></td>
                 </tr>
                 <tr>
-                    <td><p><spring:message code="label.username"/></p></td>
+                    <td><p><spring:message code="label.surname"/></p></td>
                     <td><s:input path="surname"/></td>
                     <td><span class="error"><s:errors path="surname" /></span></td>
                 </tr>
@@ -47,7 +42,7 @@
                     <td><span class="error"><s:errors path="email" /></span></td>
                 </tr>
                 <tr>
-                    <td><p><spring:message code="label.username"/></p></td>
+                    <td><p><spring:message code="label.reg.phone"/></p></td>
                     <td><s:input path="phone"/></td>
                     <td><span class="error"><s:errors path="phone"/></span></td>
                 </tr>

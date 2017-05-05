@@ -8,6 +8,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.css"/> ">
+    <style type="text/css">
+        span.error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="bar.jsp"/>
@@ -18,20 +23,18 @@
     <div align="center">
         <legend><spring:message code="label.formName"/></legend>
             <p align="inherit">
-            <span style="float: inherit">
-                <a href="?lang=en">en</a>
-                |
-                <a href="?lang=ru">ru</a>
-            </span>
+
             </p>
             </div>
             <tr>
                 <td><p><spring:message code="label.username"/></p></td>
                 <td><s:input path="email"/></td>
+                <td><span class="error"><s:errors path="email" /></span></td>
             </tr>
             <tr>
                 <td><p><spring:message code="label.password"/></p></td>
                 <td><s:password path="password"/></td>
+                <td><span class="error"><s:errors path="password" /></span></td>
             </tr>
             <%--<tr>--%>
                 <%--<td>Remember me?</td>--%>

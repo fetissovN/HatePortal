@@ -27,9 +27,10 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login")
-    public String login(HttpSession session, Model model, @ModelAttribute("loginFrom")UserLoginDTO loginDTO, BindingResult result){
+    public String login(@ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpSession session, Model model, BindingResult result){
         validator.validate(loginDTO, result);
         if (result.hasErrors()){
+//            model.addAttribute("loginFrom", new UserLoginDTO());
             return "login";
         }
 

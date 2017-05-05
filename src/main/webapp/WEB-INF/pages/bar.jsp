@@ -10,12 +10,20 @@
 
 </head>
 <body>
+<div class="row">
+<span style="float: right">
+                <a href="?lang=en">en</a>
+                |
+                <a href="?lang=ru">ru</a>
+</span>
+
+</div>
 
 
 <div class="off-canvas-content" data-off-canvas-content>
     <div class="nav-bar">
         <div class="nav-bar-left">
-            <a class="nav-bar-logo"><img class="logo" src="<c:url value="/resources/images/logo.png"/>"></a>
+            <a style="margin-left: 50px" class="nav-bar-logo" href="/"><img class="logo" src="<c:url value="/resources/images/logo.png"/>"></a>
         </div>
         <div class="nav-bar-right">
             <ul class="menu">
