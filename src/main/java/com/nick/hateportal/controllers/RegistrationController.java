@@ -1,6 +1,7 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.UserRegDTO;
+import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.validation.RegFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,20 @@ public class RegistrationController {
         if (result.hasErrors()){
             return "register";
         }
+        try{
+            User user = new User();
+            user.setEmail(userRegDTO.getEmail());
+            user.setPassword(userRegDTO.getPassword());
+            user.setPhone(userRegDTO.getPhone());
+            user.setRate(0.0);
+            user.setUsername(userRegDTO.getUsername());
+            user.setSurname(userRegDTO.getSurname());
+            user.setRole(1);
+            userService.createUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        return "/log/";
+        return "redirect:/log/";
     }
 }

@@ -1,6 +1,7 @@
 package com.nick.hateportal.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "phone")
@@ -31,9 +32,20 @@ public class User {
     private Double rate;
 
     @Column(name = "role")
-    private Role role;
+    private int role;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
+    private List<Post> sentPosts;
 
     public User() {
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public Long getId() {
@@ -92,11 +104,11 @@ public class User {
         this.rate = rate;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Post> getSentPosts() {
+        return sentPosts;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setSentPosts(List<Post> sentPosts) {
+        this.sentPosts = sentPosts;
     }
 }

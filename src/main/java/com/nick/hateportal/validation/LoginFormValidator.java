@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 
 @Component
 public class LoginFormValidator implements Validator {
+
     @Override
     public boolean supports(Class<?> aClass) {
         return UserLoginDTO.class.isAssignableFrom(aClass);

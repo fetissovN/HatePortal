@@ -1,8 +1,6 @@
 package com.nick.hateportal.DTO;
 
 
-import com.nick.hateportal.entity.Role;
-
 public class UserDTO {
 
     private Long id;
@@ -17,7 +15,6 @@ public class UserDTO {
 
     private Double rate;
 
-    private Role role;
 
 
 }
