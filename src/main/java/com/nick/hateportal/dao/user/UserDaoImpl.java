@@ -38,6 +38,9 @@ public class UserDaoImpl implements UserDAO {
         query.setParameter("email", email);
 
         List userEntities = query.list();
+        if (userEntities.size()==0){
+            return null;
+        }
         User user = (User) userEntities.get(0);
 
 //        User user = sessionFactory.getCurrentSession().get(User.class,email);

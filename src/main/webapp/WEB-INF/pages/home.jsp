@@ -4,6 +4,7 @@
 <html>
 <body>
 <jsp:include page="bar.jsp"/>
-<h2>Hello World!</h2>
+<h2>${sessionScope.get("auth").username}</h2>
+
 </body>
 </html>

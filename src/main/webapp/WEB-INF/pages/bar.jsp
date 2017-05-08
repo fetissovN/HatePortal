@@ -29,11 +29,26 @@
             <ul class="menu">
                 <li class="hide-for-small-only"><a href="#">LEAVE FEEDBACK</a></li>
                 <li class="hide-for-small-only"><a href="#">ABOUT</a></li>
-                <li class="hide-for-small-only"><a href="/log/">LOGIN</a></li>
+                <li class="hide-for-small-only"><a href="/log/">
+                    <c:choose>
+                        <c:when test="${not empty sessionScope.get('auth')}">
+                            <spring:message code="label.bar.logout"/>
+                        </c:when>
+                        <c:otherwise>
+                            <spring:message code="label.bar.login"/>
+                        </c:otherwise>
+                    </c:choose></a></li>
                 <li>
                 <li>
                     <button class="offcanvas-trigger" type="button" data-open="offCanvasRight">
-                        <span class="offcanvas-trigger-text hide-for-small-only">INFO</span>
+                        <span class="offcanvas-trigger-text hide-for-small-only"><c:choose>
+                            <c:when test="${sessionScope.get('auth').rate >= 0}">
+                                ${sessionScope.get("auth").username}
+                            </c:when>
+                            <c:otherwise>
+                                INF
+                            </c:otherwise>
+                        </c:choose></span>
                         <div class="hamburger">
                             <span class="line"></span>
                             <span class="line"></span>

@@ -35,6 +35,9 @@
                 <td><p><spring:message code="label.password"/></p></td>
                 <td><s:password path="password"/></td>
                 <td><span class="error"><s:errors path="password" /></span></td>
+                <td><span class="error"><c:if test="${loginErr eq 'loginErr'}">
+                    <spring:message code="label.login.error"/>
+                </c:if></span></td>
             </tr>
             <%--<tr>--%>
                 <%--<td>Remember me?</td>--%>

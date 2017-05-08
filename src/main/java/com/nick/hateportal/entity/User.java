@@ -111,4 +111,19 @@ public class User {
     public void setSentPosts(List<Post> sentPosts) {
         this.sentPosts = sentPosts;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", rate=" + rate +
+                ", role=" + role +
+                ", sentPosts=" + sentPosts +
+                '}';
+    }
 }

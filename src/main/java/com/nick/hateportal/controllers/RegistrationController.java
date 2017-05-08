@@ -3,6 +3,7 @@ package com.nick.hateportal.controllers;
 import com.nick.hateportal.DTO.UserRegDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
+import com.nick.hateportal.utils.PassHash;
 import com.nick.hateportal.validation.RegFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -43,9 +44,11 @@ public class RegistrationController {
         User userFromDB = userService.getUserByEmail(userRegDTO.getEmail());
         if (userFromDB==null){
             try{
+                PassHash passHash = new PassHash();
+                String pass = passHash.stringPassToHash(userRegDTO.getPassword());
                 User user = new User();
                 user.setEmail(userRegDTO.getEmail());
-                user.setPassword(userRegDTO.getPassword());
+                user.setPassword(pass);
                 user.setPhone(userRegDTO.getPhone());
                 user.setRate(0.0);
                 user.setUsername(userRegDTO.getUsername());
