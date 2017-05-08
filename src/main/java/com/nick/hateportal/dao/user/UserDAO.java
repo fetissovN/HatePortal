@@ -7,4 +7,8 @@ import com.nick.hateportal.entity.User;
 public interface UserDAO {
 
     void createUser(User user);
+
+    User getUserByEmail(String email);
+
+
 }

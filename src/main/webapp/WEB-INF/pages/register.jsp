@@ -59,6 +59,9 @@
                 </tr>
                 <tr>
                     <td><input class="button" type="submit" value="Ok"/></td>
+                    <td><span class="error"><c:if test="${userExist eq 'Exist'}">
+                        <spring:message code="label.reg.userExist"/>
+                    </c:if> </span></td>
                 </tr>
             </table>
         </s:form>
