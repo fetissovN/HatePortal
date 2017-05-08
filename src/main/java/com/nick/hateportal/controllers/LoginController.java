@@ -28,7 +28,11 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = "/")
-    public String showLoginFrom(Model model){
+    public String showLoginFrom(HttpSession session, Model model){
+        if (session.getAttribute("auth")!=null){
+            session.removeAttribute("auth");
+            return "redirect:/";
+        }
         model.addAttribute("loginForm", new UserLoginDTO());
         return "login";
     }

@@ -27,8 +27,8 @@
         </div>
         <div class="nav-bar-right">
             <ul class="menu">
-                <li class="hide-for-small-only"><a href="#">LEAVE FEEDBACK</a></li>
-                <li class="hide-for-small-only"><a href="#">ABOUT</a></li>
+                <li class="hide-for-small-only"><a href="#"><spring:message code="label.bar.feedback"/></a></li>
+                <li class="hide-for-small-only"><a href="#"><spring:message code="label.bar.about"/></a></li>
                 <li class="hide-for-small-only"><a href="/log/">
                     <c:choose>
                         <c:when test="${not empty sessionScope.get('auth')}">
@@ -42,7 +42,7 @@
                 <li>
                     <button class="offcanvas-trigger" type="button" data-open="offCanvasRight">
                         <span class="offcanvas-trigger-text hide-for-small-only"><c:choose>
-                            <c:when test="${sessionScope.get('auth').rate >= 0}">
+                            <c:when test="${ not empty sessionScope.get('auth')}">
                                 ${sessionScope.get("auth").username}
                             </c:when>
                             <c:otherwise>
