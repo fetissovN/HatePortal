@@ -44,7 +44,9 @@ public class PostController {
     public String createPost(@ModelAttribute(value = "postFrom") Post post, Model model, HttpSession session, BindingResult result){
         postFormValidator.validate(post, result);
         if (result.hasErrors()){
-            return "redirect:/post/";
+            model.addAttribute("postBinding","postBinding");
+            model.addAttribute("postForm", new Post());
+            return "home";
         }
         Date date = new Date();
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");

@@ -11,6 +11,13 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
 
+    <script src="<c:url value="/resources/js/app.js"/>"></script>
+    <style type="text/css">
+        span.error {
+            color: red;
+        }
+    </style>
+
 </head>
 <body>
 <jsp:include page="bar.jsp"/>
@@ -18,50 +25,52 @@
 <%--<ul class="button-group round">--%>
     <%--<li><a href="/post/" class="button"><spring:message code="label.post.buttonIn"/></a></li>--%>
 <%--</ul>--%>
-<c:if test="${not empty postForm}">
+
     <div class="row">
         <div class="large-3 column"><!-- ... --></div>
         <div class="large-6 large-centered column">
-            <s:form method="post" commandName="postForm" action="create">
+            <c:if test="${not empty postBinding}">
+            <script>
+                $('#formPost').show('slow');
+            </script>
+            </c:if>
+            <s:form id="formPost" cssStyle="display: none" method="post" commandName="postForm" action="post/create">
+                <%--<c:if test="${not empty postForm}">--%>
                 <div align="center">
                     <legend><spring:message code="label.post.post"/></legend>
                 </div>
                 <tr>
                     <td><p><spring:message code="label.post.title"/></p></td>
                     <td><s:input path="title"/></td>
-                        <%--<td><span class="error"><s:errors path="email" /></span></td>--%>
+                    <td><span class="error"><s:errors path="title"/></span></td>
                 </tr>
                 <tr>
                     <td><p><spring:message code="label.post.message"/></p></td>
                     <td><s:textarea path="post"/></td>
-                        <%--<td><span class="error"><s:errors path="password" /></span></td>--%>
-                        <%--<td><span class="error"><c:if test="${loginErr eq 'loginErr'}">--%>
-                        <%--<spring:message code="label.login.error"/>--%>
-                        <%--</c:if></span></td>--%>
+                    <td><span class="error"><s:errors path="post" /></span></td>
                 </tr>
                 <tr>
-                    <td><p><spring:message code="label.post.message"/></p></td>
+                    <td><p><spring:message code="label.post.photo"/></p></td>
                     <td><s:input path="photo" type="file" name="photo" accept="image/*"/></td>
-                        <%--<td><span class="error"><s:errors path="password" /></span></td>--%>
-                        <%--<td><span class="error"><c:if test="${loginErr eq 'loginErr'}">--%>
-                        <%--<spring:message code="label.login.error"/>--%>
-                        <%--</c:if></span></td>--%>
                 </tr>
                 <tr>
                     <td><input class="button" type="submit" value="Ok"/></td>
                 </tr>
                 </table>
+                <%--</c:if>--%>
             </s:form>
 
         </div>
         <div class="large-3 column"></div>
     </div>
-</c:if>
+
 <div class="row">
     <div class="large-2 column">
+        <c:if test="${not empty showButton}">
         <ul class="button-group round">
-            <li><a href="/post/" class="button"><spring:message code="label.post.buttonIn"/></a></li>
+            <li><button id="buttonPost" class="button"><spring:message code="label.post.buttonIn"/></button></li>
         </ul>
+        </c:if>
     </div>
     <div class="large-10 column">
 <div class="article-row-section">
