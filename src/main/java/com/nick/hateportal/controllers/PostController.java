@@ -56,8 +56,9 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post/{id}")
-    public String showPostById(@PathVariable("id") int id, Model model){
-//        TODO
-        return "home";
+    public String showPostById(@PathVariable("id") Long id, Model model){
+        Post post = postService.getPostById(id);
+        model.addAttribute("post", post);
+        return "post";
     }
 }

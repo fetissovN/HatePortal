@@ -29,12 +29,12 @@
                 <tr>
                     <td><p><spring:message code="label.post.title"/></p></td>
                     <td><s:input path="title"/></td>
-                        <%--<td><span class="error"><s:errors path="email" /></span></td>--%>
+                    <td><span class="error"><s:errors path="title" /></span></td>
                 </tr>
                 <tr>
                     <td><p><spring:message code="label.post.message"/></p></td>
                     <td><s:textarea path="post"/></td>
-                        <%--<td><span class="error"><s:errors path="password" /></span></td>--%>
+                    <td><span class="error"><s:errors path="post" /></span></td>
                         <%--<td><span class="error"><c:if test="${loginErr eq 'loginErr'}">--%>
                         <%--<spring:message code="label.login.error"/>--%>
                         <%--</c:if></span></td>--%>
@@ -69,7 +69,7 @@
 
         <h2 class="article-row-section-header">Hate Posts</h2>
 <c:forEach items="${posts}" var="postMain">
-        <a href="<c:url value="/post/${postMain.id}"/>">
+        <a href="<c:url value="post/post/${postMain.id}"/>">
             <article class="article-row">
                 <div class="article-row-img">
                     <img src="http://placehold.it/200" alt="picture of a whale eating a donkey" />
@@ -93,21 +93,5 @@
     <%--<div class="large-1 column">asdasdasdasd</div>--%>
 </div>
 
-
-<div class="row">
-    <div class="large-3 column"><!-- ... --></div>
-    <div class="large-6 large-centered column">
-        <table align="center" border="1">
-            <tr>
-        <c:forEach items="${posts}" var="post">
-            <th>
-
-            </th>
-        </c:forEach>
-            </tr>
-        </table>
-    </div>
-    <div class="large-3 column"></div>
-</div>
 </body>
 </html>

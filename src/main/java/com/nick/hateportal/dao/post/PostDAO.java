@@ -11,4 +11,6 @@ public interface PostDAO {
     void createPost(Post post);
 
     List<Post> getAllPosts();
+
+    Post getPostById(Long postId);
 }

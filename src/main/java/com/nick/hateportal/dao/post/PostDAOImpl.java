@@ -30,4 +30,10 @@ public class PostDAOImpl implements PostDAO{
         List result = criteria.list();
         return result;
     }
+
+    @Override
+    public Post getPostById(Long id) {
+        Post post = sessionFactory.getCurrentSession().get(Post.class, id);
+        return post;
+    }
 }

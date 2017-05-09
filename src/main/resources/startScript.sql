@@ -82,3 +82,4 @@ CREATE TABLE companies_response(
   FOREIGN KEY (post_id) REFERENCES users_posts(id) ON UPDATE CASCADE ON DELETE CASCADE
 )
   ENGINE = InnoDB;
+
