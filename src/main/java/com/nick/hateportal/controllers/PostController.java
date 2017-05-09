@@ -1,6 +1,7 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.UserDTO;
+import com.nick.hateportal.entity.Message;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.post.PostService;
@@ -59,6 +60,13 @@ public class PostController {
     public String showPostById(@PathVariable("id") Long id, Model model){
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
+        model.addAttribute("messagePost", new Message());
         return "post";
     }
+
+    @RequestMapping(value = "comment")
+    public String getComments(){
+        return "post";
+    }
+
 }

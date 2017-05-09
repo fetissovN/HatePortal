@@ -2,6 +2,7 @@ package com.nick.hateportal.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users_posts")
@@ -28,7 +29,18 @@ public class Post {
     @Column(name = "photo")
     private byte[] photo;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "post_id")
+    private List<Message> postRelatedMessages;
+
     public Post() {
+    }
+
+    public List<Message> getPostRelatedMessages() {
+        return postRelatedMessages;
+    }
+
+    public void setPostRelatedMessages(List<Message> postRelatedMessages) {
+        this.postRelatedMessages = postRelatedMessages;
     }
 
     public Long getId() {

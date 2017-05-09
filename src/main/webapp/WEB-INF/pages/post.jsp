@@ -29,7 +29,23 @@
                 <time class="article-row-content-time" datetime="2008-02-14 20:00">${post.postDate}</time>
             </div>
         </article>
-
+        <div class="row">
+            <div class="large-3 column"></div>
+                <div class="large-6 large-centered column">
+                    <h5><spring:message code="label.post.comment"/></h5>
+                        <s:form method="post" commandName="messagePost" action="comment">
+                            <tr>
+                                <td><p><spring:message code="label.message"/></p></td>
+                                <td><s:input path="message"/></td>
+                                <%--<td><span class="error"><s:errors path="email" /></span></td>--%>
+                            </tr>
+                            <tr>
+                                <td><input class="button" type="submit" value="Ok"/></td>
+                            </tr>
+                        </s:form>
+                </div>
+                    <div class="large-3 column"></div>
+        </div>
     </div>
 </div>
 
