@@ -1,5 +1,6 @@
 package com.nick.hateportal.controllers;
 
+import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String redirectToHome(HttpSession session, Model model ){
-
+//        Post post = new Post();
         if (session.getAttribute("auth")==null){
 
             model.addAttribute("role","0");
