@@ -6,8 +6,8 @@ import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.post.PostService;
 import com.nick.hateportal.service.user.UserService;
+import com.nick.hateportal.validation.MessageFormValidator;
 import com.nick.hateportal.validation.PostFormValidator;
-import com.sun.javafx.sg.prism.NGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +25,9 @@ public class PostController {
 
     @Autowired
     private PostFormValidator postFormValidator;
+
+    @Autowired
+    private MessageFormValidator messgeFormValidator;
 
     @Autowired
     private PostService postService;
@@ -64,8 +67,16 @@ public class PostController {
         return "post";
     }
 
-    @RequestMapping(value = "comment")
-    public String getComments(){
+    @RequestMapping(value = "/comment/{post}")
+    public String getComments(@PathVariable("post") Post post, @ModelAttribute(value = "messagePost") Message message, Model model, BindingResult result ){
+        messgeFormValidator.validate(message, result);
+        if (result.hasErrors()){
+//            Post post = new Post();
+//            post.getClass()
+            model.addAttribute("post", post);
+
+            return "post";
+        }
         return "post";
     }
 

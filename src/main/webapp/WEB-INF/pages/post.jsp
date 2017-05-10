@@ -33,7 +33,7 @@
             <div class="large-3 column"></div>
                 <div class="large-6 large-centered column">
                     <h5><spring:message code="label.post.comment"/></h5>
-                        <s:form method="post" commandName="messagePost" action="comment">
+                        <s:form method="post" commandName="messagePost" action="comment/${post}">
                             <tr>
                                 <td><p><spring:message code="label.message"/></p></td>
                                 <td><s:input path="message"/></td>
