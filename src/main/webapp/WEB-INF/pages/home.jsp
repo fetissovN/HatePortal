@@ -10,7 +10,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
-
+    <style type="text/css">
+        span.error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <jsp:include page="bar.jsp"/>

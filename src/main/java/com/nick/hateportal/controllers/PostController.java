@@ -42,10 +42,10 @@ public class PostController {
     }
 
     @RequestMapping(value = "/create")
-    public String createPost(@ModelAttribute(value = "postFrom") Post post, Model model, HttpSession session, BindingResult result){
+    public String createPost(@ModelAttribute(value = "postForm") Post post, Model model, HttpSession session, BindingResult result){
         postFormValidator.validate(post, result);
         if (result.hasErrors()){
-            return "redirect:/post/";
+            return "home";
         }
         Date date = new Date();
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
