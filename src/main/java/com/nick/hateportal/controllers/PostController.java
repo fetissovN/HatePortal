@@ -4,6 +4,7 @@ import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.entity.Message;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
+import com.nick.hateportal.service.message.MessageService;
 import com.nick.hateportal.service.post.PostService;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.validation.MessageFormValidator;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/post")
@@ -34,6 +36,9 @@ public class PostController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping(value = "/")
     public String showForm(Model model, HttpSession session){
@@ -64,19 +69,35 @@ public class PostController {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
         model.addAttribute("messagePost", new Message());
+
+        List<Message> messages = messageService.getAllMessagesByPostId(post);
+        model.addAttribute("messages", messages);
         return "post";
     }
 
-    @RequestMapping(value = "/comment/{post}")
-    public String getComments(@PathVariable("post") Post post, @ModelAttribute(value = "messagePost") Message message, Model model, BindingResult result ){
+    @RequestMapping(value = "/post/comment/{id}")
+    public String getComments(@PathVariable("id") Long id,HttpSession session, @ModelAttribute(value = "messagePost") Message message, Model model, BindingResult result ){
+        if (session.getAttribute("auth")==null){
+            return "redirect:/log/";
+        }
         messgeFormValidator.validate(message, result);
+        Post post = postService.getPostById(id);
         if (result.hasErrors()){
-//            Post post = new Post();
-//            post.getClass()
             model.addAttribute("post", post);
-
             return "post";
         }
+
+        UserDTO userDTO = (UserDTO) session.getAttribute("auth");
+        Date date = new Date();
+        User user = userService.getUserByEmail(userDTO.getEmail());
+
+        message.setMessage_date(new java.sql.Date(date.getTime()));
+        message.setPost_id(post);
+        message.setUser_id(user);
+        messageService.saveMessage(message);
+        model.addAttribute("post", post);
+        List<Message> messages = messageService.getAllMessagesByPostId(post);
+        model.addAttribute("messages", messages);
         return "post";
     }
 

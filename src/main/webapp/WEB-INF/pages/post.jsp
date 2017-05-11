@@ -33,16 +33,32 @@
             <div class="large-3 column"></div>
                 <div class="large-6 large-centered column">
                     <h5><spring:message code="label.post.comment"/></h5>
-                        <s:form method="post" commandName="messagePost" action="comment/${post}">
+                        <s:form method="post" commandName="messagePost" action="comment/${post.id}">
                             <tr>
                                 <td><p><spring:message code="label.message"/></p></td>
                                 <td><s:input path="message"/></td>
-                                <%--<td><span class="error"><s:errors path="email" /></span></td>--%>
+                                <td><span class="error"><s:errors path="message" /></span></td>
                             </tr>
                             <tr>
                                 <td><input class="button" type="submit" value="Ok"/></td>
                             </tr>
                         </s:form>
+                    <c:forEach items="${messages}" var="message">
+                        <!-- comments -->
+                        <div class="comment-section-container">
+                            <div class="comment-section-author">
+                                <%--<img src="http://placehold.it/50x50" alt="">--%>
+                                <div class="comment-section-name">
+                                    <h5><a href="">${message.user_id.username}</a></h5>
+                                    <p>${message.message_date}</p>
+                                </div>
+                            </div>
+                            <div class="comment-section-text">
+                                <p>${message.message}</p>
+                            </div>
+                        </div>
+
+                    </c:forEach>
                 </div>
                     <div class="large-3 column"></div>
         </div>
