@@ -60,6 +60,7 @@ public class PostController {
         User user = userService.getUserByEmail(userDTO.getEmail());
         post.setPostDate(new java.sql.Date(date.getTime()));
         post.setUserId(user);
+//        TODO ask higher
         postService.createPost(post);
         return "redirect:/";
     }
