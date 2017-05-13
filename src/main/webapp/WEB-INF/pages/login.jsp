@@ -8,11 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.css"/> ">
-    <style type="text/css">
-        span.error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
 </head>
 <body>
 <jsp:include page="bar.jsp"/>

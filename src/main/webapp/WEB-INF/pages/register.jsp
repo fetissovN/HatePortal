@@ -7,11 +7,7 @@
     <title><spring:message code="label.reg.reg"/></title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.css"/> ">
-    <style type="text/css">
-        span.error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
 </head>
 <body>
 <jsp:include page="bar.jsp"/>

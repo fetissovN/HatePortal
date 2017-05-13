@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -38,11 +39,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login")
-    public String login(@ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpSession session, Model model, BindingResult result){
+    public String login(HttpServletRequest request, @ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpSession session, Model model, BindingResult result){
         validator.validate(loginDTO, result);
         if (result.hasErrors()){
             return "login";
         }
+        String s = request.getHeader("referer");
         User userFromDB = userService.getUserByEmail(loginDTO.getEmail());
         if (userFromDB==null){
             model.addAttribute("loginErr", "loginErr");

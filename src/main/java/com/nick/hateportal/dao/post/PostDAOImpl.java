@@ -27,13 +27,11 @@ public class PostDAOImpl implements PostDAO{
     public List<Post> getAllPosts() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Post.class);
         criteria.addOrder(Order.desc("postDate"));
-        List result = criteria.list();
-        return result;
+        return criteria.list();
     }
 
     @Override
     public Post getPostById(Long id) {
-        Post post = sessionFactory.getCurrentSession().get(Post.class, id);
-        return post;
+        return sessionFactory.getCurrentSession().get(Post.class, id);
     }
 }

@@ -3,6 +3,7 @@ package com.nick.hateportal.dao.message;
 
 import com.nick.hateportal.entity.Message;
 import com.nick.hateportal.entity.Post;
+import javafx.geometry.Pos;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -40,9 +41,8 @@ public class MessageDAOImpl implements MessageDAO {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Message.class)
                 .add(Restrictions.eq("post_id", post));
         criteria.addOrder(Order.desc("message_date"));
+//        List<Message> messages = criteria.list();
 
-        List<Message> messages = criteria.list();
-
-        return messages;
+        return criteria.list();
     }
 }
