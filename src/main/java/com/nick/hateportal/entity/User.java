@@ -13,6 +13,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nickname")
+    private String nickname;
+
     @Column(name = "username")
     private String username;
 
@@ -38,6 +41,14 @@ public class User {
     private List<Post> sentPosts;
 
     public User() {
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public int getRole() {

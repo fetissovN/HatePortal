@@ -21,11 +21,15 @@ public class PostFormValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Post post = (Post) o;
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "target", "post.target.empty", "Target must not be empty.");
+
+
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "post.title.empty", "Title must not be empty.");
-        String postStr = post.getTitle();
-        if (postStr.length() < 10){
+        String titleStr = post.getTitle();
+        if (titleStr.length() < 10){
             errors.rejectValue("title", "post.title.tooShort", "Title should be more than 10 characters.");
         }
+        String postStr = post.getPost();
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "post", "post.empty", "Post must not be empty.");
         if (postStr.length() < 30){
             errors.rejectValue("post", "post.post.tooShort", "Post should be more than 30 characters.");

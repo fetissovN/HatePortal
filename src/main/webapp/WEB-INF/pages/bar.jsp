@@ -43,7 +43,7 @@
                     <button class="offcanvas-trigger" type="button" data-open="offCanvasRight">
                         <span class="offcanvas-trigger-text hide-for-small-only"><c:choose>
                             <c:when test="${ not empty sessionScope.get('auth')}">
-                                ${sessionScope.get("auth").username}
+                                ${sessionScope.get("auth").nickname}
                             </c:when>
                             <c:otherwise>
                                 INF

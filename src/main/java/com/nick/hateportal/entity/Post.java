@@ -18,6 +18,9 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User userId;
 
+    @Column(name = "target")
+    private String target;
+
     @Column(name = "title")
     private String title;
 
@@ -34,6 +37,14 @@ public class Post {
     private List<Message> postRelatedMessages;
 
     public Post() {
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     public List<Message> getPostRelatedMessages() {

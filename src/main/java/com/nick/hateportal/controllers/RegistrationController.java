@@ -47,6 +47,7 @@ public class RegistrationController {
                 PassHash passHash = new PassHash();
                 String pass = passHash.stringPassToHash(userRegDTO.getPassword());
                 User user = new User();
+                user.setNickname(userRegDTO.getNickname());
                 user.setEmail(userRegDTO.getEmail());
                 user.setPassword(pass);
                 user.setPhone(userRegDTO.getPhone());

@@ -39,6 +39,11 @@
                     <td><span class="error"><s:errors path="title" /></span></td>
                 </tr>
                 <tr>
+                    <td><p><spring:message code="label.post.target"/></p></td>
+                    <td><s:input path="target"/></td>
+                    <td><span class="error"><s:errors path="target" /></span></td>
+                </tr>
+                <tr>
                     <td><p><spring:message code="label.post.message"/></p></td>
                     <td><s:textarea path="post"/></td>
                     <td><span class="error"><s:errors path="post" /></span></td>
@@ -55,7 +60,7 @@
                         <%--</c:if></span></td>--%>
                 </tr>
                 <tr>
-                    <td><input class="button" type="submit" value="Ok"/></td>
+                    <td><input id="submitForm" class="button" type="submit" value="Ok"/></td>
                     <td><input style="float: right" id="closePostForm" class="button" type="button" value="Later"/></td>
                 </tr>
                 </table>

@@ -5,6 +5,8 @@ public class UserDTO {
 
     private Long id;
 
+    private String nickname;
+
     private String username;
 
     private String surname;
@@ -16,6 +18,14 @@ public class UserDTO {
     private Double rate;
 
     public UserDTO() {
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Long getId() {

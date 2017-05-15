@@ -10,7 +10,10 @@ $(document).ready(function () {
         var show = $('#form');
         localStorage.setItem('show', '0');
     });
-
+    // $('#submitForm').click(function () {
+    //
+    // });
+    //TODO above
     if (localStorage.getItem('show')== '1'){
         $('#form').show('fast');
     }else {

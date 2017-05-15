@@ -19,6 +19,12 @@ public class RegFormValidator implements Validator {
     public void validate(Object o, Errors errors) {
         UserRegDTO user = (UserRegDTO) o;
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickname", "reg.nickname.empty", "Nickname must not be empty.");
+        String nickname= user.getNickname();
+        if (nickname.length() > 20){
+            errors.rejectValue("nickname", "reg.nickname.tooLong", "Nickname must not more than 20 characters.");
+        }
+
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "reg.username.empty", "Username must not be empty.");
         String username = user.getUsername();
         if (username.length() > 20){

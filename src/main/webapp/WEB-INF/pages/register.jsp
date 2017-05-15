@@ -27,6 +27,11 @@
             </div>
             <table>
                 <tr>
+                    <td><p><spring:message code="label.nickname"/></p></td>
+                    <td><s:input path="nickname"/></td>
+                    <td><span class="error"><s:errors path="nickname" /></span></td>
+                </tr>
+                <tr>
                     <td><p><spring:message code="label.username"/></p></td>
                     <td><s:input path="username"/></td>
                     <td><span class="error"><s:errors path="username" /></span></td>

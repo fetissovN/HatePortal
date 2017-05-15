@@ -9,6 +9,8 @@ public class UserRegDTO {
 
     private String username;
 
+    private String nickname;
+
     private String surname;
 
     private String password;
@@ -20,6 +22,14 @@ public class UserRegDTO {
     private String phone;
 
     public UserRegDTO() {
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getUsername() {
