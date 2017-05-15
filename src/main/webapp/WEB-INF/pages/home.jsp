@@ -10,6 +10,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
+    <script src="<c:url value="/resources/js/app.js"/>"></script>
     <style type="text/css">
         span.error {
             color: red;
@@ -22,11 +23,13 @@
 <%--<ul class="button-group round">--%>
     <%--<li><a href="/post/" class="button"><spring:message code="label.post.buttonIn"/></a></li>--%>
 <%--</ul>--%>
-<c:if test="${not empty postForm}">
+<%--<c:if test="${not empty postForm}">--%>
     <div class="row">
-        <div class="large-3 column"><!-- ... --></div>
+        <div class="large-3 column">
+
+        </div>
         <div class="large-6 large-centered column">
-            <s:form method="post" commandName="postForm" action="create">
+            <s:form id="form" cssStyle="display: none" method="post" commandName="postForm" action="/post/create">
                 <div align="center">
                     <legend><spring:message code="label.post.post"/></legend>
                 </div>
@@ -53,6 +56,7 @@
                 </tr>
                 <tr>
                     <td><input class="button" type="submit" value="Ok"/></td>
+                    <td><input style="float: right" id="closePostForm" class="button" type="button" value="Later"/></td>
                 </tr>
                 </table>
             </s:form>
@@ -60,11 +64,11 @@
         </div>
         <div class="large-3 column"></div>
     </div>
-</c:if>
+<%--</c:if>--%>
 <div class="row">
     <div class="large-2 column">
         <ul class="button-group round">
-            <li><a href="/post/" class="button"><spring:message code="label.post.buttonIn"/></a></li>
+            <li><button id="postForm" class="button"><spring:message code="label.post.buttonIn"/></button></li>
         </ul>
     </div>
     <div class="large-10 column">

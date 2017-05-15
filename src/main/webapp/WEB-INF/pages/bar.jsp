@@ -64,7 +64,7 @@
 <script src="/resources/js/vendor/jquery.js"></script>
 <script src="/resources/js/vendor/foundation.js"></script>
 <script src="/resources/js/vendor/what-input.js"></script>
-<script src="/resources/js/vendor/app.js"></script>
+<%--<script src="/resources/js/vendor/app.js"></script>--%>
 
 </body>
 </html>

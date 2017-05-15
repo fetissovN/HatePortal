@@ -22,6 +22,7 @@ public class MainController {
     public String redirectToHome(HttpSession session, Model model ){
         List<Post> list = postService.getAllPosts();
         model.addAttribute("posts", list);
+        model.addAttribute("postForm", new Post());
         if (session.getAttribute("auth")==null){
 
             model.addAttribute("role","0");
