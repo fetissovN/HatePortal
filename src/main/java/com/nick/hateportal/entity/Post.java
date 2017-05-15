@@ -1,6 +1,7 @@
 package com.nick.hateportal.entity;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -90,4 +91,17 @@ public class Post {
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Post{" +
+//                "id=" + id +
+//                ", userId=" + userId +
+//                ", title='" + title + '\'' +
+//                ", post='" + post + '\'' +
+//                ", postDate=" + postDate +
+//                ", photo=" + Arrays.toString(photo) +
+//                ", postRelatedMessages=" + postRelatedMessages +
+//                '}';
+//    }
 }
