@@ -11,7 +11,7 @@
     align-items: center;
     background: #2c3840;
     height: 75px;
-    margin-bottom: 75px;
+    margin-bottom: 10px;
 }
 
 .nav-bar .nav-bar-logo {
@@ -326,3 +326,42 @@
 }
 
 
+.translucent-form-overlay {
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(54, 54, 54, 0.8);
+    padding: 20px;
+    color: #fefefe;
+}
+
+.translucent-form-overlay .columns.row {
+    display: block;
+}
+
+.translucent-form-overlay h3, .translucent-form-overlay label {
+    color: #fefefe;
+}
+
+.translucent-form-overlay input, .translucent-form-overlay select {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input::-webkit-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input:-ms-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input::placeholder {
+    color: #8a8a8a;
+}
+
+.formBar{
+    position: absolute;
+    z-index: 100;
+    right:0px;
+    width:400px;
+    /*top: -1px;*/
+}
