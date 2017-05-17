@@ -8,6 +8,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
+    <script src="<c:url value="/resources/js/appInfoToolbar.js"/>"></script>
 
 </head>
 <body>
@@ -41,8 +42,9 @@
                     </c:choose></a></li>
                 <li>
                 <li>
-                    <button class="offcanvas-trigger" type="button" data-open="offCanvasRight">
-                        <span class="offcanvas-trigger-text hide-for-small-only"><c:choose>
+                    <button id="toolBarInfo" class="offcanvas-trigger" type="button" data-open="offCanvasRight">
+                        <span class="offcanvas-trigger-text hide-for-small-only">
+                            <c:choose>
                             <c:when test="${ not empty sessionScope.get('auth')}">
                                 ${sessionScope.get("auth").nickname}
                             </c:when>
@@ -61,56 +63,56 @@
         </div>
     </div>
 </div>
-<div class="formBar">
+<div id="formB" class="formBar">
 
     <%--<div class="large-3 column"><!-- ... --></div>--%>
     <%--<div class="large-6 large-centered column"></div>--%>
     <%--<div class="large-3 column">--%>
-        <div class="translucent-form-overlay" style="float: right;">
-<s:form method="post" commandName="barUserInfo" action="/post/post/comment/${post.id}">
-                <h3><spring:message code="label.bar.droptitle"/></h3>
-                <div class="row columns">
-                    <label><spring:message code="label.nickname"/>
-                        <s:input path="nickname"/>
-                            <%--<input type="text" name="keyword" placeholder="Any">--%>
-                    </label>
-                </div>
-                <div class="row columns">
-                    <label><spring:message code="label.username"/>
-                        <s:input path="username"/>
-                    </label>
-                </div>
-                <div class="row columns">
-                    <label><spring:message code="label.surname"/>
-                        <s:input path="surname"/>
-                    </label>
-                </div>
-                <div class="row columns">
-                    <label><spring:message code="label.reg.email"/>
-                        <s:input path="email"/>
-                    </label>
-                </div>
-                <div class="row columns">
-                    <label><spring:message code="label.reg.phone"/>
-                        <s:input path="phone"/>
-                    </label>
-                </div>
-                <div class="row columns">
-                    <label><spring:message code="label.password"/>
-                        <s:password path="password"/>
-                    </label>
-                </div>
-                <div class="row columns">
-                    <label><spring:message code="label.password.check"/>
-                        <s:password path="passwordCheck"/>
-                    </label>
-                </div>
-                <%--<input class="button" type="submit" value="Ok"/>--%>
-                <button type="submit" class="primary button expanded search-button">
-                    Ok
-                </button>
-</s:form>
-        </div>
+        <%--<div class="translucent-form-overlay" style="float: right;">--%>
+<%--<s:form method="post" commandName="barUserInfo" action="/post/post/comment/${post.id}">--%>
+                <%--<h3><spring:message code="label.bar.droptitle"/></h3>--%>
+                <%--<div class="row columns">--%>
+                    <%--<label><spring:message code="label.nickname"/>--%>
+                        <%--<s:input path="nickname"/>--%>
+                            <%--&lt;%&ndash;<input type="text" name="keyword" placeholder="Any">&ndash;%&gt;--%>
+                    <%--</label>--%>
+                <%--</div>--%>
+                <%--<div class="row columns">--%>
+                    <%--<label><spring:message code="label.username"/>--%>
+                        <%--<s:input path="username"/>--%>
+                    <%--</label>--%>
+                <%--</div>--%>
+                <%--<div class="row columns">--%>
+                    <%--<label><spring:message code="label.surname"/>--%>
+                        <%--<s:input path="surname"/>--%>
+                    <%--</label>--%>
+                <%--</div>--%>
+                <%--<div class="row columns">--%>
+                    <%--<label><spring:message code="label.reg.email"/>--%>
+                        <%--<s:input path="email"/>--%>
+                    <%--</label>--%>
+                <%--</div>--%>
+                <%--<div class="row columns">--%>
+                    <%--<label><spring:message code="label.reg.phone"/>--%>
+                        <%--<s:input path="phone"/>--%>
+                    <%--</label>--%>
+                <%--</div>--%>
+                <%--<div class="row columns">--%>
+                    <%--<label><spring:message code="label.password"/>--%>
+                        <%--<s:password path="password"/>--%>
+                    <%--</label>--%>
+                <%--</div>--%>
+                <%--<div class="row columns">--%>
+                    <%--<label><spring:message code="label.password.check"/>--%>
+                        <%--<s:password path="passwordCheck"/>--%>
+                    <%--</label>--%>
+                <%--</div>--%>
+                <%--&lt;%&ndash;<input class="button" type="submit" value="Ok"/>&ndash;%&gt;--%>
+                <%--<button type="submit" class="primary button expanded search-button">--%>
+                    <%--Ok--%>
+                <%--</button>--%>
+<%--</s:form>--%>
+        <%--</div>--%>
     </div>
 <%--</div>--%>
 <script src="/resources/js/vendor/jquery.js"></script>
