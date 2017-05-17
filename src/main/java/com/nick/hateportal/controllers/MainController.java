@@ -23,6 +23,7 @@ public class MainController {
         List<Post> list = postService.getAllPosts();
         model.addAttribute("posts", list);
         model.addAttribute("postForm", new Post());
+        model.addAttribute("barUserInfo", new User());
         if (session.getAttribute("auth")==null){
 
             model.addAttribute("role","0");

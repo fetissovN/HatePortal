@@ -37,10 +37,20 @@ public class User {
     @Column(name = "role")
     private int role;
 
+    transient String passwordCheck;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
     private List<Post> sentPosts;
 
     public User() {
+    }
+
+    public String getPasswordCheck() {
+        return passwordCheck;
+    }
+
+    public void setPasswordCheck(String passwordCheck) {
+        this.passwordCheck = passwordCheck;
     }
 
     public String getNickname() {

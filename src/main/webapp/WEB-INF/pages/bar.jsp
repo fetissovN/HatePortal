@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -66,47 +67,47 @@
     <%--<div class="large-6 large-centered column"></div>--%>
     <%--<div class="large-3 column">--%>
         <div class="translucent-form-overlay" style="float: right;">
-<s:form method="post" commandName="messagePost" action="/post/post/comment/${post.id}">
+<s:form method="post" commandName="barUserInfo" action="/post/post/comment/${post.id}">
                 <h3><spring:message code="label.bar.droptitle"/></h3>
                 <div class="row columns">
-                    <label>Keyword
-                        <input type="text" name="keyword" placeholder="Any">
+                    <label><spring:message code="label.nickname"/>
+                        <s:input path="nickname"/>
+                            <%--<input type="text" name="keyword" placeholder="Any">--%>
                     </label>
                 </div>
                 <div class="row columns">
-                    <label>Property Status
-                        <select name="status" type="text">
-                            <option>Any</option>
-                            <option value="rent">Rent</option>
-                            <option value="buy">Buy</option>
-                        </select>
+                    <label><spring:message code="label.username"/>
+                        <s:input path="username"/>
                     </label>
                 </div>
                 <div class="row columns">
-                    <label>Property Type
-                        <select name="status" type="text">
-                            <option>Any</option>
-                            <option value="office">Office</option>
-                            <option value="building">Building</option>
-                        </select>
+                    <label><spring:message code="label.surname"/>
+                        <s:input path="surname"/>
                     </label>
                 </div>
                 <div class="row columns">
-                    <label>Location
-                        <input type="text" name="location" placeholder="Any">
+                    <label><spring:message code="label.reg.email"/>
+                        <s:input path="email"/>
                     </label>
                 </div>
-                <div class="row">
-                    <label class="columns small-12">Price</label>
-                    <div class="columns small-6">
-                        <input type="number" min="0" name="min" placeholder="Min">
-                    </div>
-                    <div class="columns small-6">
-                        <input type="number" min="0" name="max" placeholder="Max">
-                    </div>
+                <div class="row columns">
+                    <label><spring:message code="label.reg.phone"/>
+                        <s:input path="phone"/>
+                    </label>
                 </div>
-                <button type="button" class="primary button expanded search-button">
-                    Search
+                <div class="row columns">
+                    <label><spring:message code="label.password"/>
+                        <s:password path="password"/>
+                    </label>
+                </div>
+                <div class="row columns">
+                    <label><spring:message code="label.password.check"/>
+                        <s:password path="passwordCheck"/>
+                    </label>
+                </div>
+                <%--<input class="button" type="submit" value="Ok"/>--%>
+                <button type="submit" class="primary button expanded search-button">
+                    Ok
                 </button>
 </s:form>
         </div>
