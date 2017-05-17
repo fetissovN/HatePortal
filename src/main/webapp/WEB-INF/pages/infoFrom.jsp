@@ -1,3 +1,4 @@
+
 <div class="translucent-form-overlay" style="float: right;">
 <s:form method="post" commandName="barUserInfo" action="/post/post/comment/${post.id}">
     <h3><spring:message code="label.bar.droptitle"/></h3>
