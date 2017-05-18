@@ -44,11 +44,6 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping(value = "/showInfo", method = RequestMethod.GET)
-    public String showInfo(Model model){
-        model.addAttribute("barUserInfo", new User());
-//        System.out.println(s);
-        return "infoFrom";
-    }
+
 //    @RequestMapping(value = "/po")
 }

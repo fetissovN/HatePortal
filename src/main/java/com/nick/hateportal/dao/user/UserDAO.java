@@ -10,5 +10,7 @@ public interface UserDAO {
 
     User getUserByEmail(String email);
 
+    void updateUser(User user);
+
 
 }
