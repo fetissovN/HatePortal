@@ -54,6 +54,7 @@ public class UserDaoImpl implements UserDAO {
 
     @Override
     public void updateUser(User user) {
+
         sessionFactory.getCurrentSession().update(user);
         LOGGER.info(messageSource.getMessage("log.update.user", new Object[] {user}, Locale.ENGLISH));
     }

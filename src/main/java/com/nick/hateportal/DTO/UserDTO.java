@@ -17,7 +17,17 @@ public class UserDTO {
 
     private Double rate;
 
+    private int role;
+
     public UserDTO() {
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public String getNickname() {

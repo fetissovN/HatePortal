@@ -121,7 +121,26 @@
 <script src="/resources/js/vendor/jquery.js"></script>
 <script src="/resources/js/vendor/foundation.js"></script>
 <script src="/resources/js/vendor/what-input.js"></script>
-<%--<script src="/resources/js/vendor/app.js"></script>--%>
+<script>
+    $('#submitInfo').click(function (e) {
+        e.preventDefault();
+        alert('test');
+        ajaxSentInfoForm();
+    });
+    function ajaxSentInfoForm(){
+
+        $.ajax({
+            type: 'GET',
+            url: '/infoCh',
+            // data: {'s': term},
+            success: function(data){
+                alert(data);
+                $('.translucent-form-overlay').remove();
+            }
+        });
+    }
+
+</script>
 
 </body>
 </html>

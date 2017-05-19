@@ -133,18 +133,20 @@ public class User {
         this.sentPosts = sentPosts;
     }
 
-//    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", username='" + username + '\'' +
-//                ", surname='" + surname + '\'' +
-//                ", password='" + password + '\'' +
-//                ", email='" + email + '\'' +
-//                ", phone='" + phone + '\'' +
-//                ", rate=" + rate +
-//                ", role=" + role +
-//                ", sentPosts=" + sentPosts +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", username='" + username + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", rate=" + rate +
+                ", role=" + role +
+                ", passwordCheck='" + passwordCheck + '\'' +
+                ", sentPosts=" + sentPosts +
+                '}';
+    }
 }
