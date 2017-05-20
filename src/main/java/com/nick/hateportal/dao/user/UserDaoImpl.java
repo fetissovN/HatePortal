@@ -59,5 +59,17 @@ public class UserDaoImpl implements UserDAO {
         LOGGER.info(messageSource.getMessage("log.update.user", new Object[] {user}, Locale.ENGLISH));
     }
 
+    @Override
+    public User getUserById(Long id) {
+        User user = sessionFactory.getCurrentSession().get(User.class, id);
+        LOGGER.info(messageSource.getMessage("log.get.userById", new Object[] {id}, Locale.ENGLISH));
+        return user;
+    }
+
+    @Override
+    public void updateUserInfoWithoutPassword(User user) {
+
+    }
+
 
 }

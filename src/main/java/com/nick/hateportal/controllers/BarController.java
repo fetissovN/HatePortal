@@ -23,17 +23,17 @@ public class BarController {
 
     @RequestMapping(value = "/infoCh")
     @ResponseBody
-    public String saveChanges(@ModelAttribute("barUserInfo") UserDTO userDTO, Model model, HttpSession session, BindingResult result){
-//        System.out.println(userDTO.getEmail());
-        if (userService.getUserByEmail(userDTO.getEmail())!=null){
-            UserDTO userSession = (UserDTO) session.getAttribute("auth");
-            System.out.println(userDTO.getId());
-//            user.setId(userDTO.getId());
-//            user.setRate(userDTO.getRate());
-//            user.setRole(userDTO.getRole());
-            userService.updateUser(userDTO);
-            session.invalidate();
-            session.setAttribute("auth", userDTO);
+    public String saveChanges(@ModelAttribute("barUserInfo") User user, Model model, HttpSession session, BindingResult result){
+        System.out.println(user.getId());
+        if (userService.getUserByEmail(user.getEmail())!=null){
+            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
+            System.out.println(userDTO);
+            user.setId(userDTO.getId());
+            user.setRate(userDTO.getRate());
+            user.setRole(userDTO.getRole());
+            userService.updateUser(user);
+            session.removeAttribute("auth");
+            session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
             return "1";
         }else {
             return "0";
@@ -45,7 +45,7 @@ public class BarController {
         if (session.getAttribute("auth")==null){
             return "redirect:/log/";
         }
-        model.addAttribute("barUserInfo", new UserDTO());
+        model.addAttribute("barUserInfo", new User());
 //        System.out.println(s);
         return "infoFrom";
     }

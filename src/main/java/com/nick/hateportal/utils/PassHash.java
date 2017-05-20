@@ -6,9 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class PassHash {
-    public String stringPassToHash(String plaintext){
-
-
+    public static String stringPassToHash(String plaintext){
         try {
             MessageDigest m = MessageDigest.getInstance("MD5");
             m.reset();
