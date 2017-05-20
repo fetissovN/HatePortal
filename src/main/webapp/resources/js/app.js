@@ -19,6 +19,9 @@ $(document).ready(function () {
     }else {
         $('#form').css("display", "none");
     }
-
+    // $('#log').click(function () {
+    //     alert('asd');
+    //     $.removeCookie('auth', { path: '/' });
+    // })
 });
 

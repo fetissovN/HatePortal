@@ -11,7 +11,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
+    <%--<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>--%>
+    <script src="<c:url value="/resources/js/jquery.cookie.js"/>"></script>
     <script src="<c:url value="/resources/js/appInfoToolbar.js"/>"></script>
+    <script src="<c:url value="/resources/js/app.js"/>"></script>
+
 
 </head>
 <body>
@@ -34,7 +38,7 @@
             <ul class="menu">
                 <li class="hide-for-small-only"><a href="#"><spring:message code="label.bar.feedback"/></a></li>
                 <li class="hide-for-small-only"><a href="#"><spring:message code="label.bar.about"/></a></li>
-                <li class="hide-for-small-only"><a href="/log/">
+                <li id="log" class="hide-for-small-only"><a href="/log/">
                     <c:choose>
                         <c:when test="${not empty sessionScope.get('auth')}">
                             <spring:message code="label.bar.logout"/>

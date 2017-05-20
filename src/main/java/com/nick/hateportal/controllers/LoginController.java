@@ -15,6 +15,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -28,9 +31,17 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = "/")
-    public String showLoginFrom(HttpSession session, Model model){
+    public String showLoginFrom(HttpServletRequest request , HttpServletResponse response, HttpSession session, Model model){
         if (session.getAttribute("auth")!=null){
             session.removeAttribute("auth");
+            Cookie cookie = null;
+            Cookie[] cookies = null;
+            cookies = request.getCookies();
+            for (int i = 0; i < cookies.length; i++) {
+                cookie = cookies[i];
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
             return "redirect:/";
         }
         model.addAttribute("loginForm", new UserLoginDTO());
@@ -38,7 +49,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login")
-    public String login(@ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpSession session, Model model, BindingResult result){
+    public String login(@ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpServletResponse response, HttpSession session, Model model, BindingResult result){
         validator.validate(loginDTO, result);
         if (result.hasErrors()){
             return "login";
@@ -53,6 +64,9 @@ public class LoginController {
             if (userFromDB.getPassword().equals(pass)){
                 session.removeAttribute("auth");
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
+                Cookie cookie = new Cookie("auth","1");
+                cookie.setMaxAge(60*60*24);
+                response.addCookie(cookie);
                 return "redirect:/";
             }else {
                 model.addAttribute("loginErr", "loginErr");

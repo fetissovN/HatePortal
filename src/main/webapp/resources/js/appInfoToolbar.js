@@ -1,9 +1,8 @@
 $('body').on('click', '#submitInfo', function(e){
     e.preventDefault();
-    // $('#submitInfo').click(function (e) {
-    //     e.preventDefault();
+
         ajaxSentInfoForm();
-    // });
+
     function ajaxSentInfoForm(){
 
         $.ajax({
@@ -20,13 +19,13 @@ $('body').on('click', '#submitInfo', function(e){
 });
 $(document).ready(function () {
     $('#toolBarInfo').click(function(){
-        // var sess = $.at;
-        // alert(sess);
-        // if (sess!=null){
-            ajaxRequest();
-        // }else {
-        //     alert('err');
-        // }
+        var cookie = $.cookie('auth');
+        if (cookie!=null){
+        ajaxRequest();
+        }else {
+
+        }
+
 
     });
 
