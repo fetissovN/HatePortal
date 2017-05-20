@@ -43,10 +43,13 @@ public class BarController {
     @RequestMapping(value = "/showInfo", method = RequestMethod.GET)
     public String showInfo(Model model, HttpSession session){
         if (session.getAttribute("auth")==null){
-            return "redirect:/log/";
-        }
-        model.addAttribute("barUserInfo", new User());
+            model.addAttribute("auth", "1");
+            return null;
+        }else {
+            model.addAttribute("barUserInfo", new User());
 //        System.out.println(s);
-        return "infoFrom";
+            return "formSample/infoFrom";
+        }
+
     }
 }

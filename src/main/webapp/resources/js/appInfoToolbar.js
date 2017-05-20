@@ -1,10 +1,9 @@
 $('body').on('click', '#submitInfo', function(e){
     e.preventDefault();
-    $('#submitInfo').click(function (e) {
-        e.preventDefault();
-        alert('test');
+    // $('#submitInfo').click(function (e) {
+    //     e.preventDefault();
         ajaxSentInfoForm();
-    });
+    // });
     function ajaxSentInfoForm(){
 
         $.ajax({
@@ -12,7 +11,7 @@ $('body').on('click', '#submitInfo', function(e){
             url: '/infoCh',
             data: $('#infoFormId').serialize(),
             success: function(data){
-                alert(data);
+                alert('success '+ data);
                 $('.translucent-form-overlay').remove();
             }
         });
@@ -21,7 +20,14 @@ $('body').on('click', '#submitInfo', function(e){
 });
 $(document).ready(function () {
     $('#toolBarInfo').click(function(){
+        // var sess = $.at;
+        // alert(sess);
+        // if (sess!=null){
             ajaxRequest();
+        // }else {
+        //     alert('err');
+        // }
+
     });
 
 });

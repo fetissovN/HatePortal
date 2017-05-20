@@ -21,9 +21,6 @@ import java.util.Locale;
 public class RegistrationController {
 
     @Autowired
-    private MessageSource messageSource;
-
-    @Autowired
     private RegFormValidator validator;
 
     @Autowired
