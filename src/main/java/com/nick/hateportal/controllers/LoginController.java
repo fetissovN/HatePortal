@@ -66,7 +66,7 @@ public class LoginController {
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
                 Cookie cookie = new Cookie("auth","1");
                 cookie.setMaxAge(7);
-                cookie.htt;
+//                cookie.htt;
                 response.addCookie(cookie);
                 return "redirect:/";
             }else {
