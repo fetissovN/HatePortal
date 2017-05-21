@@ -11,7 +11,11 @@ $('body').on('click', '#submitInfo', function(e){
             data: $('#infoFormId').serialize(),
             success: function(data){
                 alert('success '+ data);
-                $('.translucent-form-overlay').remove();
+                if(data!=null){
+                    alert('err');
+                }else {
+                    $('.translucent-form-overlay').remove();
+                }
             }
         });
     }
@@ -19,14 +23,14 @@ $('body').on('click', '#submitInfo', function(e){
 });
 $(document).ready(function () {
     $('#toolBarInfo').click(function(){
-        var cookie = $.cookie("auth");
-        alert(cookie);
-
-        if (cookie!=null){
+        // var cookie = $.cookie("auth");
+        // alert(cookie);
+        //
+        // if (cookie!=null){
         ajaxRequest();
-        }else {
-
-        }
+        // }else {
+        //
+        // }
 
 
     });

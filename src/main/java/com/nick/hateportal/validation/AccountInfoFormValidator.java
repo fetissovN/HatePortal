@@ -1,7 +1,9 @@
 package com.nick.hateportal.validation;
 
 
+import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.DTO.UserRegDTO;
+import com.nick.hateportal.entity.User;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -17,7 +19,7 @@ public class AccountInfoFormValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        UserRegDTO user = (UserRegDTO) o;
+        User user = (User) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickname", "reg.nickname.empty", "Nickname must not be empty.");
         String nickname= user.getNickname();
