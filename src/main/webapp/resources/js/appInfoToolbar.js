@@ -19,7 +19,9 @@ $('body').on('click', '#submitInfo', function(e){
 });
 $(document).ready(function () {
     $('#toolBarInfo').click(function(){
-        var cookie = $.cookie('auth');
+        var cookie = $.cookie("auth");
+        alert(cookie);
+
         if (cookie!=null){
         ajaxRequest();
         }else {

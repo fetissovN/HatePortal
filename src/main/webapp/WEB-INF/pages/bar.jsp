@@ -8,15 +8,12 @@
 <html>
 <head>
     <title>Bar</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
-    <%--<script type="text/javascript" src="/resources/js/jquery.cookie.js"></script>--%>
-    <script src="<c:url value="/resources/js/jquery.cookie.js"/>"></script>
-    <script src="<c:url value="/resources/js/appInfoToolbar.js"/>"></script>
-    <script src="<c:url value="/resources/js/app.js"/>"></script>
-
-
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery_cookie.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/appInfoToolbar.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
 </head>
 <body>
 <div class="row">
@@ -25,10 +22,7 @@
                 |
                 <a href="?lang=ru">ru</a>
 </span>
-
 </div>
-
-
 <div class="off-canvas-content" data-off-canvas-content>
     <div class="nav-bar">
         <div class="nav-bar-left">
@@ -122,29 +116,29 @@
         <%--</div>--%>
     </div>
 <%--</div>--%>
-<script src="/resources/js/vendor/jquery.js"></script>
+<%--<script src="/resources/js/vendor/jquery.js"></script>--%>
 <script src="/resources/js/vendor/foundation.js"></script>
 <script src="/resources/js/vendor/what-input.js"></script>
-<script>
-    $('#submitInfo').click(function (e) {
-        e.preventDefault();
-        alert('test');
-        ajaxSentInfoForm();
-    });
-    function ajaxSentInfoForm(){
+<%--<script>--%>
+    <%--$('#submitInfo').click(function (e) {--%>
+        <%--e.preventDefault();--%>
+        <%--alert('test');--%>
+        <%--ajaxSentInfoForm();--%>
+    <%--});--%>
+    <%--function ajaxSentInfoForm(){--%>
 
-        $.ajax({
-            type: 'GET',
-            url: '/infoCh',
-            // data: {'s': term},
-            success: function(data){
-                alert(data);
-                $('.translucent-form-overlay').remove();
-            }
-        });
-    }
+        <%--$.ajax({--%>
+            <%--type: 'GET',--%>
+            <%--url: '/infoCh',--%>
+            <%--// data: {'s': term},--%>
+            <%--success: function(data){--%>
+                <%--alert(data);--%>
+                <%--$('.translucent-form-overlay').remove();--%>
+            <%--}--%>
+        <%--});--%>
+    <%--}--%>
 
-</script>
+<%--</script>--%>
 
 </body>
 </html>

@@ -7,10 +7,10 @@
 <html>
 <head>
     <title>Hate</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
-    <script src="<c:url value="/resources/js/app.js"/>"></script>
+    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>--%>
+    <%--<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">--%>
+    <%--<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">--%>
+    <%--<script src="<c:url value="/resources/js/app.js"/>"></script>--%>
     <style type="text/css">
         span.error {
             color: red;
