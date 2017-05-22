@@ -5,14 +5,14 @@ import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.validation.AccountInfoFormValidator;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,17 +34,21 @@ public class BarController {
         }
         if (userService.getUserByEmail(user.getEmail())!=null){
             UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-            System.out.println(userDTO);
             user.setId(userDTO.getId());
             user.setRate(userDTO.getRate());
             user.setRole(userDTO.getRole());
             userService.updateUser(user);
             session.removeAttribute("auth");
             session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
-            return null;
+            return "redirect:/info_bar_save_ok0";
         }else {
-            return null;
+            return "redirect:/info_bar_save_ok0";
         }
+    }
+
+    @RequestMapping(value = "/info_bar_save_ok{status}")
+    public @ResponseBody String saved(@PathVariable("status") String status){
+        return status;
     }
 
     @RequestMapping(value = "/showInfo", method = RequestMethod.GET)

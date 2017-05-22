@@ -42,10 +42,13 @@ public class AccountInfoFormValidator implements Validator {
         if (surname.length() > 30){
             errors.rejectValue("surname", "reg.surname.tooLong", "Surname must not more than 30 characters.");
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "reg.password.empty", "Password must not be empty.");
-        if (!(user.getPassword()).equals(user
-                .getPasswordCheck())) {
-            errors.rejectValue("passwordCheck", "reg.passwordCheck.passwordDontMatch", "Passwords don't match.");
+        if(user.getPassword().equals("") && user.getPasswordCheck().equals("")){
+        }else {
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "reg.password.empty", "Password must not be empty.");
+            if (!(user.getPassword()).equals(user
+                    .getPasswordCheck())) {
+                errors.rejectValue("passwordCheck", "reg.passwordCheck.passwordDontMatch", "Passwords don't match.");
+            }
         }
 
         if( !EmailValidator.getInstance().isValid( user.getEmail() ) ){

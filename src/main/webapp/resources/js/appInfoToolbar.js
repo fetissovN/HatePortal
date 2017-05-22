@@ -11,10 +11,12 @@ $('body').on('click', '#submitInfo', function(e){
             data: $('#infoFormId').serialize(),
             success: function(data){
                 alert('success '+ data);
-                if(data!=null){
-                    alert('err');
-                }else {
+                if(data!=1 && data!=0){
                     $('.translucent-form-overlay').remove();
+                    $('#formB').append(data);
+                }else if (data==0){
+                    $('.translucent-form-overlay').remove();
+                    window.location.href = "/log/";
                 }
             }
         });
