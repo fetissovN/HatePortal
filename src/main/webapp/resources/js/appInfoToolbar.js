@@ -1,7 +1,6 @@
 $('body').on('click', '#submitInfo', function(e){
     e.preventDefault();
-
-        ajaxSentInfoForm();
+    ajaxSentInfoForm();
 
     function ajaxSentInfoForm(){
 
@@ -24,19 +23,18 @@ $('body').on('click', '#submitInfo', function(e){
 
 });
 $(document).ready(function () {
-    $('#toolBarInfo').click(function(){
-        // var cookie = $.cookie("auth");
-        // alert(cookie);
-        //
-        // if (cookie!=null){
+    $('#toolBarInfo').on('click', function(){
+        var cookie = $.cookie("timestamp");
+        var cookie2 = $.cookie("auth");
+        alert(cookie);
+        alert(cookie2);
+
+        // if (cookie==1){
         ajaxRequest();
         // }else {
-        //
+        //     window.location.href = "/log/";
         // }
-
-
     });
-
 });
 
 function ajaxRequest(){
@@ -47,12 +45,6 @@ function ajaxRequest(){
         // data: {'s': term},
         success: function(data){
             $('#formB').append(data);
-            // var myDiv = document.createElement('button');
-            // myDiv.id = 'submitInfo';
-            // document.body.appendChild(myDiv);
-            // // document.getElementById('myDiv').innerHTML = 'this should have worked...';
-            // document.createElement('submitInfo');
-
         }
     });
 }

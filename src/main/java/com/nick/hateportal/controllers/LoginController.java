@@ -19,6 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/log")
@@ -34,13 +35,15 @@ public class LoginController {
     public String showLoginFrom(HttpServletRequest request , HttpServletResponse response, HttpSession session, Model model){
         if (session.getAttribute("auth")!=null){
             session.removeAttribute("auth");
-            Cookie cookie = null;
-            Cookie[] cookies = null;
-            cookies = request.getCookies();
+//            Cookie cookie = null;
+//            cookies = null;
+            Cookie[] cookies = request.getCookies();
             for (int i = 0; i < cookies.length; i++) {
-                cookie = cookies[i];
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
+                if (cookies[i].getName().equals("auth")){
+                    System.out.println(cookies[i].getName());
+                    cookies[i].setMaxAge(0);
+                    response.addCookie(cookies[i]);
+                }
             }
             return "redirect:/";
         }
@@ -66,7 +69,17 @@ public class LoginController {
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
                 Cookie cookie = new Cookie("auth","1");
                 cookie.setMaxAge(7);
+                cookie.setPath("/");
+                cookie.setSecure(false);
+                cookie.setHttpOnly(true);
+
 //                cookie.htt;
+                Cookie cookietimestamp = new Cookie("timestamp", new Long(new Date().getTime()).toString());
+                cookietimestamp.setPath("/showInfo");
+                cookietimestamp.setSecure(false);
+                cookietimestamp.setHttpOnly(true);
+                cookietimestamp.setMaxAge(32436356);
+                response.addCookie(cookietimestamp);
                 response.addCookie(cookie);
                 return "redirect:/";
             }else {

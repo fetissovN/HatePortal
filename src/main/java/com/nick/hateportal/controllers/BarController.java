@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -40,7 +42,7 @@ public class BarController {
             userService.updateUser(user);
             session.removeAttribute("auth");
             session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
-            return "redirect:/info_bar_save_ok0";
+            return "redirect:/info_bar_save_ok1";
         }else {
             return "redirect:/info_bar_save_ok0";
         }
@@ -52,10 +54,19 @@ public class BarController {
     }
 
     @RequestMapping(value = "/showInfo", method = RequestMethod.GET)
-    public String showInfo(Model model, HttpSession session){
+    public String showInfo(Model model, HttpServletRequest request, HttpSession session){
+        Cookie[] cookies = request.getCookies();
+        for (int i=0;i<cookies.length;i++){
+            if (cookies[i].getValue().equals("1")){
+                model.addAttribute("barUserInfo", new User());
+                return "formSample/infoFrom";
+            }
+        }
         if (session.getAttribute("auth")==null){
 //            model.addAttribute("auth", "1");
             return null;
+
+
         }else {
             model.addAttribute("barUserInfo", new User());
             return "formSample/infoFrom";
