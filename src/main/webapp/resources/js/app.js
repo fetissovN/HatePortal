@@ -10,18 +10,23 @@ $(document).ready(function () {
         var show = $('#form');
         localStorage.setItem('show', '0');
     });
-    // $('#submitForm').click(function () {
-    //
-    // });
-    //TODO above
     if (localStorage.getItem('show')== '1'){
         $('#form').show('fast');
     }else {
         $('#form').css("display", "none");
     }
-    // $('#log').click(function () {
-    //     alert('asd');
-    //     $.removeCookie('auth', { path: '/' });
-    // })
+    $('#like').click(function (e) {
+        var addressValue = $(this).attr("href");
+        // alert(addressValue);
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: addressValue,
+            // data: {'s': term},
+            success: function(data){
+            alert('success');
+            }
+        });
+    });
 });
 

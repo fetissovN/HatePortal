@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
@@ -103,6 +104,12 @@ public class PostController {
         List<Message> messages = messageService.getAllMessagesByPostId(post);
         model.addAttribute("messages", messages);
         return "/post";
+    }
+
+    @RequestMapping(value = "/like/{postId}")
+    public @ResponseBody String likePost(@PathVariable("postId") Long id){
+        postService.likePost(id);
+        return "1";
     }
 
 }

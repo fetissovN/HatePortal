@@ -13,4 +13,6 @@ public interface PostDAO {
     List<Post> getAllPosts();
 
     Post getPostById(Long postId);
+
+    void updatePost(Post post);
 }

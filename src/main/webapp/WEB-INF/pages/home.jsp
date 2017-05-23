@@ -94,6 +94,10 @@
 
                     <p class="article-row-content-author">${postMain.userId.username}</p>
                     <time class="article-row-content-time" datetime="2008-02-14 20:00">${postMain.postDate}</time>
+                    <p class="article-row-content-author">
+                        Likes: ${postMain.like}
+                        <a id="like" href="/post/like/${postMain.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
+                    </p>
                 </div>
             </article>
         </a>

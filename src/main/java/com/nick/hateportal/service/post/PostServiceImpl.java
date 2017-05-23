@@ -31,4 +31,13 @@ public class PostServiceImpl implements PostService {
         Post post = postDAO.getPostById(postId);
         return post;
     }
+
+    @Override
+    public void likePost(Long id) {
+        Post post = getPostById(id);
+        int count = post.getLike();
+        count++;
+        post.setLike(count);
+        postDAO.updatePost(post);
+    }
 }

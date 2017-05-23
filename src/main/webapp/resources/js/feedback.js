@@ -15,7 +15,6 @@ $(document).ready(function () {
 
 $('body').on('click', '#submitFeed', function(e){
     e.preventDefault();
-    alert("asalkfn");
     ajaxRequestFeedSend();
 });
 
