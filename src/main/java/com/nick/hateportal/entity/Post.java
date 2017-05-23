@@ -1,6 +1,7 @@
 package com.nick.hateportal.entity;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class Post {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User userId;
+
+    @Column(name = "target")
+    private String target;
 
     @Column(name = "title")
     private String title;
@@ -33,6 +37,14 @@ public class Post {
     private List<Message> postRelatedMessages;
 
     public Post() {
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     public List<Message> getPostRelatedMessages() {
@@ -90,4 +102,17 @@ public class Post {
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Post{" +
+//                "id=" + id +
+//                ", userId=" + userId +
+//                ", title='" + title + '\'' +
+//                ", post='" + post + '\'' +
+//                ", postDate=" + postDate +
+//                ", photo=" + Arrays.toString(photo) +
+//                ", postRelatedMessages=" + postRelatedMessages +
+//                '}';
+//    }
 }

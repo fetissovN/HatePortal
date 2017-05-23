@@ -1,7 +1,9 @@
 package com.nick.hateportal.validation;
 
 
+import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.DTO.UserRegDTO;
+import com.nick.hateportal.entity.User;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -9,7 +11,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-public class RegFormValidator implements Validator {
+public class AccountInfoFormValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
         return UserRegDTO.class.isAssignableFrom(aClass);
@@ -17,7 +19,7 @@ public class RegFormValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        UserRegDTO user = (UserRegDTO) o;
+        User user = (User) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickname", "reg.nickname.empty", "Nickname must not be empty.");
         String nickname= user.getNickname();
@@ -40,10 +42,13 @@ public class RegFormValidator implements Validator {
         if (surname.length() > 30){
             errors.rejectValue("surname", "reg.surname.tooLong", "Surname must not more than 30 characters.");
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "reg.password.empty", "Password must not be empty.");
-        if (!(user.getPassword()).equals(user
-                .getPasswordCheck())) {
-            errors.rejectValue("passwordCheck", "reg.passwordCheck.passwordDontMatch", "Passwords don't match.");
+        if(user.getPassword().equals("") && user.getPasswordCheck().equals("")){
+        }else {
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "reg.password.empty", "Password must not be empty.");
+            if (!(user.getPassword()).equals(user
+                    .getPasswordCheck())) {
+                errors.rejectValue("passwordCheck", "reg.passwordCheck.passwordDontMatch", "Passwords don't match.");
+            }
         }
 
         if( !EmailValidator.getInstance().isValid( user.getEmail() ) ){

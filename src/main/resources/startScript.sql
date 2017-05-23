@@ -1,7 +1,15 @@
+DROP DATABASE IF EXISTS hate;
+
+CREATE DATABASE IF NOT EXISTS hate;
+
+USE hate;
+
+
 -- Table: users
 
-CREATE TABLE users(
+CREATE TABLE hate.users(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  nickname VARCHAR(100) NOT NULL ,
   username VARCHAR(255) NOT NULL ,
   password VARCHAR(255) NOT NULL ,
   surname VARCHAR(255) NOT NULL ,
@@ -22,7 +30,7 @@ CREATE TABLE users(
 
 -- Table: company
 
-CREATE TABLE companies(
+CREATE TABLE hate.companies(
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   name VARCHAR(255) NOT NULL ,
   lable VARCHAR(255) NOT NULL ,
@@ -48,8 +56,9 @@ CREATE TABLE companies(
 
 -- Table: users posts
 
-CREATE TABLE users_posts(
+CREATE TABLE hate.users_posts(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  target VARCHAR(255) NOT NULL ,
   title VARCHAR(100) NOT NULL ,
   post VARCHAR(1000) NOT NULL ,
   user_id INT NOT NULL ,
@@ -60,7 +69,7 @@ CREATE TABLE users_posts(
 )
   ENGINE = InnoDB;
 
-CREATE TABLE users_messages(
+CREATE TABLE hate.users_messages(
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   message VARCHAR(300) NOT NULL ,
   user_id INT NOT NULL ,
@@ -74,7 +83,7 @@ CREATE TABLE users_messages(
 
 -- Table: response of companies
 
-CREATE TABLE companies_response(
+CREATE TABLE hate.companies_response(
   id INT NOT NULL PRIMARY KEY ,
   post VARCHAR(1000) NOT NULL ,
   post_id INT NOT NULL ,

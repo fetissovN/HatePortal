@@ -13,6 +13,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nickname")
+    private String nickname;
+
     @Column(name = "username")
     private String username;
 
@@ -34,10 +37,28 @@ public class User {
     @Column(name = "role")
     private int role;
 
+    transient String passwordCheck;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "userId")
     private List<Post> sentPosts;
 
     public User() {
+    }
+
+    public String getPasswordCheck() {
+        return passwordCheck;
+    }
+
+    public void setPasswordCheck(String passwordCheck) {
+        this.passwordCheck = passwordCheck;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public int getRole() {
@@ -116,6 +137,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", nickname='" + nickname + '\'' +
                 ", username='" + username + '\'' +
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
@@ -123,6 +145,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", rate=" + rate +
                 ", role=" + role +
+                ", passwordCheck='" + passwordCheck + '\'' +
                 ", sentPosts=" + sentPosts +
                 '}';
     }

@@ -68,4 +68,15 @@ public class Message {
     public void setMessage_date(Date message_date) {
         this.message_date = message_date;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Message{" +
+//                "id=" + id +
+//                ", message='" + message + '\'' +
+//                ", user_id=" + user_id +
+//                ", post_id=" + post_id +
+//                ", message_date=" + message_date +
+//                '}';
+//    }
 }

@@ -11,7 +11,7 @@
     align-items: center;
     background: #2c3840;
     height: 75px;
-    margin-bottom: 75px;
+    margin-bottom: 10px;
 }
 
 .nav-bar .nav-bar-logo {
@@ -323,11 +323,6 @@
 .comment-section-box {
     background-color: #e6e6e6;
     padding: 1rem;
-}
-
-
-span.error {
-    color: red;
 }
 
 

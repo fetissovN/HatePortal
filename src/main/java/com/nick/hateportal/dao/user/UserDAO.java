@@ -10,5 +10,9 @@ public interface UserDAO {
 
     User getUserByEmail(String email);
 
+    void updateUser(User user);
 
+    User getUserById(Long id);
+
+    void updateUserInfoWithoutPassword(User user);
 }

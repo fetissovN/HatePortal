@@ -15,8 +15,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/log")
@@ -29,9 +32,19 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = "/")
-    public String showLoginFrom(HttpSession session, Model model){
+    public String showLoginFrom(HttpServletRequest request , HttpServletResponse response, HttpSession session, Model model){
         if (session.getAttribute("auth")!=null){
             session.removeAttribute("auth");
+//            Cookie cookie = null;
+//            cookies = null;
+            Cookie[] cookies = request.getCookies();
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("auth")){
+                    System.out.println(cookies[i].getName());
+                    cookies[i].setMaxAge(0);
+                    response.addCookie(cookies[i]);
+                }
+            }
             return "redirect:/";
         }
         model.addAttribute("loginForm", new UserLoginDTO());
@@ -39,12 +52,11 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login")
-    public String login(HttpServletRequest request, @ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpSession session, Model model, BindingResult result){
+    public String login(@ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpServletResponse response, HttpSession session, Model model, BindingResult result){
         validator.validate(loginDTO, result);
         if (result.hasErrors()){
             return "login";
         }
-        String s = request.getHeader("referer");
         User userFromDB = userService.getUserByEmail(loginDTO.getEmail());
         if (userFromDB==null){
             model.addAttribute("loginErr", "loginErr");
@@ -55,6 +67,20 @@ public class LoginController {
             if (userFromDB.getPassword().equals(pass)){
                 session.removeAttribute("auth");
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
+                Cookie cookie = new Cookie("auth","1");
+                cookie.setMaxAge(7);
+                cookie.setPath("/");
+                cookie.setSecure(false);
+                cookie.setHttpOnly(true);
+
+//                cookie.htt;
+                Cookie cookietimestamp = new Cookie("timestamp", new Long(new Date().getTime()).toString());
+                cookietimestamp.setPath("/showInfo");
+                cookietimestamp.setSecure(false);
+                cookietimestamp.setHttpOnly(true);
+                cookietimestamp.setMaxAge(32436356);
+                response.addCookie(cookietimestamp);
+                response.addCookie(cookie);
                 return "redirect:/";
             }else {
                 model.addAttribute("loginErr", "loginErr");

@@ -53,6 +53,8 @@ public class PostController {
     public String createPost(@ModelAttribute(value = "postForm") Post post, Model model, HttpSession session, BindingResult result){
         postFormValidator.validate(post, result);
         if (result.hasErrors()){
+            List<Post> list = postService.getAllPosts();
+            model.addAttribute("posts", list);
             return "home";
         }
         Date date = new Date();
@@ -60,7 +62,6 @@ public class PostController {
         User user = userService.getUserByEmail(userDTO.getEmail());
         post.setPostDate(new java.sql.Date(date.getTime()));
         post.setUserId(user);
-//        TODO ask higher
         postService.createPost(post);
         return "redirect:/";
     }
@@ -83,12 +84,13 @@ public class PostController {
         }
         messgeFormValidator.validate(message, result);
         Post post = postService.getPostById(id);
-        List<Message> messages = messageService.getAllMessagesByPostId(post);
         if (result.hasErrors()){
-            model.addAttribute("post", post);
+            List<Message> messages = messageService.getAllMessagesByPostId(post);
             model.addAttribute("messages", messages);
-            return "post";
+            model.addAttribute("post", post);
+            return "/post";
         }
+
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         Date date = new Date();
         User user = userService.getUserByEmail(userDTO.getEmail());
@@ -98,8 +100,9 @@ public class PostController {
         message.setUser_id(user);
         messageService.saveMessage(message);
         model.addAttribute("post", post);
+        List<Message> messages = messageService.getAllMessagesByPostId(post);
         model.addAttribute("messages", messages);
-        return "post";
+        return "/post";
     }
 
 }

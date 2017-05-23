@@ -19,9 +19,8 @@
             </div>
             <div class="article-row-content">
                 <h1 class="article-row-content-header">${post.title}</h1>
-
+                <p class="article-row-content-author">${post.target}</p>
                 <p class="article-row-content-description">${post.post}</p>
-
                 <p class="article-row-content-author">${post.userId.username}</p>
                 <time class="article-row-content-time" datetime="2008-02-14 20:00">${post.postDate}</time>
             </div>
@@ -30,7 +29,7 @@
             <div class="large-3 column"></div>
                 <div class="large-6 large-centered column">
                     <h5><spring:message code="label.post.comment"/></h5>
-                        <s:form method="post" commandName="messagePost" action="comment/${post.id}">
+                        <s:form method="post" commandName="messagePost" action="/post/post/comment/${post.id}">
                             <tr>
                                 <td><p><spring:message code="label.message"/></p></td>
                                 <td><s:input path="message"/></td>
