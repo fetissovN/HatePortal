@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="translucent-form-overlay-feed" style="float: right;">
-    <s:form id="barFeedbackId" method="post" commandName="barFeedback" action="/infoCh">
+    <s:form id="barFeedbackId" method="post" commandName="barFeedback" action="/sendFeedback">
         <h3><spring:message code="label.bar.feedback.nameForm"/></h3>
         <div class="row columns">
             <label><spring:message code="label.reg.email"/>
@@ -20,7 +20,7 @@
         </div>
 
         <%--<input class="button" type="submit" value="Ok"/>--%>
-        <button id="submitInfo" type="submit" class="primary button expanded search-button">
+        <button id="submitFeed" type="submit" class="primary button expanded search-button">
             Ok
         </button>
     </s:form>

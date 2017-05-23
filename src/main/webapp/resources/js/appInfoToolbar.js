@@ -9,7 +9,6 @@ $('body').on('click', '#submitInfo', function(e){
             url: '/infoCh',
             data: $('#infoFormId').serialize(),
             success: function(data){
-                alert('success '+ data);
                 if(data!=1 && data!=0){
                     $('.translucent-form-overlay').remove();
                     $('#formB').append(data);

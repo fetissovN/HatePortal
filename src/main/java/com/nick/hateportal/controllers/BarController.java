@@ -5,6 +5,7 @@ import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
+import com.nick.hateportal.utils.Mailing;
 import com.nick.hateportal.validation.AccountInfoFormValidator;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -77,5 +79,13 @@ public class BarController {
     public String showFeedback(Model model){
         model.addAttribute("barFeedback", new FeedbackDTO());
         return "formSample/feedbackFrom";
+    }
+
+    @RequestMapping(value = "/sendFeedback", method = RequestMethod.POST)
+    @ResponseBody
+    public String sendFeedback(@ModelAttribute("barFeedback") FeedbackDTO feedbackDTO){
+            Mailing mailing = new Mailing();
+            mailing.send("test",feedbackDTO.getFeedback(),"asd",feedbackDTO.getEmail());
+            return "1";
     }
 }

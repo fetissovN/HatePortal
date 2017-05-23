@@ -13,6 +13,11 @@ $(document).ready(function () {
     });
 });
 
+$('#submitFeed').on('click', function(e){
+    e.preventDefault();
+    ajaxRequestFeedSend();
+});
+
 function ajaxRequestFeed(){
 
     $.ajax({
@@ -22,5 +27,24 @@ function ajaxRequestFeed(){
         success: function(data){
             $('#formFeed').append(data);
         }
+    });
+}
+
+function ajaxRequestFeedSend(){
+
+    $.ajax({
+        type: 'POST',
+        url: '/showFeedback',
+        data: $('#barFeedbackId').serialize(),
+        success: function(data){
+            if (data==1){
+                $('.translucent-form-overlay-feed').remove();
+            }
+            alert(data);
+        },
+        error: function () {
+            alert("asdasdasdasd");
+        }
+
     });
 }
