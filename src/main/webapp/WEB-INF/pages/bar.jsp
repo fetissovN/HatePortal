@@ -65,7 +65,7 @@
         </div>
     </div>
 </div>
-<div id="formFeed"></div>
+<div id="formFeed" class="formFeed"></div>
 <div id="formB" class="formBar"></div>
 <script src="/resources/js/vendor/foundation.js"></script>
 <script src="/resources/js/vendor/what-input.js"></script>

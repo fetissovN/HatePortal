@@ -5,7 +5,7 @@ $('body').on('click', '#submitInfo', function(e){
     function ajaxSentInfoForm(){
 
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: '/infoCh',
             data: $('#infoFormId').serialize(),
             success: function(data){
@@ -15,6 +15,9 @@ $('body').on('click', '#submitInfo', function(e){
                 }else if (data==0){
                     $('.translucent-form-overlay').remove();
                     window.location.href = "/log/";
+                }else if (data==1){
+                    $('.translucent-form-overlay').remove();
+                    alert('saved!');
                 }
             }
         });

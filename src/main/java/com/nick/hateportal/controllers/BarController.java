@@ -31,7 +31,7 @@ public class BarController {
     private UserService userService;
 
 
-    @RequestMapping(value = "/infoCh")
+    @RequestMapping(value = "/infoCh", method = RequestMethod.POST)
     public String saveChanges(@ModelAttribute("barUserInfo") User user, Model model, HttpSession session, BindingResult result){
         validator.validate(user,result);
         if (result.hasErrors()){

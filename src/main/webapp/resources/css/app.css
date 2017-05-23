@@ -398,3 +398,10 @@
     width:400px;
     /*top: -1px;*/
 }
+
+.formFeed{
+    position: absolute;
+    z-index: 100;
+    right:400px;
+    width:400px;
+}

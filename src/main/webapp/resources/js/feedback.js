@@ -13,8 +13,9 @@ $(document).ready(function () {
     });
 });
 
-$('#submitFeed').on('click', function(e){
+$('body').on('click', '#submitFeed', function(e){
     e.preventDefault();
+    alert("asalkfn");
     ajaxRequestFeedSend();
 });
 
@@ -34,16 +35,16 @@ function ajaxRequestFeedSend(){
 
     $.ajax({
         type: 'POST',
-        url: '/showFeedback',
+        url: '/sendFeedback',
         data: $('#barFeedbackId').serialize(),
         success: function(data){
             if (data==1){
                 $('.translucent-form-overlay-feed').remove();
+                alert("saved!");
             }
-            alert(data);
         },
         error: function () {
-            alert("asdasdasdasd");
+            alert("fail!");
         }
 
     });
