@@ -13,7 +13,7 @@ CREATE TABLE hate.users(
   username VARCHAR(255) NOT NULL ,
   password VARCHAR(255) NOT NULL ,
   surname VARCHAR(255) NOT NULL ,
-  email VARCHAR(100) NOT NULL ,
+  email VARCHAR(100) NOT NULL UNIQUE ,
   phone VARCHAR(100) NOT NULL ,
   rate INT NOT NULL,
   role INT NOT NULL
@@ -63,7 +63,7 @@ CREATE TABLE hate.users_posts(
   post VARCHAR(1000) NOT NULL ,
   user_id INT NOT NULL ,
   post_date DATETIME NOT NULL,
-  like INT NOT NULL,
+  like INT NOT NULL DEFAULT 0,
   photo LONGBLOB,
 
   FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
