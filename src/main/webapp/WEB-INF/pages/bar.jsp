@@ -14,6 +14,7 @@
     <script type="text/javascript" src="<c:url value="/resources/js/jquery_cookie.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/appInfoToolbar.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/feedback.js"/>"></script>
 </head>
 <body>
 <div class="row">
@@ -30,7 +31,7 @@
         </div>
         <div class="nav-bar-right">
             <ul class="menu">
-                <li class="hide-for-small-only"><a href="#"><spring:message code="label.bar.feedback"/></a></li>
+                <li id="feedback" class="hide-for-small-only"><a href="#"><spring:message code="label.bar.feedback"/></a></li>
                 <li class="hide-for-small-only"><a href="#"><spring:message code="label.bar.about"/></a></li>
                 <li id="log" class="hide-for-small-only"><a href="/log/">
                     <c:choose>
@@ -64,81 +65,9 @@
         </div>
     </div>
 </div>
-<div id="formB" class="formBar">
-
-    <%--<div class="large-3 column"><!-- ... --></div>--%>
-    <%--<div class="large-6 large-centered column"></div>--%>
-    <%--<div class="large-3 column">--%>
-        <%--<div class="translucent-form-overlay" style="float: right;">--%>
-<%--<s:form method="post" commandName="barUserInfo" action="/post/post/comment/${post.id}">--%>
-                <%--<h3><spring:message code="label.bar.droptitle"/></h3>--%>
-                <%--<div class="row columns">--%>
-                    <%--<label><spring:message code="label.nickname"/>--%>
-                        <%--<s:input path="nickname"/>--%>
-                            <%--&lt;%&ndash;<input type="text" name="keyword" placeholder="Any">&ndash;%&gt;--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="row columns">--%>
-                    <%--<label><spring:message code="label.username"/>--%>
-                        <%--<s:input path="username"/>--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="row columns">--%>
-                    <%--<label><spring:message code="label.surname"/>--%>
-                        <%--<s:input path="surname"/>--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="row columns">--%>
-                    <%--<label><spring:message code="label.reg.email"/>--%>
-                        <%--<s:input path="email"/>--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="row columns">--%>
-                    <%--<label><spring:message code="label.reg.phone"/>--%>
-                        <%--<s:input path="phone"/>--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="row columns">--%>
-                    <%--<label><spring:message code="label.password"/>--%>
-                        <%--<s:password path="password"/>--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--<div class="row columns">--%>
-                    <%--<label><spring:message code="label.password.check"/>--%>
-                        <%--<s:password path="passwordCheck"/>--%>
-                    <%--</label>--%>
-                <%--</div>--%>
-                <%--&lt;%&ndash;<input class="button" type="submit" value="Ok"/>&ndash;%&gt;--%>
-                <%--<button type="submit" class="primary button expanded search-button">--%>
-                    <%--Ok--%>
-                <%--</button>--%>
-<%--</s:form>--%>
-        <%--</div>--%>
-    </div>
-<%--</div>--%>
-<%--<script src="/resources/js/vendor/jquery.js"></script>--%>
+<div id="formFeed"></div>
+<div id="formB" class="formBar"></div>
 <script src="/resources/js/vendor/foundation.js"></script>
 <script src="/resources/js/vendor/what-input.js"></script>
-<%--<script>--%>
-    <%--$('#submitInfo').click(function (e) {--%>
-        <%--e.preventDefault();--%>
-        <%--alert('test');--%>
-        <%--ajaxSentInfoForm();--%>
-    <%--});--%>
-    <%--function ajaxSentInfoForm(){--%>
-
-        <%--$.ajax({--%>
-            <%--type: 'GET',--%>
-            <%--url: '/infoCh',--%>
-            <%--// data: {'s': term},--%>
-            <%--success: function(data){--%>
-                <%--alert(data);--%>
-                <%--$('.translucent-form-overlay').remove();--%>
-            <%--}--%>
-        <%--});--%>
-    <%--}--%>
-
-<%--</script>--%>
-
 </body>
 </html>

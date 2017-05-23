@@ -1,5 +1,6 @@
 package com.nick.hateportal.controllers;
 
+import com.nick.hateportal.DTO.FeedbackDTO;
 import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
@@ -65,12 +66,16 @@ public class BarController {
         if (session.getAttribute("auth")==null){
 //            model.addAttribute("auth", "1");
             return null;
-
-
         }else {
             model.addAttribute("barUserInfo", new User());
             return "formSample/infoFrom";
         }
 
+    }
+
+    @RequestMapping(value = "/showFeedback", method = RequestMethod.GET)
+    public String showFeedback(Model model){
+        model.addAttribute("barFeedback", new FeedbackDTO());
+        return "formSample/feedbackFrom";
     }
 }

@@ -24,20 +24,32 @@ $('body').on('click', '#submitInfo', function(e){
 });
 $(document).ready(function () {
     $('#toolBarInfo').on('click', function(){
+        var feedExist = $('.translucent-form-overlay-feed');
+        var infExist = $('.translucent-form-overlay');
+        if(feedExist.length > 0){
+            $('.translucent-form-overlay-feed').remove();
+            ajaxRequestInf();
+        }else if (infExist.length > 0){
+            $('.translucent-form-overlay').remove();
+        }else {
+            ajaxRequestInf();
+        }
+
+
         var cookie = $.cookie("timestamp");
         var cookie2 = $.cookie("auth");
         alert(cookie);
         alert(cookie2);
 
         // if (cookie==1){
-        ajaxRequest();
+        // ajaxRequestInf();
         // }else {
         //     window.location.href = "/log/";
         // }
     });
 });
 
-function ajaxRequest(){
+function ajaxRequestInf(){
 
     $.ajax({
         type: 'GET',
