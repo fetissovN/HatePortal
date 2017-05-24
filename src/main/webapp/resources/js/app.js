@@ -29,6 +29,14 @@ $(document).ready(function () {
             url: addressValue,
             // data: {'s': term},
             success: function(data){
+                var likeT = $('#likeTag').text();
+                var likeWS = likeT.replace(/\s+/g, '');
+                var count = likeWS.substring(6,10);
+                var countD = count.parseInt(count);
+                var output = [likeWS.slice(0, 6),777, likeWS.slice(6)].join('');
+                alert(countD)
+                alert(count);
+                alert(output);
             alert('success');
             }
         });
