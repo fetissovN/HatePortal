@@ -56,4 +56,9 @@ public class PostDAOImpl implements PostDAO{
         LOGGER.info(messageSource.getMessage("log.update.post", new Object[] {post}, Locale.ENGLISH));
 
     }
+
+    @Override
+    public void deletePost(Post post) {
+        sessionFactory.getCurrentSession().delete(post);
+    }
 }

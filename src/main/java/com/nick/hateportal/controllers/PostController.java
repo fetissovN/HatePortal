@@ -117,4 +117,10 @@ public class PostController {
         messageService.markLike(id);
         return "1";
     }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String deletePost(@PathVariable("id") Long id){
+        postService.deletePost(id);
+        return "redirect:/";
+    }
 }

@@ -1,3 +1,4 @@
+<%@ page import="com.nick.hateportal.DTO.UserDTO" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -96,6 +97,11 @@
                     <p id="likeTag" class="article-row-content-author">
                         Likes: ${postMain.like}
                         <a id="like" href="/post/like/${postMain.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
+                    </p>
+                    <p class="article-row-content-author">
+                        <c:if test="${sessionScope.get('auth').role eq 0}">
+                            <a style="color: #cc8b00" id="adminDel" href="/post/delete/${postMain.id}">delete</a>
+                        </c:if>
                     </p>
                 </div>
             </article>

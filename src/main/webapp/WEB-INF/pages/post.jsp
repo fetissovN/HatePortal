@@ -30,6 +30,11 @@
                     <a id="like" href="/post/like/${post.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
                 </p>
                 <time class="article-row-content-time" datetime="2008-02-14 20:00">${post.postDate}</time>
+                <p class="article-row-content-author">
+                    <c:if test="${sessionScope.get('auth').role eq 0}">
+                        <a style="color: #cc8b00" id="adminDel" href="/post/delete/${post.id}">delete</a>
+                    </c:if>
+                </p>
             </div>
         </article>
         <div class="row">

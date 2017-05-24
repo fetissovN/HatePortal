@@ -40,4 +40,10 @@ public class PostServiceImpl implements PostService {
         post.setLike(count);
         postDAO.updatePost(post);
     }
+
+    @Override
+    public void deletePost(Long id) {
+        Post post = getPostById(id);
+        postDAO.deletePost(post);
+    }
 }
