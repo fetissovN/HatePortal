@@ -63,7 +63,7 @@ CREATE TABLE hate.users_posts(
   post VARCHAR(1000) NOT NULL ,
   user_id INT NOT NULL ,
   post_date DATETIME NOT NULL,
-  like INT NOT NULL DEFAULT 0,
+  like_count INT NOT NULL DEFAULT 0,
   photo LONGBLOB,
 
   FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE

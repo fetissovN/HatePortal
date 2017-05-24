@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    //show hide post form
     $('#postForm').click(function(){
         $('#form').show('slow');
         var show = $('#form');
@@ -15,6 +15,11 @@ $(document).ready(function () {
     }else {
         $('#form').css("display", "none");
     }
+    //hide post form after ok
+    $('#submitForm').click(function () {
+        $('#form').css("display", "none");
+    });
+    //likes
     $('#like').click(function (e) {
         var addressValue = $(this).attr("href");
         // alert(addressValue);
