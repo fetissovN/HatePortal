@@ -27,8 +27,11 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void uptadeMessage(Message message) {
-
+    public void markLike(Long id) {
+        Message message = messageDAO.getMessageById(id);
+        int count = message.getLike();
+        message.setLike(count+1);
+        messageDAO.updateMessage(message);
     }
 
     @Override

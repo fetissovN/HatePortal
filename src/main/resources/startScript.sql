@@ -75,6 +75,7 @@ CREATE TABLE hate.users_messages(
   message VARCHAR(300) NOT NULL ,
   user_id INT NOT NULL ,
   post_id INT NOT NULL ,
+  like_count INT NOT NULL DEFAULT 0,
   message_date DATETIME NOT NULL,
 
   FOREIGN KEY (post_id) REFERENCES users_posts(id) ON UPDATE CASCADE ON DELETE CASCADE,

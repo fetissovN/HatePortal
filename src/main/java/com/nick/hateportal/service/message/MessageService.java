@@ -12,7 +12,7 @@ public interface MessageService {
 
     void deleteMessage(Message message);
 
-    void uptadeMessage(Message message);
+    void markLike(Long id);
 
     List<Message> getAllMessagesByPostId(Post post);
 

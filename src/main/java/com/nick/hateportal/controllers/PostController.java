@@ -112,4 +112,9 @@ public class PostController {
         return "1";
     }
 
+    @RequestMapping(value = "/message/like/{messId}")
+    public @ResponseBody String likeMessage(@PathVariable("messId") Long id){
+        messageService.markLike(id);
+        return "1";
+    }
 }

@@ -23,10 +23,21 @@ public class Message {
     @JoinColumn(name = "post_id")
     private Post post_id;
 
+    @Column(name = "like_count")
+    private int like;
+
     @Column(name = "message_date")
     private Date message_date;
 
     public Message() {
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 
     public Long getId() {

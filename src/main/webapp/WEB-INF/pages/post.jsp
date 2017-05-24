@@ -25,6 +25,10 @@
                 <p class="article-row-content-author">${post.target}</p>
                 <p class="article-row-content-description">${post.post}</p>
                 <p class="article-row-content-author">${post.userId.username}</p>
+                <p id="likeTag" class="article-row-content-author">
+                    Likes: ${post.like}
+                    <a id="like" href="/post/like/${post.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
+                </p>
                 <time class="article-row-content-time" datetime="2008-02-14 20:00">${post.postDate}</time>
             </div>
         </article>
@@ -54,6 +58,12 @@
                             </div>
                             <div class="comment-section-text">
                                 <p>${message.message}</p>
+                            </div>
+                            <div class="comment-section-text">
+                                <p id="likeMessage" class="article-row-content-author">
+                                    Likes: ${message.like}
+                                    <a id="likeMessLink" href="/post/message/like/${message.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
+                                </p>
                             </div>
                         </div>
 

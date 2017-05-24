@@ -29,11 +29,18 @@ public class MessageDAOImpl implements MessageDAO {
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;
 
+
+    @Override
+    public Message getMessageById(Long id) {
+        Message message = sessionFactory.getCurrentSession().get(Message.class, id);
+        LOGGER.info(messageSource.getMessage("log.get.message", new Object[] {message}, Locale.ENGLISH));
+        return message;
+    }
+
     @Override
     public void saveMessage(Message message) {
         sessionFactory.getCurrentSession().save(message);
         LOGGER.info(messageSource.getMessage("log.new.message", new Object[] {message}, Locale.ENGLISH));
-
     }
 
     @Override
@@ -42,7 +49,9 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     @Override
-    public void uptadeMessage(Message message) {
+    public void updateMessage(Message message) {
+        sessionFactory.getCurrentSession().update(message);
+        LOGGER.info(messageSource.getMessage("log.update.message", new Object[] {message}, Locale.ENGLISH));
 
     }
 
