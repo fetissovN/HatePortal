@@ -24,22 +24,26 @@ $(document).ready(function () {
         var addressValue = $(this).attr("href");
         // alert(addressValue);
         e.preventDefault();
-        $.ajax({
-            type: 'GET',
-            url: addressValue,
-            // data: {'s': term},
-            success: function(data){
-                var likeT = $('#likeTag').text();
-                var likeWS = likeT.replace(/\s+/g, '');
-                var count = likeWS.substring(6,10);
-                var countD = count.parseInt(count);
-                var output = [likeWS.slice(0, 6),777, likeWS.slice(6)].join('');
-                alert(countD)
-                alert(count);
-                alert(output);
-            alert('success');
-            }
-        });
+        if (localStorage.getItem(addressValue)=='1'){
+
+        }else {
+            $.ajax({
+                type: 'GET',
+                url: addressValue,
+                // data: {'s': term},
+                success: function(data){
+                    var likeT = $('#likeTag').text();
+                    var likeWS = likeT.replace(/\s+/g, '');
+                    var count = likeWS.substring(6,10);
+                    var countD = parseInt(count);
+                    countD = countD+1;
+                    var output = [likeWS.slice(0, 6),countD, likeWS.slice(10)].join('');
+                    $('#likeTag').html(output);
+                    localStorage.setItem(addressValue, "1");
+                }
+            });
+        }
+
     });
 });
 
