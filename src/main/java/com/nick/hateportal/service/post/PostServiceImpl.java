@@ -46,4 +46,14 @@ public class PostServiceImpl implements PostService {
         Post post = getPostById(id);
         postDAO.deletePost(post);
     }
+
+    @Override
+    public void updatePost(Post post, Long id) {
+        Post postDB = getPostById(id);
+        postDB.setTitle(post.getTitle());
+        postDB.setTarget(post.getTarget());
+        postDB.setPost(post.getPost());
+        postDB.setPhoto(post.getPhoto());
+        postDAO.updatePost(postDB);
+    }
 }

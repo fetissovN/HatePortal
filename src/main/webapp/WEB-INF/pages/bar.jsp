@@ -15,6 +15,8 @@
     <script type="text/javascript" src="<c:url value="/resources/js/appInfoToolbar.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/feedback.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/postUpdate.js"/>"></script>
+
 </head>
 <body>
 <div class="row">

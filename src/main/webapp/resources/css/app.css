@@ -405,3 +405,7 @@
     right:400px;
     width:400px;
 }
+
+span.error {
+    color: red;
+}

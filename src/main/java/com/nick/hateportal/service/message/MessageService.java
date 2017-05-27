@@ -10,7 +10,7 @@ public interface MessageService {
 
     void saveMessage(Message message);
 
-    void deleteMessage(Message message);
+    void deleteMessage(Long id);
 
     void markLike(Long id);
 

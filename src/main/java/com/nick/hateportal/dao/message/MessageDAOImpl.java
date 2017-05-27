@@ -45,7 +45,8 @@ public class MessageDAOImpl implements MessageDAO {
 
     @Override
     public void deleteMessage(Message message) {
-
+        sessionFactory.getCurrentSession().delete(message);
+        LOGGER.info(messageSource.getMessage("log.delete.message", new Object[] {message}, Locale.ENGLISH));
     }
 
     @Override

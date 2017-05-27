@@ -13,11 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -122,5 +120,31 @@ public class PostController {
     public String deletePost(@PathVariable("id") Long id){
         postService.deletePost(id);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/message/delete/{messageId}/{postId}")
+    public String deleteMessage(HttpServletRequest request, @PathVariable("messageId") Long messageId, @PathVariable("postId") Long postId){
+        messageService.deleteMessage(messageId);
+        String post = String.valueOf(postId);
+        request.toString();
+        return "redirect:/post/post/" + post;
+    }
+
+    @RequestMapping(value = "/updateShow/{postId}", method = RequestMethod.GET)
+    public String showUpdatePostFrom(@PathVariable("postId") Long postId, Model model){
+        Post post = postService.getPostById(postId);
+        model.addAttribute("postForm", post);
+        return "formSample/postForm";
+    }
+
+    @RequestMapping(value = "/update/{postId}", method = RequestMethod.POST)
+    public String updatePost(@ModelAttribute(value = "postForm") Post post,
+                                           @PathVariable("postId") Long id, BindingResult result){
+        postFormValidator.validate(post,result);
+        if (result.hasErrors()){
+            return "formSample/postForm";
+        }
+        postService.updatePost(post,id);
+        return "redirect:/info_save_ok" + id;
     }
 }

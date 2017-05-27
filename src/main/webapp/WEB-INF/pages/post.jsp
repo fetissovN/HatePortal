@@ -33,10 +33,12 @@
                 <p class="article-row-content-author">
                     <c:if test="${sessionScope.get('auth').role eq 0}">
                         <a style="color: #cc8b00" id="adminDel" href="/post/delete/${post.id}">delete</a>
+                        <a style="color: darkblue" id="adminUpd" href="/post/updateShow/${post.id}">update</a>
                     </c:if>
                 </p>
             </div>
         </article>
+        <div id="updatePost"></div>
         <div class="row">
             <div class="large-3 column"></div>
                 <div class="large-6 large-centered column">
@@ -69,6 +71,9 @@
                                     Likes: ${message.like}
                                     <a id="likeMessLink" href="/post/message/like/${message.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
                                 </p>
+                                <c:if test="${sessionScope.get('auth').role eq 0}">
+                                    <a style="color: #cc8b00" id="adminDel" href="/post/message/delete/${message.id}/${post.id}">delete</a>
+                                </c:if>
                             </div>
                         </div>
 

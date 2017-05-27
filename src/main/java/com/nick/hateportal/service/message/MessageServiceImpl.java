@@ -4,9 +4,7 @@ import com.nick.hateportal.dao.message.MessageDAO;
 import com.nick.hateportal.entity.Message;
 import com.nick.hateportal.entity.Post;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,8 +20,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void deleteMessage(Message message) {
-
+    public void deleteMessage(Long id) {
+        Message message = messageDAO.getMessageById(id);
+        messageDAO.deleteMessage(message);
     }
 
     @Override
