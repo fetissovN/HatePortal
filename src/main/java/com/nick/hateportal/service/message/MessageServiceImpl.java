@@ -15,6 +15,12 @@ public class MessageServiceImpl implements MessageService {
     private MessageDAO messageDAO;
 
     @Override
+    public Message getMessageById(Long id) {
+        Message message = messageDAO.getMessageById(id);
+        return message;
+    }
+
+    @Override
     public void saveMessage(Message message) {
         messageDAO.saveMessage(message);
     }
@@ -36,5 +42,12 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public List<Message> getAllMessagesByPostId(Post post) {
         return messageDAO.getAllMessagesByPostId(post);
+    }
+
+    @Override
+    public void updateMessage(Message message, Long messageId) {
+        Message messageDB = messageDAO.getMessageById(messageId);
+        messageDB.setMessage(message.getMessage());
+        messageDAO.updateMessage(messageDB);
     }
 }

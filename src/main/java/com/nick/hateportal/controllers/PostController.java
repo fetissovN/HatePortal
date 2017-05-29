@@ -9,6 +9,7 @@ import com.nick.hateportal.service.post.PostService;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.validation.MessageFormValidator;
 import com.nick.hateportal.validation.PostFormValidator;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -146,5 +147,22 @@ public class PostController {
         }
         postService.updatePost(post,id);
         return "redirect:/info_save_ok" + id;
+    }
+
+    @RequestMapping(value = "/message/updateShow/{messageId}")
+    public String updateMessageShow(Model model, @PathVariable("messageId") Long messageId){
+        Message message = messageService.getMessageById(messageId);
+        model.addAttribute("messageUpdate", message);
+//        JSONObject object = new JSONObject();
+//        object.put("id", message.getId());
+//        object.put("message", message.getMessage());
+//        return object.toString();
+        return "formSample/messageUpdate";
+    }
+
+    @RequestMapping(value = "/comment/update")
+    public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message){
+        messageService.updateMessage(message, message.getId());
+        return message.getMessage();
     }
 }

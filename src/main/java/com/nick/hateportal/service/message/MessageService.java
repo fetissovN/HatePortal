@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface MessageService {
 
+    Message getMessageById(Long id);
+
     void saveMessage(Message message);
 
     void deleteMessage(Long id);
@@ -16,4 +18,5 @@ public interface MessageService {
 
     List<Message> getAllMessagesByPostId(Post post);
 
+    void updateMessage(Message message, Long messageId);
 }

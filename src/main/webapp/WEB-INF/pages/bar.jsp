@@ -16,6 +16,7 @@
     <script type="text/javascript" src="<c:url value="/resources/js/app.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/feedback.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/postUpdate.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/messageUpdate.js"/>"></script>
 
 </head>
 <body>
