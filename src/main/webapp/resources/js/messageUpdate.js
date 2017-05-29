@@ -1,8 +1,7 @@
 $(document).ready(function () {
-    $('#adminMessUpdate').on('click', function(e){
+    $('.updMess').on('click', function(e){
         var addressValue = $(this).attr("href");
         e.preventDefault();
-
         ajaxRequestMessUpdShow(addressValue);
     });
 });
@@ -12,8 +11,8 @@ $('body').on('click', '#messSubmitUpdateFormId', function(e){
     ajaxRequestUpdMess();
 });
 $('body').on('click', '#closeMessFormUpdate', function(){
-    $('#mess').show();
-    $('#adminMessUpdate').show();
+    $('.mess').show();
+    $('.updMess').show();
     $('#messageAjaxId').remove();
 });
 
@@ -26,9 +25,11 @@ function ajaxRequestMessUpdShow(urlFrom){
         url: urlFrom,
         // data: {'s': term},
         success: function(data){
-            $('#updMessPlace').append(data);
-            $('#mess').hide();
-            $('#adminMessUpdate').hide();
+            var id = $(data).find( ".supportId").html();
+            alert(id);
+            $('#updMessPlace'+id).append(data);
+            $('#mess'+id).hide();
+            $('#adminMessUpdate'+id).hide();
 
 
             // var json = $.parseJSON(data)
@@ -51,10 +52,14 @@ function ajaxRequestUpdMess(){
         url: addressValue,
         data: $('#messageAjaxId').serialize(),
         success: function(data){
+
+
             if (data.length > 1){
-                $('#mess').show();
-                $('#mess').html(data);
-                $('#adminMessUpdate').show();
+                var json = $.parseJSON(data);
+
+                $('.mess').show();
+                $('#mess'+json.id).html(json.message);
+                $('#adminMessUpdate'+json.id).show();
                 $('#messageAjaxId').remove();
             }
 

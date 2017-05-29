@@ -55,6 +55,7 @@
                         </s:form>
                     <c:forEach items="${messages}" var="message">
                         <!-- comments -->
+
                         <div class="comment-section-container">
                             <div class="comment-section-author">
                                 <%--<img src="http://placehold.it/50x50" alt="">--%>
@@ -64,14 +65,20 @@
                                 </div>
                             </div>
                             <div class="comment-section-text">
-                                <p id="updMessPlace"></p>
-                                <p id="mess">${message.message}</p>
+                                <p id="updMessPlace${message.id}"></p>
+                                <p id="mess${message.id}" class="mess">${message.message}</p>
                             </div>
                             <div class="comment-section-text">
                                 <p id="likeMessage" class="article-row-content-author">
                                     Likes: ${message.like}
                                     <a id="likeMessLink" href="/post/message/like/${message.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
                                 </p>
+                                <c:if test="${sessionScope.get('auth').role eq 1}">
+                                    <c:if test="${sessionScope.get('auth').id eq message.user_id.id}">
+                                        <a style="color: #cc8b00" id="adminDel" href="/post/message/delete/${message.id}/${post.id}">delete</a>
+                                        <a class="updMess" style="color: darkblue" id="adminMessUpdate${message.id}" href="/post/message/updateShow/${message.id}">update</a>
+                                    </c:if>
+                                </c:if>
                                 <c:if test="${sessionScope.get('auth').role eq 0}">
                                     <a style="color: #cc8b00" id="adminDel" href="/post/message/delete/${message.id}/${post.id}">delete</a>
                                     <a style="color: darkblue" id="adminMessUpdate" href="/post/message/updateShow/${message.id}">update</a>

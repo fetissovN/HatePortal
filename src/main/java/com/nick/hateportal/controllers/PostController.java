@@ -163,6 +163,9 @@ public class PostController {
     @RequestMapping(value = "/comment/update")
     public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message){
         messageService.updateMessage(message, message.getId());
-        return message.getMessage();
+        JSONObject object = new JSONObject();
+        object.put("id", message.getId());
+        object.put("message", message.getMessage());
+        return object.toString();
     }
 }
