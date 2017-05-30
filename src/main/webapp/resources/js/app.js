@@ -71,5 +71,24 @@ $(document).ready(function () {
         }
 
     });
+    $('#ajaxLoadPosts').click(function (e) {
+            $.ajax({
+                type: 'GET',
+                url: '/loadPosts',
+                // data: {'s': term},
+                success: function(data){
+                    var likeT = $('#likeMessage').text();
+                    var likeWS = likeT.replace(/\s+/g, '');
+                    var count = likeWS.substring(6,10);
+                    var countD = parseInt(count);
+                    countD = countD+1;
+                    var output = [likeWS.slice(0, 6),countD, likeWS.slice(10)].join('');
+                    $('#likeMessage').html(output);
+                    localStorage.setItem(addressValue, "1");
+                }
+            });
+        }
+
+    });
 });
 

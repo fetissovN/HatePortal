@@ -22,7 +22,7 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String redirectToHome(HttpSession session, Model model ){
-        List<Post> list = postService.getAllPosts();
+        List<Post> list = postService.getStartPosts();
         model.addAttribute("posts", list);
         model.addAttribute("postForm", new Post());
         model.addAttribute("barUserInfo", new User());
@@ -44,4 +44,8 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping(value = "/loadPosts")
+    public String loadPosts(){
+
+    }
 }

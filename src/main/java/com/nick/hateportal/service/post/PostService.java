@@ -18,4 +18,8 @@ public interface PostService {
     void deletePost(Long id);
 
     void updatePost(Post post, Long id);
+
+    List<Post> getFivePostsWithBoundaries(int page);
+
+    List<Post> getStartPosts();
 }

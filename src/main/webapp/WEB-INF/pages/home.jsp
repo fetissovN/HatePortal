@@ -20,11 +20,6 @@
 </head>
 <body>
 <jsp:include page="bar.jsp"/>
-<%--<h2>${sessionScope.get("auth").username}</h2>--%>
-<%--<ul class="button-group round">--%>
-    <%--<li><a href="/post/" class="button"><spring:message code="label.post.buttonIn"/></a></li>--%>
-<%--</ul>--%>
-<%--<c:if test="${not empty postForm}">--%>
     <div class="row">
         <div class="large-3 column">
 
@@ -70,7 +65,6 @@
         </div>
         <div class="large-3 column"></div>
     </div>
-<%--</c:if>--%>
 <div class="row">
     <div class="large-2 column">
         <ul class="button-group round">
@@ -107,6 +101,9 @@
             </article>
         </a>
 </c:forEach>
+        <ul class="button-group round">
+            <li><button id="ajaxLoadPosts" class="button"><spring:message code="label.post.buttonIn"/></button></li>
+        </ul>
     </div>
 </div>
     </div>

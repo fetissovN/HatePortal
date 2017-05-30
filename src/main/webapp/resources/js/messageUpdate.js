@@ -51,11 +51,9 @@ function ajaxRequestUpdMess(){
                 $('#adminMessUpdate'+json.id).show();
                 $('#messageAjaxId').remove();
             }
-
         },
         error: function () {
             alert("fail!");
         }
-
     });
 }

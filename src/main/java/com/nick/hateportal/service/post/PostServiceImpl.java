@@ -56,4 +56,29 @@ public class PostServiceImpl implements PostService {
         postDB.setPhoto(post.getPhoto());
         postDAO.updatePost(postDB);
     }
+
+    @Override
+    public List<Post> getFivePostsWithBoundaries(int page) {
+        List<Post> allPosts = getAllPosts();
+        List<Post> fivePosts = null;
+        for (int i=0; i<allPosts.size();i++){
+            if(i==page*5){
+                for (int j=0;j<5;j++) {
+                    fivePosts.add(allPosts.get(i+j));
+                }
+                break;
+            }
+        }
+        return fivePosts;
+    }
+
+    @Override
+    public List<Post> getStartPosts() {
+        List<Post> allPosts = getAllPosts();
+        List<Post> startPosts = new ArrayList<>(5);
+        for (int i=0; i<3;i++){
+            startPosts.add(allPosts.get(i));
+        }
+        return startPosts;
+    }
 }
