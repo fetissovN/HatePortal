@@ -35,7 +35,6 @@ function ajaxRequestPostUpdShow(urlFrom){
         url: urlFrom,
         // data: {'s': term},
         success: function(data){
-            // alert('asdasdasd');
             $('.article-row').hide();
             $('#updatePost').append(data);
             // $("#updatePost").focus();

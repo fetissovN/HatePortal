@@ -22,7 +22,6 @@ $(document).ready(function () {
     //likes post
     $('#like').click(function (e) {
         var addressValue = $(this).attr("href");
-        alert(addressValue);
         e.preventDefault();
         if (localStorage.getItem(addressValue)=='1'){
             alert('nooooo');
@@ -48,7 +47,6 @@ $(document).ready(function () {
     //likes message
     $('#likeMessLink').click(function (e) {
         var addressValue = $(this).attr("href");
-        alert(addressValue);
         e.preventDefault();
         if (localStorage.getItem(addressValue)=='1'){
             alert('nooooo');
@@ -70,31 +68,17 @@ $(document).ready(function () {
         }
 
     });
-    // $('#ajaxLoadPosts').click(function () {
-    //     var page = $('#ajaxLoadPosts').attr("name");
-    //     alert(page);
-    //     $('#ajaxLoadPosts').hide();
-    //     $.ajax({
-    //             type: 'GET',
-    //             url: '/loadPosts',
-    //             data: {'page': '1'},
-    //             success: function(data){
-    //             $('.loadedPostsPlaceholder').append(data);
-    //             }
-    //     });
-    // });
+    //page ajax load posts
     $('body').on('click', '#ajaxLoadPosts', function(){
         var page = $('#ajaxLoadPosts').attr("name");
         var countPage = parseInt(page);
         countPage++;
-        alert(countPage);
         $('#ajaxLoadPosts').remove();
         $.ajax({
             type: 'GET',
             url: '/loadPosts',
             data: {'page': countPage},
             success: function(data){
-                alert('kasjd');
                 countPage--;
                 $('.loadedPostsPlaceholder'+page).append(data);
             }
