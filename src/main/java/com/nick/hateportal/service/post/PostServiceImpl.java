@@ -60,10 +60,20 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getFivePostsWithBoundaries(int page) {
         List<Post> allPosts = getAllPosts();
-        List<Post> fivePosts = null;
+        List<Post> fivePosts = new ArrayList<>();
+        int count ;
+        if (page*5-allPosts.size()>=5){
+            count = 0;
+        }else {
+            if (allPosts.size()-5<=5*page){
+                count = allPosts.size()%5;
+            }else {
+                count = 5;
+            }
+        }
         for (int i=0; i<allPosts.size();i++){
             if(i==page*5){
-                for (int j=0;j<5;j++) {
+                for (int j=0;j<count;j++) {
                     fivePosts.add(allPosts.get(i+j));
                 }
                 break;
@@ -76,7 +86,7 @@ public class PostServiceImpl implements PostService {
     public List<Post> getStartPosts() {
         List<Post> allPosts = getAllPosts();
         List<Post> startPosts = new ArrayList<>(5);
-        for (int i=0; i<3;i++){
+        for (int i=0; i<5;i++){
             startPosts.add(allPosts.get(i));
         }
         return startPosts;

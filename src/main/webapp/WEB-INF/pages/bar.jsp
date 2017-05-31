@@ -17,6 +17,7 @@
     <script type="text/javascript" src="<c:url value="/resources/js/feedback.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/postUpdate.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/messageUpdate.js"/>"></script>
+    <%--<script type="text/javascript" src="<c:url value="/resources/js/"/>"></script>--%>
 
 </head>
 <body>

@@ -56,7 +56,6 @@ $(document).ready(function () {
             $.ajax({
                 type: 'GET',
                 url: addressValue,
-                // data: {'s': term},
                 success: function(data){
                     var likeT = $('#likeMessage').text();
                     var likeWS = likeT.replace(/\s+/g, '');
@@ -71,23 +70,38 @@ $(document).ready(function () {
         }
 
     });
-    $('#ajaxLoadPosts').click(function (e) {
-            $.ajax({
-                type: 'GET',
-                url: '/loadPosts',
-                // data: {'s': term},
-                success: function(data){
-                    var likeT = $('#likeMessage').text();
-                    var likeWS = likeT.replace(/\s+/g, '');
-                    var count = likeWS.substring(6,10);
-                    var countD = parseInt(count);
-                    countD = countD+1;
-                    var output = [likeWS.slice(0, 6),countD, likeWS.slice(10)].join('');
-                    $('#likeMessage').html(output);
-                    localStorage.setItem(addressValue, "1");
-                }
-            });
-        }
+    // $('#ajaxLoadPosts').click(function () {
+    //     var page = $('#ajaxLoadPosts').attr("name");
+    //     alert(page);
+    //     $('#ajaxLoadPosts').hide();
+    //     $.ajax({
+    //             type: 'GET',
+    //             url: '/loadPosts',
+    //             data: {'page': '1'},
+    //             success: function(data){
+    //             $('.loadedPostsPlaceholder').append(data);
+    //             }
+    //     });
+    // });
+    $('body').on('click', '#ajaxLoadPosts', function(){
+        var page = $('#ajaxLoadPosts').attr("name");
+        var countPage = parseInt(page);
+        countPage++;
+        alert(countPage);
+        $('#ajaxLoadPosts').remove();
+        $.ajax({
+            type: 'GET',
+            url: '/loadPosts',
+            data: {'page': countPage},
+            success: function(data){
+                alert('kasjd');
+                countPage--;
+                $('.loadedPostsPlaceholder'+page).append(data);
+            }
+        });
+
+    });
+    $('#ajaxLoadPosts').click(function () {
 
     });
 });

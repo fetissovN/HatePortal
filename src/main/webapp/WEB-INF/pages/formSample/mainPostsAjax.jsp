@@ -28,3 +28,8 @@
         </article>
     </a>
 </c:forEach>
+<div class="loadedPostsPlaceholder${page}"></div>
+<ul class="button-group round">
+    <li><button id="ajaxLoadPosts" name="${page}" class="button"><spring:message code="label.post.load"/></button></li>
+</ul>
+

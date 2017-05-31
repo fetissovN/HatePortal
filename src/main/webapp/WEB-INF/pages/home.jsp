@@ -102,8 +102,9 @@
         </a>
 </c:forEach>
         <ul class="button-group round">
-            <li><button id="ajaxLoadPosts" class="button"><spring:message code="label.post.buttonIn"/></button></li>
+            <li><button id="ajaxLoadPosts" name="0" class="button"><spring:message code="label.post.load"/></button></li>
         </ul>
+        <div class="loadedPostsPlaceholder0"></div>
     </div>
 </div>
     </div>
