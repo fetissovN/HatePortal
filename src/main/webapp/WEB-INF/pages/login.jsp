@@ -13,11 +13,22 @@
             color: red;
         }
     </style>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
+
+    <script type="text/javascript">
+        VK.init({apiId: 6058012});
+    </script>
 </head>
 <body>
+
 <jsp:include page="bar.jsp"/>
     <div class="row">
-        <div class="large-4 column"><!-- ... --></div>
+        <div class="large-4 column">
+            <div id="vk_auth"></div>
+            <script type="text/javascript">
+                VK.Widgets.Auth("vk_auth", {authUrl: '/log/login'},{scope: 'email'});
+            </script>
+        </div>
         <div class="large-4 large-centered column">
 <s:form method="post" commandName="loginForm" action="login">
     <div align="center">

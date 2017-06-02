@@ -6,6 +6,7 @@ import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.PassHash;
+import com.nick.hateportal.utils.Vk;
 import com.nick.hateportal.validation.LoginFormValidator;
 import com.nick.hateportal.validation.RegFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 
 @Controller
@@ -33,6 +35,12 @@ public class LoginController {
 
     @RequestMapping(value = "/")
     public String showLoginFrom(HttpServletRequest request , HttpServletResponse response, HttpSession session, Model model){
+//        Vk vk = new Vk();
+//        try {
+//            vk.test();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         if (session.getAttribute("auth")!=null){
             session.removeAttribute("auth");
 //            Cookie cookie = null;
@@ -53,6 +61,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login")
     public String login(@ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpServletResponse response, HttpSession session, Model model, BindingResult result){
+        response.toString();
         validator.validate(loginDTO, result);
         if (result.hasErrors()){
             return "login";
