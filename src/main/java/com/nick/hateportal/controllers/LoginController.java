@@ -1,14 +1,16 @@
 package com.nick.hateportal.controllers;
 
-import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.DTO.UserLoginDTO;
 import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.PassHash;
-import com.nick.hateportal.utils.Vk;
 import com.nick.hateportal.validation.LoginFormValidator;
-import com.nick.hateportal.validation.RegFormValidator;
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
+
+import static org.apache.commons.codec.digest.DigestUtils.md5;
 
 @Controller
 @RequestMapping(value = "/log")
@@ -61,7 +65,6 @@ public class LoginController {
 
     @RequestMapping(value = "/login")
     public String login(@ModelAttribute(value = "loginForm") UserLoginDTO loginDTO, HttpServletResponse response, HttpSession session, Model model, BindingResult result){
-        response.toString();
         validator.validate(loginDTO, result);
         if (result.hasErrors()){
             return "login";
@@ -96,5 +99,36 @@ public class LoginController {
                 return "login";
             }
         }
+    }
+
+    @RequestMapping(value = "/vk.login")
+    public String vkLogin(HttpServletResponse response, HttpServletRequest request){
+//        System.out.println(request);
+//        String userId = (request.getParameter("uid"));
+//        String hash = (request.getParameter("hash"));
+        String secKey = "c5gxoDRIDhSuYbTKckS7";
+        String appId = "6058012";
+        HttpClient client= HttpClientBuilder.create().build();
+        StringBuilder str =new StringBuilder();
+        str.append("https://oauth.vk.com/authorize?client_id="+
+                appId+"&display=page&redirect_uri=http://localhost/log/&scope=email&response_type=code&v=5.65");
+        HttpGet get=new HttpGet(String.valueOf(str));
+        try {
+            HttpResponse httpResponse = client.execute(get);
+            Header[] sss = httpResponse.getAllHeaders();
+            System.out.println(sss.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        try {
+////            client.execute(get);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+
+
+        return "redirect:" + String.valueOf(str);
     }
 }
