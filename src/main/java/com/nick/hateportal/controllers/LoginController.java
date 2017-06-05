@@ -7,6 +7,7 @@ import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.PassHash;
 import com.nick.hateportal.validation.LoginFormValidator;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -115,8 +116,11 @@ public class LoginController {
         HttpGet get=new HttpGet(String.valueOf(str));
         try {
             HttpResponse httpResponse = client.execute(get);
-            Header[] sss = httpResponse.getAllHeaders();
-            System.out.println(sss.toString());
+//            HttpEntity entity = httpResponse.getEntity();
+            for (Header header: httpResponse.getAllHeaders()){
+                System.out.println(header.getName()+":"+header.getValue());
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
