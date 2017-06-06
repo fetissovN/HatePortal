@@ -10,4 +10,6 @@ public interface UserService {
     User getUserByEmail(String email);
 
     void updateUser(User user);
+
+    void createDefaultUser(String name,String surname,String email);
 }

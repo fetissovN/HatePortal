@@ -40,4 +40,18 @@ public class UserServiceImpl implements UserService {
             userDao.updateUser(user);
         }
     }
+
+    @Override
+    public void createDefaultUser(String name,String surname,String email) {
+        User user = new User();
+        user.setUsername(name);
+        user.setSurname(surname);
+        user.setEmail(email);
+        user.setPassword("1341341");
+        user.setNickname(name+" HateDefault");
+        user.setRole(1);
+        user.setRate(0.0);
+        user.setPhone("00000000");
+        createUser(user);
+    }
 }

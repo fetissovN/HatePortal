@@ -1,18 +1,30 @@
 package com.nick.hateportal.controllers;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nick.hateportal.DTO.UserLoginDTO;
 import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.PassHash;
+import com.nick.hateportal.utils.Vk;
 import com.nick.hateportal.validation.LoginFormValidator;
+import com.vk.api.sdk.client.TransportClient;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +37,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import static org.apache.commons.codec.digest.DigestUtils.md5;
 
@@ -104,32 +120,34 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/vk.login")
-    public String vkLogin(HttpServletResponse response, HttpServletRequest request){
-//        System.out.println(request);
-//        String userId = (request.getParameter("uid"));
-//        String hash = (request.getParameter("hash"));
-        String secKey = "c5gxoDRIDhSuYbTKckS7";
-        String appId = "6058012";
-        HttpClient client= HttpClientBuilder.create().build();
-        StringBuilder str =new StringBuilder();
-        str.append("https://oauth.vk.com/authorize?client_id="+
-                appId+"&display=page&redirect_uri=http://localhost/log/&scope=email&response_type=code&v=5.65");
-        HttpGet get=new HttpGet(String.valueOf(str));
-        try {
-            HttpResponse httpResponse = client.execute(get);
-            HttpEntity entity = httpResponse.getEntity();
-            if (entity!= null){
-                String data = IOUtils.toString(entity.getContent(),"cp1251");
-                System.out.println("Data" + data);
-            }
-            for (Header header: httpResponse.getAllHeaders()){
-                System.out.println(header.getName()+":"+header.getValue());
-            }
+    public String vkLogin(HttpServletRequest request){
+        String codeHttp= Vk.getCodeHttp();
+        return "redirect:" + codeHttp;
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+    @RequestMapping(value = "/log.access")
+    public String loginFinalVk(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model){
+        String code = request.getParameter("code");
+        HashMap<String,String> userInfo= Vk.finalHttp(code);
+        String email = userInfo.get("email");
+        if (userInfo!=null){
+            User userFromDB = userService.getUserByEmail(email);
+            if (userFromDB!=null){
+//                model.addAttribute()
+                session.removeAttribute("auth");
+                session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
+                return "redirect:/";
+            }else {
+                userService.createDefaultUser(userInfo.get("first_name"),userInfo.get("last_name"),email);
+                session.removeAttribute("auth");
+                User user = userService.getUserByEmail(email);
+                session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
+
+            }
         }
 
-        return "redirect:" + String.valueOf(str);
+
+
+            return "redirect:/";
     }
 }

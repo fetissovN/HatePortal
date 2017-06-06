@@ -86,9 +86,17 @@ public class PostServiceImpl implements PostService {
     public List<Post> getStartPosts() {
         List<Post> allPosts = getAllPosts();
         List<Post> startPosts = new ArrayList<>(5);
-        for (int i=0; i<5;i++){
-            startPosts.add(allPosts.get(i));
+        if (allPosts.size()<5){
+            for (int i=0; i<allPosts.size();i++){
+                startPosts.add(allPosts.get(i));
+                return startPosts;
+            }
+        }else {
+            for (int i=0; i<5;i++){
+                startPosts.add(allPosts.get(i));
+            }
         }
+
         return startPosts;
     }
 }
