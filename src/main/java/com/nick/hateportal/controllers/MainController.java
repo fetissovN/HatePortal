@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -22,7 +23,7 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String redirectToHome(HttpSession session, Model model ){
-        List<Post> list = postService.getAllPosts();
+        List<Post> list = postService.getStartPosts();
         model.addAttribute("posts", list);
         model.addAttribute("postForm", new Post());
         model.addAttribute("barUserInfo", new User());
@@ -44,4 +45,11 @@ public class MainController {
         return "login";
     }
 
+    @RequestMapping(value = "/loadPosts",method = RequestMethod.GET)
+    public String loadPosts(Model model, @RequestParam("page") String page){
+        List<Post> loadedPosts = postService.getFivePostsWithBoundaries(Integer.parseInt(page));
+        model.addAttribute("posts",loadedPosts);
+        model.addAttribute("page", page);
+        return "formSample/mainPostsAjax";
+    }
 }

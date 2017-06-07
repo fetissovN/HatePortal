@@ -5,9 +5,6 @@ import com.nick.hateportal.entity.Post;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Николай on 08.05.2017.
- */
 public interface PostService {
 
     void createPost(Post post);
@@ -15,4 +12,14 @@ public interface PostService {
     List<Post> getAllPosts();
 
     Post getPostById(Long postId);
+
+    void likePost(Long id);
+
+    void deletePost(Long id);
+
+    void updatePost(Post post, Long id);
+
+    List<Post> getFivePostsWithBoundaries(int page);
+
+    List<Post> getStartPosts();
 }

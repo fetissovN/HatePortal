@@ -45,13 +45,13 @@ public class BarController {
             userService.updateUser(user);
             session.removeAttribute("auth");
             session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
-            return "redirect:/info_bar_save_ok1";
+            return "redirect:/info_save_ok1";
         }else {
-            return "redirect:/info_bar_save_ok0";
+            return "redirect:/info_save_ok0";
         }
     }
 
-    @RequestMapping(value = "/info_bar_save_ok{status}")
+    @RequestMapping(value = "/info_save_ok{status}")
     public @ResponseBody String saved(@PathVariable("status") String status){
         return status;
     }

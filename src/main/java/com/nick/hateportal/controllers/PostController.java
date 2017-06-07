@@ -9,14 +9,15 @@ import com.nick.hateportal.service.post.PostService;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.validation.MessageFormValidator;
 import com.nick.hateportal.validation.PostFormValidator;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -105,4 +106,68 @@ public class PostController {
         return "/post";
     }
 
+    @RequestMapping(value = "/like/{postId}")
+    public @ResponseBody String likePost(@PathVariable("postId") Long id){
+        postService.likePost(id);
+        return "1";
+    }
+
+    @RequestMapping(value = "/message/like/{messId}")
+    public @ResponseBody String likeMessage(@PathVariable("messId") Long id){
+        messageService.markLike(id);
+        return "1";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String deletePost(@PathVariable("id") Long id){
+        postService.deletePost(id);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/message/delete/{messageId}/{postId}")
+    public String deleteMessage(HttpServletRequest request, @PathVariable("messageId") Long messageId, @PathVariable("postId") Long postId){
+        messageService.deleteMessage(messageId);
+        String post = String.valueOf(postId);
+        request.toString();
+        return "redirect:/post/post/" + post;
+    }
+
+    @RequestMapping(value = "/updateShow/{postId}", method = RequestMethod.GET)
+    public String showUpdatePostFrom(@PathVariable("postId") Long postId, Model model){
+        Post post = postService.getPostById(postId);
+        model.addAttribute("postForm", post);
+        return "formSample/postForm";
+    }
+
+    @RequestMapping(value = "/update/{postId}", method = RequestMethod.POST)
+    public String updatePost(@ModelAttribute(value = "postForm") Post post,
+                                           @PathVariable("postId") Long id, BindingResult result){
+        postFormValidator.validate(post,result);
+        if (result.hasErrors()){
+            return "formSample/postForm";
+        }
+        postService.updatePost(post,id);
+        return "redirect:/info_save_ok" + id;
+    }
+
+    @RequestMapping(value = "/message/updateShow/{messageId}")
+    public String updateMessageShow(Model model, @PathVariable("messageId") Long messageId){
+        Message message = messageService.getMessageById(messageId);
+        model.addAttribute("messageUpdate", message);
+//        JSONObject object = new JSONObject();
+//        object.put("id", message.getId());
+//        object.put("message", message.getMessage());
+//        return object.toString();
+        return "formSample/messageUpdate";
+    }
+
+    @RequestMapping(value = "/comment/update",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message, HttpServletResponse response){
+//        response.setCharacterEncoding("UTF-8");
+        messageService.updateMessage(message, message.getId());
+        JSONObject object = new JSONObject();
+        object.put("id", message.getId());
+        object.put("message", message.getMessage());
+        return object.toString();
+    }
 }

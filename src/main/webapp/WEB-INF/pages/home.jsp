@@ -1,3 +1,4 @@
+<%@ page import="com.nick.hateportal.DTO.UserDTO" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,11 +20,6 @@
 </head>
 <body>
 <jsp:include page="bar.jsp"/>
-<%--<h2>${sessionScope.get("auth").username}</h2>--%>
-<%--<ul class="button-group round">--%>
-    <%--<li><a href="/post/" class="button"><spring:message code="label.post.buttonIn"/></a></li>--%>
-<%--</ul>--%>
-<%--<c:if test="${not empty postForm}">--%>
     <div class="row">
         <div class="large-3 column">
 
@@ -69,7 +65,6 @@
         </div>
         <div class="large-3 column"></div>
     </div>
-<%--</c:if>--%>
 <div class="row">
     <div class="large-2 column">
         <ul class="button-group round">
@@ -79,7 +74,6 @@
     <div class="large-10 column">
 <div class="article-row-section">
     <div class="article-row-section-inner">
-
         <h2 class="article-row-section-header">Hate Posts</h2>
 <c:forEach items="${posts}" var="postMain">
         <a href="<c:url value="post/post/${postMain.id}"/>">
@@ -94,16 +88,26 @@
 
                     <p class="article-row-content-author">${postMain.userId.username}</p>
                     <time class="article-row-content-time" datetime="2008-02-14 20:00">${postMain.postDate}</time>
+                    <p id="likeTag" class="article-row-content-author">
+                        Likes: ${postMain.like}
+                        <a id="like" href="/post/like/${postMain.id}"><img class="logo" src="<c:url value="/resources/images/like-512.png"/>"></a>
+                    </p>
+                    <p class="article-row-content-author">
+                        <c:if test="${sessionScope.get('auth').role eq 0}">
+                            <a style="color: #cc8b00" id="adminDel" href="/post/delete/${postMain.id}">delete</a>
+                        </c:if>
+                    </p>
                 </div>
             </article>
         </a>
 </c:forEach>
-
-
+        <ul class="button-group round">
+            <li><button id="ajaxLoadPosts" name="0" class="button"><spring:message code="label.post.load"/></button></li>
+        </ul>
+        <div class="loadedPostsPlaceholder0"></div>
     </div>
 </div>
     </div>
-    <%--<div class="large-1 column">asdasdasdasd</div>--%>
 </div>
 
 </body>

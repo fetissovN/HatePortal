@@ -8,12 +8,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.css"/> ">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
+    <style type="text/css">
+        span.error {
+            color: red;
+        }
+    </style>
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>
+
+    <script type="text/javascript">
+        VK.init({apiId: 6058012});
+    </script>
 </head>
 <body>
+
 <jsp:include page="bar.jsp"/>
     <div class="row">
-        <div class="large-4 column"><!-- ... --></div>
+        <div class="large-4 column">
+            <div id="vk_auth"></div>
+            <script type="text/javascript">
+                VK.Widgets.Auth("vk_auth", {authUrl: '/log/vk.login'});
+            </script>
+        </div>
         <div class="large-4 large-centered column">
 <s:form method="post" commandName="loginForm" action="login">
     <div align="center">

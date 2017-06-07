@@ -40,8 +40,8 @@ $(document).ready(function () {
 
         var cookie = $.cookie("timestamp");
         var cookie2 = $.cookie("auth");
-        alert(cookie);
-        alert(cookie2);
+        // alert(cookie);
+        // alert(cookie2);
 
         // if (cookie==1){
         // ajaxRequestInf();

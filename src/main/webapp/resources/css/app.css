@@ -326,3 +326,86 @@
 }
 
 
+.translucent-form-overlay {
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(54, 54, 54, 0.8);
+    padding: 20px;
+    color: #fefefe;
+}
+
+.translucent-form-overlay .columns.row {
+    display: block;
+}
+
+.translucent-form-overlay h3, .translucent-form-overlay label {
+    color: #fefefe;
+}
+
+.translucent-form-overlay input, .translucent-form-overlay select {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input::-webkit-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input:-ms-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay input::placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay-feed {
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(54, 54, 54, 0.8);
+    padding: 20px;
+    color: #fefefe;
+}
+
+.translucent-form-overlay-feed .columns.row {
+    display: block;
+}
+
+.translucent-form-overlay-feed h3, .translucent-form-overlay-feed label {
+    color: #fefefe;
+}
+
+.translucent-form-overlay-feed input, .translucent-form-overlay-feed select {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay-feed input::-webkit-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay-feed input:-ms-input-placeholder {
+    color: #8a8a8a;
+}
+
+.translucent-form-overlay-feed input::placeholder {
+    color: #8a8a8a;
+}
+
+
+.formBar{
+    position: absolute;
+    z-index: 100;
+    right:0px;
+    width:400px;
+    /*top: -1px;*/
+}
+
+.formFeed{
+    position: absolute;
+    z-index: 100;
+    right:400px;
+    width:400px;
+}
+
+span.error {
+    color: red;
+}

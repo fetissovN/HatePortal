@@ -30,6 +30,9 @@ public class Post {
     @Column(name = "post_date")
     private Date postDate;
 
+    @Column(name = "like_count")
+    private int like;
+
     @Column(name = "photo")
     private byte[] photo;
 
@@ -37,6 +40,14 @@ public class Post {
     private List<Message> postRelatedMessages;
 
     public Post() {
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 
     public String getTarget() {

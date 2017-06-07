@@ -10,4 +10,9 @@ public interface UserService {
     User getUserByEmail(String email);
 
     void updateUser(User user);
+
+// returns new password
+    String createDefaultUser(String name,String surname,String email);
+
+    void sendEmailToNewVkUser(String email, String pass);
 }

@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface MessageDAO {
 
+    Message getMessageById(Long id);
+
     void saveMessage(Message message);
 
     void deleteMessage(Message message);
 
-    void uptadeMessage(Message message);
+    void updateMessage(Message message);
 
     List<Message> getAllMessagesByPostId(Post post);
 

@@ -1,13 +1,30 @@
 package com.nick.hateportal.controllers;
 
-import com.nick.hateportal.DTO.UserDTO;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nick.hateportal.DTO.UserLoginDTO;
 import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.PassHash;
+import com.nick.hateportal.utils.Vk;
 import com.nick.hateportal.validation.LoginFormValidator;
-import com.nick.hateportal.validation.RegFormValidator;
+import com.vk.api.sdk.client.TransportClient;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +36,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+import static org.apache.commons.codec.digest.DigestUtils.md5;
 
 @Controller
 @RequestMapping(value = "/log")
@@ -33,6 +57,12 @@ public class LoginController {
 
     @RequestMapping(value = "/")
     public String showLoginFrom(HttpServletRequest request , HttpServletResponse response, HttpSession session, Model model){
+//        Vk vk = new Vk();
+//        try {
+//            vk.test();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         if (session.getAttribute("auth")!=null){
             session.removeAttribute("auth");
 //            Cookie cookie = null;
@@ -87,5 +117,38 @@ public class LoginController {
                 return "login";
             }
         }
+    }
+
+    @RequestMapping(value = "/vk.login")
+    public String vkLogin(HttpServletRequest request){
+        String codeHttp= Vk.getCodeHttp();
+        return "redirect:" + codeHttp;
+    }
+
+    @RequestMapping(value = "/log.access")
+    public String loginFinalVk(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model){
+        String code = request.getParameter("code");
+        HashMap<String,String> userInfo= Vk.finalHttp(code);
+        String email = userInfo.get("email");
+        if (userInfo!=null){
+            User userFromDB = userService.getUserByEmail(email);
+            if (userFromDB!=null){
+//                model.addAttribute()
+                session.removeAttribute("auth");
+                session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
+                return "redirect:/";
+            }else {
+                String passForEmail = userService.createDefaultUser(userInfo.get("first_name"),userInfo.get("last_name"),email);
+                userService.sendEmailToNewVkUser(email, passForEmail);
+                session.removeAttribute("auth");
+                User user = userService.getUserByEmail(email);
+                session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
+
+            }
+        }
+
+
+
+            return "redirect:/";
     }
 }
