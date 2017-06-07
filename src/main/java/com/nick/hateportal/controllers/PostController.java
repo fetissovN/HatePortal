@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -160,8 +161,9 @@ public class PostController {
         return "formSample/messageUpdate";
     }
 
-    @RequestMapping(value = "/comment/update")
-    public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message){
+    @RequestMapping(value = "/comment/update",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message, HttpServletResponse response){
+//        response.setCharacterEncoding("UTF-8");
         messageService.updateMessage(message, message.getId());
         JSONObject object = new JSONObject();
         object.put("id", message.getId());

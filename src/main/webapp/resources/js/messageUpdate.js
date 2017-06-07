@@ -44,13 +44,13 @@ function ajaxRequestUpdMess(){
         url: addressValue,
         data: $('#messageAjaxId').serialize(),
         success: function(data){
-            if (data.length > 1){
-                var json = $.parseJSON(data);
+                // alert('kgjkh');
                 $('.mess').show();
-                $('#mess'+json.id).html(json.message);
-                $('#adminMessUpdate'+json.id).show();
+                // var str = $.utf8_encode(json.message);
+                $('#mess'+data.id).html(data.message);
+                $('#adminMessUpdate'+data.id).show();
                 $('#messageAjaxId').remove();
-            }
+
         },
         error: function () {
             alert("fail!");
