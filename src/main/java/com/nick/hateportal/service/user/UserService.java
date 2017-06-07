@@ -11,5 +11,8 @@ public interface UserService {
 
     void updateUser(User user);
 
-    void createDefaultUser(String name,String surname,String email);
+// returns new password
+    String createDefaultUser(String name,String surname,String email);
+
+    void sendEmailToNewVkUser(String email, String pass);
 }

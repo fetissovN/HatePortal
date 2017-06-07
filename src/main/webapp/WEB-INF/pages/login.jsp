@@ -29,7 +29,6 @@
                 VK.Widgets.Auth("vk_auth", {authUrl: '/log/vk.login'});
             </script>
         </div>
-        <a href="/log/vk.login"> akjdhalsdj</a>
         <div class="large-4 large-centered column">
 <s:form method="post" commandName="loginForm" action="login">
     <div align="center">

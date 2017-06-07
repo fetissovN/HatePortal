@@ -138,7 +138,8 @@ public class LoginController {
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
                 return "redirect:/";
             }else {
-                userService.createDefaultUser(userInfo.get("first_name"),userInfo.get("last_name"),email);
+                String passForEmail = userService.createDefaultUser(userInfo.get("first_name"),userInfo.get("last_name"),email);
+                userService.sendEmailToNewVkUser(email, passForEmail);
                 session.removeAttribute("auth");
                 User user = userService.getUserByEmail(email);
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));

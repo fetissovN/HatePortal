@@ -35,7 +35,7 @@ public class Mailing{
             //тема сообщения
             message.setSubject(subject);
             //текст
-            message.setText(fromEmail+ "<br>" + text);
+            message.setText(text);
 
             //отправляем сообщение
             Transport.send(message);
@@ -43,4 +43,12 @@ public class Mailing{
             throw new RuntimeException(e);
         }
     }
+
+    public void sendVkAuthMessageWithPassword(String toEmail, String newPass){
+        String text = "Welcome to HatePortal! You are successfully registered, " +
+                "please use password in the end and change it as soon as possible   "  + newPass;
+        send("Hate Portal",text,"",toEmail);
+    }
+
+
 }
