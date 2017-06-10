@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-public class MainController {
+public class MainController extends ExceptionsController{
 
     @Autowired
     private PostService postService;

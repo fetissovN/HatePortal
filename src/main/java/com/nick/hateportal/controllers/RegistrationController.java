@@ -18,7 +18,7 @@ import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/reg")
-public class RegistrationController {
+public class RegistrationController extends ExceptionsController {
 
     @Autowired
     private RegFormValidator validator;

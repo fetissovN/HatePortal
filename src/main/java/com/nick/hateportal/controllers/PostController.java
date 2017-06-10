@@ -24,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/post")
-public class PostController {
+public class PostController extends ExceptionsController {
 
     @Autowired
     private PostFormValidator postFormValidator;

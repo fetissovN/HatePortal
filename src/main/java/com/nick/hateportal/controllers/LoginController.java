@@ -47,7 +47,7 @@ import static org.apache.commons.codec.digest.DigestUtils.md5;
 
 @Controller
 @RequestMapping(value = "/log")
-public class LoginController {
+public class LoginController extends ExceptionsController {
 
     @Autowired
     private LoginFormValidator validator;
