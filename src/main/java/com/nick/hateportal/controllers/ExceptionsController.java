@@ -6,10 +6,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
-/**
- *  Created by ZheynovVV on 01.10.2016.
- */
-
 @EnableWebMvc
 @ControllerAdvice
 public abstract class ExceptionsController {
