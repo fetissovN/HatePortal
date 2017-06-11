@@ -9,6 +9,8 @@ import com.nick.hateportal.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -64,6 +66,12 @@ public class UserServiceImpl implements UserService {
     public void sendEmailToNewVkUser(String email, String newPass) {
         Mailing mailing = new Mailing();
         mailing.sendVkAuthMessageWithPassword(email, newPass);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> list = userDao.getAllUsers();
+        return list;
     }
 
 
