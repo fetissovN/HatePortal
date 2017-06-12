@@ -18,5 +18,7 @@ public interface UserService {
 
     void sendEmailToNewVkUser(String email, String pass);
 
-    List<User> getAllUsers();
+    List<User> getAllUsersDescId();
+
+    List<User> getAllUsersAscId();
 }

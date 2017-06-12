@@ -69,8 +69,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        List<User> list = userDao.getAllUsers();
+    public List<User> getAllUsersDescId() {
+        List<User> list = userDao.getAllUsersDecrId();
+        return list;
+    }
+
+    @Override
+    public List<User> getAllUsersAscId() {
+        List<User> list = userDao.getAllUsersAscId();
         return list;
     }
 
