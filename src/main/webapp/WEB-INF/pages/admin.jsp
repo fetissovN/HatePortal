@@ -15,7 +15,9 @@
 <div class="row">
     <div class="large-8 column" style="border-right: 1px solid black; position: inherit">
         <a href="/admin?n=1"><button type="button" class="button">Id down</button></a>
-        <a href="/admin/"><button type="button" class="button">Id up</button></a>
+        <a href="/admin?n=2"><button type="button" class="button">Id up</button></a>
+        <a href="/admin?n=3"><button type="button" class="button">Rate down</button></a>
+        <a href="/admin?n=4"><button type="button" class="button">Rate up</button></a>
         <table>
             <table style="font-size: xx-small; margin-right: 20px" cellpadding="4" cellspacing="1">
                 <p>Total users: ${countUsers}</p><tr><th>Id</th><th>Nickname</th><th>Username</th><th>Surname</th><th>Email</th><th>Phone</th><th>Rate</th></tr>

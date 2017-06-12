@@ -56,12 +56,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "")
-    public String showUsersAsc(@RequestParam(value = "n") int n,HttpSession session, Model model){
+    public String showUsersAsc(@RequestParam(value = "n") int n ,HttpSession session, Model model){
 
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-
         if (userDTO.getRole()==0){
-            List<User> list = adminListHandler.listUserSortBy(session, ListUserSortPossibilities.);
+            List<User> list = adminListHandler.listUserSortBy(session, ListUserSortPossibilities.getMask(n));
+            model.addAttribute("countUsers", list.size());
             model.addAttribute("list", list);
             return "admin";
         }else {

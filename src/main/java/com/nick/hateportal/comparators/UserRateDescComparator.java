@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 import java.util.Comparator;
 
 @Component
-public class UserDescComparator implements Comparator<User> {
+public class UserRateDescComparator implements Comparator<User> {
     @Override
     public int compare(User o1, User o2) {
-        return o2.getId().compareTo(o1.getId());
+        return o2.getRate().compareTo(o1.getRate());
     }
 
 

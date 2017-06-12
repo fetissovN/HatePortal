@@ -3,6 +3,8 @@ package com.nick.hateportal.utils.admin;
 import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.comparators.UserAscComparator;
 import com.nick.hateportal.comparators.UserDescComparator;
+import com.nick.hateportal.comparators.UserRateAscComparator;
+import com.nick.hateportal.comparators.UserRateDescComparator;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,12 @@ public class AdminListHandler {
     @Autowired
     private UserDescComparator userDescComparator;
 
+    @Autowired
+    private UserRateAscComparator userRateAscComparator;
+
+    @Autowired
+    private UserRateDescComparator userRateDescComparator;
+
     public List<User> listUserSortBy(HttpSession session, ListUserSortPossibilities sortType) {
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         List<User> list = new ArrayList<>();
@@ -42,10 +50,10 @@ public class AdminListHandler {
                     list.sort(userDescComparator);
                     break;
                 case SORT_USER_RATE_DOWN:
-//                    list.sort(userDescComparator);
+                    list.sort(userRateAscComparator);
                     break;
                 case SORT_USER_RATE_UP:
-//                    list.sort(userDescComparator);
+                    list.sort(userRateDescComparator);
                     break;
 
                 default:
