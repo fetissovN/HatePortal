@@ -1,17 +1,23 @@
 package com.nick.hateportal.utils.admin;
 
 import com.nick.hateportal.DTO.UserDTO;
-import com.nick.hateportal.comparators.UserAscComparator;
-import com.nick.hateportal.comparators.UserDescComparator;
-import com.nick.hateportal.comparators.UserRateAscComparator;
-import com.nick.hateportal.comparators.UserRateDescComparator;
+import com.nick.hateportal.comparators.forPost.PostDateAscComparator;
+import com.nick.hateportal.comparators.forPost.PostIdAscComparator;
+import com.nick.hateportal.comparators.forUser.UserIdAscComparator;
+import com.nick.hateportal.comparators.forUser.UserIdDescComparator;
+import com.nick.hateportal.comparators.forUser.UserRateAscComparator;
+import com.nick.hateportal.comparators.forUser.UserRateDescComparator;
+import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
+import com.nick.hateportal.service.post.PostService;
 import com.nick.hateportal.service.user.UserService;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Component
@@ -20,10 +26,13 @@ public class AdminListHandler {
     private UserService userService;
 
     @Autowired
-    private UserAscComparator userAscComparator;
+    private PostService postService;
 
     @Autowired
-    private UserDescComparator userDescComparator;
+    private UserIdAscComparator userIdAscComparator;
+
+    @Autowired
+    private UserIdDescComparator userIdDescComparator;
 
     @Autowired
     private UserRateAscComparator userRateAscComparator;
@@ -31,7 +40,13 @@ public class AdminListHandler {
     @Autowired
     private UserRateDescComparator userRateDescComparator;
 
-    public List<User> listUserSortBy(HttpSession session, ListUserSortPossibilities sortType) {
+    @Autowired
+    private PostIdAscComparator postIdAscComparator;
+
+    @Autowired
+    private PostDateAscComparator postDateAscComparator;
+
+    public List<User> listUserSortBy(HttpSession session, ListAdminEntitySortPossibilities sortType) {
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         List<User> list = new ArrayList<>();
         if (userDTO.getRole() == 0) {
@@ -44,23 +59,67 @@ public class AdminListHandler {
             }
             switch (sortType){
                 case SORT_USER_ID_DOWN:
-                    list.sort(userAscComparator);
+                    list.sort(userIdAscComparator);
                     break;
                 case SORT_USER_ID_UP:
-                    list.sort(userDescComparator);
+                    list.sort(userIdAscComparator.reversed());
                     break;
                 case SORT_USER_RATE_DOWN:
                     list.sort(userRateAscComparator);
                     break;
                 case SORT_USER_RATE_UP:
-                    list.sort(userRateDescComparator);
+                    list.sort(userRateAscComparator.reversed());
                     break;
 
                 default:
-                    list.sort(userDescComparator);
+                    list.sort(userIdDescComparator);
                     break;
             }
         }
         return list;
+    }
+
+    public List<Post> adminPostSortBy(HttpSession session, ListAdminEntitySortPossibilities sortType){
+        List<Post> list = new ArrayList<>();
+        if (session.getAttribute("listPosts") == null) {
+            list = postService.getAllPosts();
+            session.setAttribute("listPosts", list);
+        } else {
+            list = (List<Post>) session.getAttribute("listPosts");
+        }
+        switch (sortType){
+            case SORT_POST_ID_DOWN:
+                list.sort(postIdAscComparator);
+                break;
+            case SORT_POST_ID_UP:
+                list.sort(postIdAscComparator.reversed());
+                break;
+            case SORT_POST_DATE_DOWN:
+                list.sort(postDateAscComparator);
+                break;
+            case SORT_POST_DATE_UP:
+                list.sort(postDateAscComparator.reversed());
+                break;
+
+            default:
+                list.sort(postIdAscComparator);
+                break;
+        }
+        return list;
+
+    }
+
+    public List<Post> userPosts(HttpSession session, Long id){
+        List<Post> list = postService.getAllPosts();
+//        List<Post> list = (List<Post>) session.getAttribute("listPosts");
+        List<Post> newList = new ArrayList<>();
+        for (Post l: list ){
+            if (l.getUserId().getId()==id){
+                newList.add(l);
+            }
+        }
+        session.removeAttribute("listPosts");
+        session.setAttribute("listPosts", newList);
+        return newList;
     }
 }
