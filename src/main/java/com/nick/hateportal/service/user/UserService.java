@@ -3,6 +3,8 @@ package com.nick.hateportal.service.user;
 
 import com.nick.hateportal.entity.User;
 
+import java.util.List;
+
 public interface UserService {
 
     void createUser(User user);
@@ -15,4 +17,8 @@ public interface UserService {
     String createDefaultUser(String name,String surname,String email);
 
     void sendEmailToNewVkUser(String email, String pass);
+
+    List<User> getAllUsersDescId();
+
+    List<User> getAllUsersAscId();
 }

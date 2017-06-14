@@ -16,7 +16,25 @@ $(document).ready(function () {
         $('#form').css("display", "none");
     }
     //hide post form after ok
-    $('#submitForm').click(function () {
+    $('#submitForm').click(function (e) {
+        // e.preventDefault();
+        // alert('in');
+        $.ajax({
+            type: 'GET',
+            url: '/post/create',
+            data: $('#form').serialize(),
+            success: function(data){
+
+                // todo
+                // nodeNames = [];
+                // $.each( f, function( i, el ) {
+                //     nodeNames[ i ] = "<li>" + el.nodeName + "</li>";
+                // });
+                // alert(nodeNames);
+            }
+        });
+
+
         $('#form').css("display", "none");
     });
     //likes post

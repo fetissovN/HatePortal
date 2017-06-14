@@ -1,9 +1,12 @@
 package com.nick.hateportal.dao.user;
 
 import com.nick.hateportal.DTO.UserRegDTO;
+import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -71,5 +74,22 @@ public class UserDaoImpl implements UserDAO {
 
     }
 
+    @Override
+    public List<User> getAllUsersDecrId() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.addOrder(Order.desc("id"));
+        List result = criteria.list();
+        LOGGER.info(messageSource.getMessage("log.get.users", new Object[] {result}, Locale.ENGLISH));
+        return result;
+    }
+
+    @Override
+    public List<User> getAllUsersAscId() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        criteria.addOrder(Order.asc("id"));
+        List result = criteria.list();
+        LOGGER.info(messageSource.getMessage("log.get.users", new Object[] {result}, Locale.ENGLISH));
+        return result;
+    }
 
 }
