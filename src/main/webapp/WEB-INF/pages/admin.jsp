@@ -16,11 +16,12 @@
 
 <div class="row">
     <div class="large-8 column" style="border-right: 1px solid black; position: inherit">
-        <a href="/admin?n=1"><button type="button" class="button">Id down</button></a>
-        <a href="/admin?n=2"><button type="button" class="button">Id up</button></a>
-        <a href="/admin?n=3"><button type="button" class="button">Rate down</button></a>
-        <a href="/admin?n=4"><button type="button" class="button">Rate up</button></a>
-        <table>
+        <a id="idDown" href="/admin?n=1"><button type="button" class="button">Id down</button></a>
+        <a id="idUp" href="/admin?n=2"><button type="button" class="button">Id up</button></a>
+        <a id="rateDown" href="/admin?n=3"><button type="button" class="button">Rate down</button></a>
+        <a id="rateUp" href="/admin?n=4"><button type="button" class="button">Rate up</button></a>
+        <div class="userAdminIncome"></div>
+        <div class="userDefault">
             <table style="font-size: xx-small; margin-right: 20px" cellpadding="4" cellspacing="1">
                 <p>Total users: ${countUsers}</p><tr><th>Id</th><th>Nickname</th><th>Username</th><th>Surname</th><th>Email</th><th>Phone</th><th>Rate</th></tr>
                 <c:forEach items="${list}" var="user">
@@ -34,15 +35,16 @@
                         <td>${user.rate}</td>
                     </tr>
                 </c:forEach>
-
             </table>
-        </table>
+        </div>
     </div>
     <div class="large-4 column">
-        <a href="/admin?p=5"><button style="padding: 5px" type="button" class="button">Id down</button></a>
-        <a href="/admin?p=6"><button style="padding: 5px" type="button" class="button">Id up</button></a>
-        <a href="/admin?p=7"><button style="padding: 5px" type="button" class="button">Date down</button></a>
-        <a href="/admin?p=8"><button style="padding: 5px" type="button" class="button">Date up</button></a>
+        <a id="postIdDown" href="/admin?p=5"><button style="padding: 5px" type="button" class="button">Id down</button></a>
+        <a id="postIdUp" href="/admin?p=6"><button style="padding: 5px" type="button" class="button">Id up</button></a>
+        <a id="postDateDown" href="/admin?p=7"><button style="padding: 5px" type="button" class="button">Date down</button></a>
+        <a id="postDateUp" href="/admin?p=8"><button style="padding: 5px" type="button" class="button">Date up</button></a>
+        <div class="postAdminIncome"></div>
+        <div class="postDefault">
         <p>Posts amount: ${countPosts}</p>
         <c:forEach items="${listPosts}" var="post">
             <tr>
@@ -55,7 +57,7 @@
             </tr>
             <hr>
         </c:forEach>
-
+        </div>
     </div>
 </div>
 </body>
