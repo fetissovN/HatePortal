@@ -6,7 +6,8 @@ import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.admin.AdminListHandler;
-import com.nick.hateportal.utils.admin.ListAdminEntitySortPossibilities;
+import com.nick.hateportal.utils.admin.ListAdminPostSortPossibilities;
+import com.nick.hateportal.utils.admin.ListAdminUserSortPossibilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,8 @@ public class AdminController {
     public String showStartScreen(Model model, HttpSession session){
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         if (userDTO.getRole() == 0) {
-            List<User> listUsers = adminListHandler.listUserSortBy(session, ListAdminEntitySortPossibilities.SORT_USER_ID_UP);
-            List<Post> listPosts = adminListHandler.adminPostSortBy(session, ListAdminEntitySortPossibilities.SORT_POST_ID_UP);
+            List<User> listUsers = adminListHandler.listUserSortBy(session, ListAdminUserSortPossibilities.SORT_USER_ID_UP);
+            List<Post> listPosts = adminListHandler.adminPostSortBy(session, ListAdminPostSortPossibilities.SORT_POST_ID_UP);
             model.addAttribute("countUsers", listUsers.size());
             model.addAttribute("countPosts", listPosts.size());
 
@@ -59,7 +60,7 @@ public class AdminController {
 
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         if (userDTO.getRole()==0){
-            List<User> list = adminListHandler.listUserSortBy(session, ListAdminEntitySortPossibilities.getMask(n));
+            List<User> list = adminListHandler.listUserSortBy(session, ListAdminUserSortPossibilities.getMask(n));
             model.addAttribute("countUsers", list.size());
             model.addAttribute("list", list);
             return "admin";
@@ -75,7 +76,7 @@ public class AdminController {
         if (userDTO.getRole()==0){
             List<User> listUser = (List<User>) session.getAttribute("listUsers");
 
-            List<Post> list = adminListHandler.adminPostSortBy(session, ListAdminEntitySortPossibilities.getMask(p));
+            List<Post> list = adminListHandler.adminPostSortBy(session, ListAdminPostSortPossibilities.getMask(p));
 
             model.addAttribute("countPosts", list.size());
             model.addAttribute("countUsers", listUser.size());

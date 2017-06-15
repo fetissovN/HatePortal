@@ -36,7 +36,7 @@ public class AdminListHandler {
     @Autowired
     private PostDateAscComparator postDateAscComparator;
 
-    public List<User> listUserSortBy(HttpSession session, ListAdminEntitySortPossibilities sortType) {
+    public List<User> listUserSortBy(HttpSession session, ListAdminUserSortPossibilities sortType) {
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         List<User> list = new ArrayList<>();
         if (userDTO.getRole() == 0) {
@@ -69,7 +69,7 @@ public class AdminListHandler {
         return list;
     }
 
-    public List<Post> adminPostSortBy(HttpSession session, ListAdminEntitySortPossibilities sortType){
+    public List<Post> adminPostSortBy(HttpSession session, ListAdminPostSortPossibilities sortType){
         List<Post> list = new ArrayList<>();
         if (session.getAttribute("listPosts") == null) {
             list = postService.getAllPosts();
