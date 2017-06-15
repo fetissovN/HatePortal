@@ -7,18 +7,9 @@ public class PasswordGenetator {
     private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //    private static final String DIGITS = "0123456789";
 
-    public static String getRandomLowerLetter(){
+    private static String getRandomLetter(String lowerUpper){
         String ch = null;
-        StringBuilder builder = new StringBuilder(LOWER);
-        Random random = new Random();
-        int i = random.nextInt(builder.length());
-        ch = String.valueOf(builder.charAt(i));
-        return ch;
-    }
-
-    public static String getRandomUpperLetter(){
-        String ch = null;
-        StringBuilder builder = new StringBuilder(UPPER);
+        StringBuilder builder = new StringBuilder(lowerUpper);
         Random random = new Random();
         int i = random.nextInt(builder.length());
         ch = String.valueOf(builder.charAt(i));
@@ -38,10 +29,10 @@ public class PasswordGenetator {
             Random random = new Random();
             int n = random.nextInt(3);
             if (n==0){
-                pass =pass + getRandomLowerLetter();
+                pass =pass + getRandomLetter(LOWER);
             }
             if (n==1){
-                pass = pass + getRandomUpperLetter();
+                pass = pass + getRandomLetter(UPPER);
             }
             if (n==2){
                 pass = pass + getRandomDigit();
