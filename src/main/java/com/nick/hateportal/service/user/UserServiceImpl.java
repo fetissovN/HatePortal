@@ -6,6 +6,7 @@ import com.nick.hateportal.utils.Mailing;
 import com.nick.hateportal.utils.PassHash;
 import com.nick.hateportal.utils.PasswordGenetator;
 import com.nick.hateportal.utils.Utils;
+import com.nick.hateportal.utils.exception.MailingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,9 +64,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendEmailToNewVkUser(String email, String newPass) {
-        Mailing mailing = new Mailing();
-        mailing.sendVkAuthMessageWithPassword(email, newPass);
+    public void sendEmailToNewVkUser(String email, String newPass) throws MailingException {
+        Mailing.sendVkAuthMessageWithPassword(email, newPass);
     }
 
     @Override

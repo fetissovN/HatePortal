@@ -6,6 +6,7 @@ import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.Mailing;
+import com.nick.hateportal.utils.exception.MailingException;
 import com.nick.hateportal.validation.AccountInfoFormValidator;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class BarController {
+public class BarController extends ExceptionsController {
 
     @Autowired
     private AccountInfoFormValidator validator;
@@ -83,9 +84,15 @@ public class BarController {
 
     @RequestMapping(value = "/sendFeedback", method = RequestMethod.POST)
     @ResponseBody
-    public String sendFeedback(@ModelAttribute("barFeedback") FeedbackDTO feedbackDTO){
+    public String sendFeedback(@ModelAttribute("barFeedback") FeedbackDTO feedbackDTO) throws MailingException{
             Mailing mailing = new Mailing();
+        try {
             mailing.send("test",feedbackDTO.getFeedback(),"asd",feedbackDTO.getEmail());
-            return "1";
+        } catch (MailingException e) {
+
+            throw new MailingException("nnn");
+//            e.printStackTrace();
+        }
+        return "1";
     }
 }

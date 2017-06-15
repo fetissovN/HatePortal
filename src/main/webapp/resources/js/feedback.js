@@ -40,6 +40,8 @@ function ajaxRequestFeedSend(){
             if (data==1){
                 $('.translucent-form-overlay-feed').remove();
                 alert("saved!");
+            }else {
+                alert(data);
             }
         },
         error: function () {

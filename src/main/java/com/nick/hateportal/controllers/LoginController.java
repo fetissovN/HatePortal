@@ -9,6 +9,7 @@ import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.PassHash;
 import com.nick.hateportal.utils.Vk;
+import com.nick.hateportal.utils.exception.MailingException;
 import com.nick.hateportal.validation.LoginFormValidator;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -139,16 +140,17 @@ public class LoginController extends ExceptionsController {
                 return "redirect:/";
             }else {
                 String passForEmail = userService.createDefaultUser(userInfo.get("first_name"),userInfo.get("last_name"),email);
-                userService.sendEmailToNewVkUser(email, passForEmail);
+                try {
+                    userService.sendEmailToNewVkUser(email, passForEmail);
+                } catch (MailingException e) {
+                    e.printStackTrace();
+                }
                 session.removeAttribute("auth");
                 User user = userService.getUserByEmail(email);
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
 
             }
         }
-
-
-
-            return "redirect:/";
+        return "redirect:/";
     }
 }

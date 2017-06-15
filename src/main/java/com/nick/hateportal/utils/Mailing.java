@@ -1,4 +1,6 @@
 package com.nick.hateportal.utils;
+import com.nick.hateportal.utils.exception.MailingException;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -8,7 +10,7 @@ public class Mailing{
 
     private static final String username = "fetissov.n@gmail.com";
     private static final String password = "trivium1341341";
-    Properties props;
+    static Properties props;
 
     public Mailing() {
         props = new Properties();
@@ -19,7 +21,7 @@ public class Mailing{
         props.put("mail.smtp.port", "465");
     }
 
-    public void send(String subject, String text, String fromEmail, String toEmail){
+    public static void send(String subject, String text, String fromEmail, String toEmail) throws MailingException {
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
@@ -40,11 +42,13 @@ public class Mailing{
             //отправляем сообщение
             Transport.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            throw new MailingException();
+//            throw new RuntimeException(e);
+
         }
     }
 
-    public void sendVkAuthMessageWithPassword(String toEmail, String newPass){
+    public static void sendVkAuthMessageWithPassword(String toEmail, String newPass) throws MailingException {
         String text = "Welcome to HatePortal! You are successfully registered, " +
                 "please use password in the end and change it as soon as possible   "  + newPass;
         send("Hate Portal",text,"",toEmail);
