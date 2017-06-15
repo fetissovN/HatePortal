@@ -2,7 +2,6 @@ package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.comparators.user.UserIdAscComparator;
-import com.nick.hateportal.comparators.user.UserIdDescComparator;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
@@ -27,9 +26,6 @@ public class AdminController {
 
     @Autowired
     private UserIdAscComparator userIdAscComparator;
-
-    @Autowired
-    private UserIdDescComparator userIdDescComparator;
 
     @Autowired
     private AdminListHandler adminListHandler;

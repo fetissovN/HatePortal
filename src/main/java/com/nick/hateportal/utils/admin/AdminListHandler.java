@@ -4,9 +4,7 @@ import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.comparators.post.PostDateAscComparator;
 import com.nick.hateportal.comparators.post.PostIdAscComparator;
 import com.nick.hateportal.comparators.user.UserIdAscComparator;
-import com.nick.hateportal.comparators.user.UserIdDescComparator;
 import com.nick.hateportal.comparators.user.UserRateAscComparator;
-import com.nick.hateportal.comparators.user.UserRateDescComparator;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.post.PostService;
@@ -30,13 +28,7 @@ public class AdminListHandler {
     private UserIdAscComparator userIdAscComparator;
 
     @Autowired
-    private UserIdDescComparator userIdDescComparator;
-
-    @Autowired
     private UserRateAscComparator userRateAscComparator;
-
-    @Autowired
-    private UserRateDescComparator userRateDescComparator;
 
     @Autowired
     private PostIdAscComparator postIdAscComparator;
@@ -70,7 +62,7 @@ public class AdminListHandler {
                     break;
 
                 default:
-                    list.sort(userIdDescComparator);
+                    list.sort(userIdAscComparator);
                     break;
             }
         }
