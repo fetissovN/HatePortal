@@ -2,7 +2,6 @@ package com.nick.hateportal.converter;
 
 
 import com.nick.hateportal.DTO.UserDTO;
-import com.nick.hateportal.DTO.UserLoginDTO;
 import com.nick.hateportal.entity.User;
 
 public class DTOConverter {

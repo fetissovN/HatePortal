@@ -2,7 +2,6 @@ package com.nick.hateportal.validation;
 
 
 
-import com.nick.hateportal.DTO.UserLoginDTO;
 import com.nick.hateportal.entity.Post;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

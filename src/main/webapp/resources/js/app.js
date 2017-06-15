@@ -17,8 +17,6 @@ $(document).ready(function () {
     }
     //hide post form after ok
     $('#submitForm').click(function (e) {
-        // e.preventDefault();
-        // alert('in');
         $.ajax({
             type: 'GET',
             url: '/post/create',

@@ -6,15 +6,12 @@ import com.nick.hateportal.service.user.UserService;
 import com.nick.hateportal.utils.PassHash;
 import com.nick.hateportal.validation.RegFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Locale;
 
 @Controller
 @RequestMapping(value = "/reg")

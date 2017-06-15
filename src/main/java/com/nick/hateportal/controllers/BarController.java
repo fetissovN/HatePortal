@@ -1,7 +1,6 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.FeedbackDTO;
-import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
@@ -35,7 +34,6 @@ public class BarController extends ExceptionsController {
         }
         User userDb = userService.getUserByEmail(user.getEmail());
         if (userService.getUserByEmail(user.getEmail())!=null){
-//            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
             user.setId(userDb.getId());
             user.setRate(userDb.getRate());
             user.setRole(userDb.getRole());
@@ -87,7 +85,6 @@ public class BarController extends ExceptionsController {
         } catch (MailingException e) {
 
             throw new MailingException("nnn");
-//            e.printStackTrace();
         }
         return "1";
     }

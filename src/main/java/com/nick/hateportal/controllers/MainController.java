@@ -3,15 +3,12 @@ package com.nick.hateportal.controllers;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.post.PostService;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 

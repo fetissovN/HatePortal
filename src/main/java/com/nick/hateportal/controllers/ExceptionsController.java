@@ -20,7 +20,7 @@ public abstract class ExceptionsController {
 
     @ExceptionHandler(MailingException.class)
     @ResponseBody
-    public String handleMailException(MailingException ex){
+    public String handleMailException(){
         String error = "Problem occur, check your internet connection!";
         return error;
     }

@@ -1,7 +1,5 @@
 package com.nick.hateportal.validation;
 
-
-import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.DTO.UserRegDTO;
 import com.nick.hateportal.entity.User;
 import org.apache.commons.validator.routines.EmailValidator;

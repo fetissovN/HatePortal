@@ -23,7 +23,6 @@ function ajaxRequestFeed(){
     $.ajax({
         type: 'GET',
         url: '/showFeedback',
-        // data: {'s': term},
         success: function(data){
             $('#formFeed').append(data);
         }
@@ -47,6 +46,5 @@ function ajaxRequestFeedSend(){
         error: function () {
             alert("fail!");
         }
-
     });
 }

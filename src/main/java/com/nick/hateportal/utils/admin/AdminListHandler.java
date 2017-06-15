@@ -101,7 +101,6 @@ public class AdminListHandler {
 
     public List<Post> userPosts(HttpSession session, Long id){
         List<Post> list = postService.getAllPosts();
-//        List<Post> list = (List<Post>) session.getAttribute("listPosts");
         List<Post> newList = new ArrayList<>();
         for (Post l: list ){
             if (l.getUserId().getId()==id){

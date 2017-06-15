@@ -1,6 +1,5 @@
 package com.nick.hateportal.controllers;
 
-
 import com.nick.hateportal.DTO.UserLoginDTO;
 import com.nick.hateportal.converter.DTOConverter;
 import com.nick.hateportal.entity.User;
@@ -73,7 +72,6 @@ public class LoginController extends ExceptionsController {
                 cookie.setSecure(false);
                 cookie.setHttpOnly(true);
 
-//                cookie.htt;
                 Cookie cookietimestamp = new Cookie("timestamp", new Long(new Date().getTime()).toString());
                 cookietimestamp.setPath("/showInfo");
                 cookietimestamp.setSecure(false);

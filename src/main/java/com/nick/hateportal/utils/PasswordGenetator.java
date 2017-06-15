@@ -5,7 +5,6 @@ import java.util.Random;
 public class PasswordGenetator {
     private static final String LOWER = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//    private static final String DIGITS = "0123456789";
 
     private static String getRandomLetter(String lowerUpper){
         String ch = null;
