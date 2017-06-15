@@ -18,7 +18,7 @@ public interface UserDAO {
 
     void updateUserInfoWithoutPassword(User user);
 
-    List<User> getAllUsersDecrId();
+//    List<User> getAllUsersDecrId();
 
     List<User> getAllUsersAscId();
 }

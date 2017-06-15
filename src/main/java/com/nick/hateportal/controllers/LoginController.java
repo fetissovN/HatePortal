@@ -133,9 +133,9 @@ public class LoginController extends ExceptionsController {
         if (userInfo!=null){
             String email = userInfo.get("email");
             User userFromDB = userService.getUserByEmail(email);
+            session.removeAttribute("auth");
+
             if (userFromDB!=null){
-//                model.addAttribute()
-                session.removeAttribute("auth");
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
                 return "redirect:/";
             }else {
@@ -145,7 +145,6 @@ public class LoginController extends ExceptionsController {
                 } catch (MailingException e) {
                     e.printStackTrace();
                 }
-                session.removeAttribute("auth");
                 User user = userService.getUserByEmail(email);
                 session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
 

@@ -68,11 +68,11 @@ public class UserServiceImpl implements UserService {
         Mailing.sendVkAuthMessageWithPassword(email, newPass);
     }
 
-    @Override
-    public List<User> getAllUsersDescId() {
-        List<User> list = userDao.getAllUsersDecrId();
-        return list;
-    }
+//    @Override
+//    public List<User> getAllUsersDescId() {
+//        List<User> list = userDao.getAllUsersDecrId();
+//        return list;
+//    }
 
     @Override
     public List<User> getAllUsersAscId() {

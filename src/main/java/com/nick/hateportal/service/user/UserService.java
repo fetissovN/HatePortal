@@ -19,7 +19,7 @@ public interface UserService {
 
     void sendEmailToNewVkUser(String email, String pass) throws MailingException;
 
-    List<User> getAllUsersDescId();
+//    List<User> getAllUsersDescId();
 
     List<User> getAllUsersAscId();
 }

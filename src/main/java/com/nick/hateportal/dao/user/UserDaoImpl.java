@@ -74,14 +74,14 @@ public class UserDaoImpl implements UserDAO {
 
     }
 
-    @Override
-    public List<User> getAllUsersDecrId() {
-        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
-        criteria.addOrder(Order.desc("id"));
-        List result = criteria.list();
-        LOGGER.info(messageSource.getMessage("log.get.users", new Object[] {result}, Locale.ENGLISH));
-        return result;
-    }
+//    @Override
+//    public List<User> getAllUsersDecrId() {
+//        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+//        criteria.addOrder(Order.desc("id"));
+//        List result = criteria.list();
+//        LOGGER.info(messageSource.getMessage("log.get.users", new Object[] {result}, Locale.ENGLISH));
+//        return result;
+//    }
 
     @Override
     public List<User> getAllUsersAscId() {
