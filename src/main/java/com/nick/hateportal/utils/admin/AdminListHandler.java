@@ -42,7 +42,7 @@ public class AdminListHandler {
         if (userDTO.getRole() == 0) {
 
             if (session.getAttribute("listUsers") == null) {
-                list = userService.getAllUsersDescId();
+                list = userService.getAllUsersAscId();
                 session.setAttribute("listUsers", list);
             } else {
                 list = (List<User>) session.getAttribute("listUsers");
