@@ -1,23 +1,21 @@
 package com.nick.hateportal.utils.admin;
 
 import com.nick.hateportal.DTO.UserDTO;
-import com.nick.hateportal.comparators.forPost.PostDateAscComparator;
-import com.nick.hateportal.comparators.forPost.PostIdAscComparator;
-import com.nick.hateportal.comparators.forUser.UserIdAscComparator;
-import com.nick.hateportal.comparators.forUser.UserIdDescComparator;
-import com.nick.hateportal.comparators.forUser.UserRateAscComparator;
-import com.nick.hateportal.comparators.forUser.UserRateDescComparator;
+import com.nick.hateportal.comparators.post.PostDateAscComparator;
+import com.nick.hateportal.comparators.post.PostIdAscComparator;
+import com.nick.hateportal.comparators.user.UserIdAscComparator;
+import com.nick.hateportal.comparators.user.UserIdDescComparator;
+import com.nick.hateportal.comparators.user.UserRateAscComparator;
+import com.nick.hateportal.comparators.user.UserRateDescComparator;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.post.PostService;
 import com.nick.hateportal.service.user.UserService;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Component

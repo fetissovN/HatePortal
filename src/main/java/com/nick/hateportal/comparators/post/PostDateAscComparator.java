@@ -1,4 +1,4 @@
-package com.nick.hateportal.comparators.forPost;
+package com.nick.hateportal.comparators.post;
 
 import com.nick.hateportal.entity.Post;
 import org.springframework.stereotype.Component;

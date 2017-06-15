@@ -1,8 +1,8 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.UserDTO;
-import com.nick.hateportal.comparators.forUser.UserIdAscComparator;
-import com.nick.hateportal.comparators.forUser.UserIdDescComparator;
+import com.nick.hateportal.comparators.user.UserIdAscComparator;
+import com.nick.hateportal.comparators.user.UserIdDescComparator;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
