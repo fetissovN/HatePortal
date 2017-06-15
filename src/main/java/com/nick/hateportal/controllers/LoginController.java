@@ -130,8 +130,8 @@ public class LoginController extends ExceptionsController {
     public String loginFinalVk(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model){
         String code = request.getParameter("code");
         HashMap<String,String> userInfo= Vk.finalHttp(code);
-        String email = userInfo.get("email");
         if (userInfo!=null){
+            String email = userInfo.get("email");
             User userFromDB = userService.getUserByEmail(email);
             if (userFromDB!=null){
 //                model.addAttribute()
