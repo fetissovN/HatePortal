@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="userAdminAjax">
-            <table style="font-size: xx-small; margin-right: 20px" cellpadding="4" cellspacing="1">
+            <table cellpadding="4" cellspacing="1">
                 <p>Total users: ${countUsers}</p>
                 <tr>
                     <th>Id</th>

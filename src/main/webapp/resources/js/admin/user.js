@@ -18,35 +18,12 @@ $(document).on('click','body .usersPostsLink',function(e){
 });
 
 $(document).ready(function () {
-    $('#idDown').on('click', function(e){
+    $('.userLinkMethod').on('click', function(e){
         e.preventDefault();
         var addressValue = $(this).attr("href");
         ajaxRequestUserSort(addressValue);
     });
-    $('#idUp').on('click', function(e){
-        e.preventDefault();
-        var addressValue = $(this).attr("href");
-        ajaxRequestUserSort(addressValue);
-    });
-    $('#rateDown').on('click', function(e){
-        e.preventDefault();
-        var addressValue = $(this).attr("href");
-        ajaxRequestUserSort(addressValue);
-    });
-    $('#rateUp').on('click', function(e){
-        e.preventDefault();
-        var addressValue = $(this).attr("href");
-        ajaxRequestUserSort(addressValue);
-    });
-    // $('#usersPostsLink').on('click', function(e){
-    //     alert('1112');
-    //     e.preventDefault();
-    //     var addressValue = $(this).attr("href");
-    //     ajaxUsersPosts(addressValue);
-    // });
 });
-
-
 
 function ajaxRequestUserSort(urlFrom){
 
