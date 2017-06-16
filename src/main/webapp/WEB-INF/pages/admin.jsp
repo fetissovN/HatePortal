@@ -1,3 +1,4 @@
+<%@ page import="com.nick.hateportal.entity.Post" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -41,12 +42,22 @@
         </div>
     </div>
     <div class="large-4 column">
-        <a id="postIdDown" href="/admin?p=5"><button style="padding: 5px" type="button" class="button">Id down</button></a>
-        <a id="postIdUp" href="/admin?p=6"><button style="padding: 5px" type="button" class="button">Id up</button></a>
-        <a id="postDateDown" href="/admin?p=7"><button style="padding: 5px" type="button" class="button">Date down</button></a>
-        <a id="postDateUp" href="/admin?p=8"><button style="padding: 5px" type="button" class="button">Date up</button></a>
         <div class="postAdminIncome"></div>
         <div class="postDefault">
+            <c:choose>
+                <c:when test="${postOfUser=='true'}">
+                    <a id="postIdDown" href="/admin?p=5&user=${listPosts.get(0).id}"><button style="padding: 5px" type="button" class="button">Id down</button></a>
+                    <a id="postIdUp" href="/admin?p=6&user=${listPosts.get(0).id}"><button style="padding: 5px" type="button" class="button">Id up</button></a>
+                    <a id="postDateDown" href="/admin?p=7&user=${listPosts.get(0).id}"><button style="padding: 5px" type="button" class="button">Date down</button></a>
+                    <a id="postDateUp" href="/admin?p=8&user=${listPosts.get(0).id}"><button style="padding: 5px" type="button" class="button">Date up</button></a>
+                </c:when>
+                <c:otherwise>
+                    <a id="postIdDown" href="/admin?p=5"><button style="padding: 5px" type="button" class="button">Id down</button></a>
+                    <a id="postIdUp" href="/admin?p=6"><button style="padding: 5px" type="button" class="button">Id up</button></a>
+                    <a id="postDateDown" href="/admin?p=7"><button style="padding: 5px" type="button" class="button">Date down</button></a>
+                    <a id="postDateUp" href="/admin?p=8"><button style="padding: 5px" type="button" class="button">Date up</button></a>
+                </c:otherwise>
+            </c:choose>
         <p>Posts amount: ${countPosts}</p>
         <c:forEach items="${listPosts}" var="post">
             <tr>

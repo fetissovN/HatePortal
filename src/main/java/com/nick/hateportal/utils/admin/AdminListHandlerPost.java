@@ -23,9 +23,18 @@ public class AdminListHandlerPost {
     @Autowired
     private PostDateAscComparator postDateAscComparator;
 
-        public List<Post> adminPostSortBy(ListAdminPostSortPossibilities sortType){
+//    Choose 2nd parameter -1, to select all posts, otherwise any plural number will
+//    associate posts with chosen user id.
+        public List<Post> adminPostSortBy(ListAdminPostSortPossibilities sortType, int chooseUserId){
         List<Post> list = postService.getAllPosts();
-
+        if (chooseUserId>=0){
+            for (Post p: list){
+                if (p.getId()!=chooseUserId){
+                Long idToRemove = p.getId();
+                list.remove(idToRemove);
+                }
+            }
+        }
         switch (sortType){
             case SORT_POST_ID_DOWN:
                 list.sort(postIdAscComparator);

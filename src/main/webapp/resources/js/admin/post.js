@@ -1,24 +1,25 @@
-$(document).ready(function () {
-    $('#postIdDown').on('click', function(e){
-        e.preventDefault();
-        var addressValue = $(this).attr("href");
-        ajaxRequestPostSort(addressValue);
-    });
-    $('#postIdUp').on('click', function(e){
-        e.preventDefault();
-        var addressValue = $(this).attr("href");
-        ajaxRequestPostSort(addressValue);
-    });
-    $('#postDateDown').on('click', function(e){
-        e.preventDefault();
-        var addressValue = $(this).attr("href");
-        ajaxRequestPostSort(addressValue);
-    });
-    $('#postDateUp').on('click', function(e){
-        e.preventDefault();
-        var addressValue = $(this).attr("href");
-        ajaxRequestPostSort(addressValue);
-    });
+$(document).on('click','body #postIdDown',function(e){
+    e.preventDefault();
+    var addressValue = $(this).attr("href");
+    ajaxRequestPostSort(addressValue);
+});
+
+$(document).on('click','body #postIdUp',function(e){
+    e.preventDefault();
+    var addressValue = $(this).attr("href");
+    ajaxRequestPostSort(addressValue);
+});
+
+$(document).on('click','body #postDateDown',function(e){
+    e.preventDefault();
+    var addressValue = $(this).attr("href");
+    ajaxRequestPostSort(addressValue);
+});
+
+$(document).on('click','body #postDateUp',function(e){
+    e.preventDefault();
+    var addressValue = $(this).attr("href");
+    ajaxRequestPostSort(addressValue);
 });
 
 function ajaxRequestPostSort(urlFrom){

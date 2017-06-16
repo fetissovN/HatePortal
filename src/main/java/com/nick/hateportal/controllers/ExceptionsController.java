@@ -15,6 +15,7 @@ public abstract class ExceptionsController {
     @ExceptionHandler(Exception.class)
     public String handleIOException(Exception ex, Model model) {
         model.addAttribute("ex", ex);
+        ex.printStackTrace();
         return "/error/exceptionpage";
     }
 
