@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="userAdminAjax">
             <table style="font-size: xx-small; margin-right: 20px" cellpadding="4" cellspacing="1">
                 <p>Total users: ${countUsers}</p>
@@ -14,7 +14,7 @@
                 </tr>
                 <c:forEach items="${list}" var="user">
                     <tr>
-                        <td><a href="/admin/userPosts${user.id}">${user.id}</a></td>
+                        <td><a class="usersPostsLink" href="/admin/userPosts${user.id}">${user.id}</a></td>
                         <td>${user.nickname}</td>
                         <td>${user.username}</td>
                         <td>${user.surname}</td>

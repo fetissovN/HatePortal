@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.app.css"/> ">
     <script type="text/javascript" src="<c:url value="/resources/js/admin.app.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/admin/post.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/admin/user.js"/>"></script>
 
 </head>
 <body>
@@ -26,7 +28,7 @@
                 <p>Total users: ${countUsers}</p><tr><th>Id</th><th>Nickname</th><th>Username</th><th>Surname</th><th>Email</th><th>Phone</th><th>Rate</th></tr>
                 <c:forEach items="${list}" var="user">
                     <tr>
-                        <td><a href="/admin/userPosts${user.id}">${user.id}</a></td>
+                        <td><a class="usersPostsLink" href="/admin/userPosts${user.id}">${user.id}</a></td>
                         <td>${user.nickname}</td>
                         <td>${user.username}</td>
                         <td>${user.surname}</td>

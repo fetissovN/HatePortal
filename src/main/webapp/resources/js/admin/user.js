@@ -1,3 +1,22 @@
+
+$(document).on('click','body .usersPostsLink',function(e){
+    e.preventDefault();
+    var addressValue = $(this).attr("href");
+
+        $.ajax({
+            type: 'GET',
+            url: addressValue,
+            success: function(data){
+                $('.postDefault').remove();
+                $('.postAdminAjax').remove();
+                $('.postAdminIncome').append(data);
+            },
+            error: function () {
+                alert("fail!");
+            }
+        });
+});
+
 $(document).ready(function () {
     $('#idDown').on('click', function(e){
         e.preventDefault();
@@ -19,7 +38,15 @@ $(document).ready(function () {
         var addressValue = $(this).attr("href");
         ajaxRequestUserSort(addressValue);
     });
+    // $('#usersPostsLink').on('click', function(e){
+    //     alert('1112');
+    //     e.preventDefault();
+    //     var addressValue = $(this).attr("href");
+    //     ajaxUsersPosts(addressValue);
+    // });
 });
+
+
 
 function ajaxRequestUserSort(urlFrom){
 
