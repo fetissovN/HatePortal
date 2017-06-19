@@ -12,6 +12,8 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
+    User getUserById(Long id);
+
     void updateUser(User user);
 
 // returns new password

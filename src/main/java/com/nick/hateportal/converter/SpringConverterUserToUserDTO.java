@@ -3,10 +3,12 @@ package com.nick.hateportal.converter;
 
 import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.entity.User;
+import org.springframework.core.convert.converter.Converter;
 
-public class DTOConverter {
+public class SpringConverterUserToUserDTO implements Converter<User,UserDTO> {
 
-    public static UserDTO convertUserToUserDto(User user){
+    @Override
+    public UserDTO convert(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setNickname(user.getNickname());

@@ -1,4 +1,4 @@
-package com.nick.hateportal.utils;
+package com.nick.hateportal.utils.password;
 
 import java.util.Random;
 

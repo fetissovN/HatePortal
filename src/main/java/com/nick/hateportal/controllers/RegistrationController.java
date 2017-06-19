@@ -3,7 +3,7 @@ package com.nick.hateportal.controllers;
 import com.nick.hateportal.DTO.UserRegDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
-import com.nick.hateportal.utils.PassHash;
+import com.nick.hateportal.utils.password.PassHash;
 import com.nick.hateportal.validation.RegFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

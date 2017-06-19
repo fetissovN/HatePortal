@@ -1,4 +1,4 @@
-package com.nick.hateportal.utils;
+package com.nick.hateportal.utils.mail;
 import com.nick.hateportal.utils.exception.MailingException;
 
 import javax.mail.*;

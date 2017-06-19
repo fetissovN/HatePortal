@@ -1,11 +1,11 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.UserLoginDTO;
-import com.nick.hateportal.converter.DTOConverter;
+import com.nick.hateportal.converter.SpringConverterUserToUserDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
-import com.nick.hateportal.utils.PassHash;
-import com.nick.hateportal.utils.Vk;
+import com.nick.hateportal.utils.password.PassHash;
+import com.nick.hateportal.utils.vk.Vk;
 import com.nick.hateportal.utils.exception.MailingException;
 import com.nick.hateportal.validation.LoginFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +65,7 @@ public class LoginController extends ExceptionsController {
             String pass = passHash.stringPassToHash(loginDTO.getPassword());
             if (userFromDB.getPassword().equals(pass)){
                 session.removeAttribute("auth");
-                session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
+                session.setAttribute("auth", new SpringConverterUserToUserDTO().convert(userFromDB));
                 Cookie cookie = new Cookie("auth","1");
                 cookie.setMaxAge(7);
                 cookie.setPath("/");
@@ -103,7 +103,7 @@ public class LoginController extends ExceptionsController {
             session.removeAttribute("auth");
 
             if (userFromDB!=null){
-                session.setAttribute("auth", DTOConverter.convertUserToUserDto(userFromDB));
+                session.setAttribute("auth", new SpringConverterUserToUserDTO().convert(userFromDB));
                 return "redirect:/";
             }else {
                 String passForEmail = userService.createDefaultUser(userInfo.get("first_name"),userInfo.get("last_name"),email);
@@ -113,7 +113,7 @@ public class LoginController extends ExceptionsController {
                     e.printStackTrace();
                 }
                 User user = userService.getUserByEmail(email);
-                session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
+                session.setAttribute("auth", new SpringConverterUserToUserDTO().convert(user));
             }
         }
         return "redirect:/";

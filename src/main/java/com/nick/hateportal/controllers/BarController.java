@@ -1,10 +1,11 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.FeedbackDTO;
-import com.nick.hateportal.converter.DTOConverter;
+import com.nick.hateportal.converter.SpringConverterUserDTOToUser;
+import com.nick.hateportal.converter.SpringConverterUserToUserDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
-import com.nick.hateportal.utils.Mailing;
+import com.nick.hateportal.utils.mail.Mailing;
 import com.nick.hateportal.utils.exception.MailingException;
 import com.nick.hateportal.validation.AccountInfoFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class BarController extends ExceptionsController {
             user.setRole(userDb.getRole());
             userService.updateUser(user);
             session.removeAttribute("auth");
-            session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
+            session.setAttribute("auth", new SpringConverterUserToUserDTO().convert(user));
             return "redirect:/info_save_ok1";
         }else {
             return "redirect:/info_save_ok0";

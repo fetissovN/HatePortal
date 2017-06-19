@@ -2,9 +2,9 @@ package com.nick.hateportal.service.user;
 
 import com.nick.hateportal.dao.user.UserDAO;
 import com.nick.hateportal.entity.User;
-import com.nick.hateportal.utils.Mailing;
-import com.nick.hateportal.utils.PassHash;
-import com.nick.hateportal.utils.PasswordGenetator;
+import com.nick.hateportal.utils.mail.Mailing;
+import com.nick.hateportal.utils.password.PassHash;
+import com.nick.hateportal.utils.password.PasswordGenetator;
 import com.nick.hateportal.utils.Utils;
 import com.nick.hateportal.utils.exception.MailingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,12 @@ public class UserServiceImpl implements UserService {
     public User getUserByEmail(String email) {
         String refactorEmail = utils.stringToLowerCase(email);
         User user = userDao.getUserByEmail(refactorEmail);
+        return user;
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        User user = userDao.getUserById(id);
         return user;
     }
 

@@ -1,4 +1,4 @@
-package com.nick.hateportal.utils;
+package com.nick.hateportal.utils.vk;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
