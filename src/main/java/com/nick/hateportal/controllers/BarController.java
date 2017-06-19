@@ -62,13 +62,11 @@ public class BarController extends ExceptionsController {
             }
         }
         if (session.getAttribute("auth")==null){
-//            model.addAttribute("auth", "1");
             return null;
         }else {
             model.addAttribute("barUserInfo", new User());
             return "formSample/infoFrom";
         }
-
     }
 
     @RequestMapping(value = "/showFeedback", method = RequestMethod.GET)
@@ -85,7 +83,7 @@ public class BarController extends ExceptionsController {
             mailing.send("test",feedbackDTO.getFeedback(),"asd",feedbackDTO.getEmail());
         } catch (MailingException e) {
 
-            throw new MailingException("nnn");
+            throw new MailingException();
         }
         return "1";
     }

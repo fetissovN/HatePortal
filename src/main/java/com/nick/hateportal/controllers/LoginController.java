@@ -39,7 +39,6 @@ public class LoginController extends ExceptionsController {
             Cookie[] cookies = request.getCookies();
             for (int i = 0; i < cookies.length; i++) {
                 if (cookies[i].getName().equals("auth")){
-                    System.out.println(cookies[i].getName());
                     cookies[i].setMaxAge(0);
                     response.addCookie(cookies[i]);
                 }

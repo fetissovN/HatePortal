@@ -65,8 +65,7 @@ public class Vk {
         {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
         }
-        catch (UnsupportedEncodingException e)
-        {
+        catch (UnsupportedEncodingException e) {
             System.out.println("Fail to send request");
         }
         HttpClient client = HttpClientBuilder.create().build();
