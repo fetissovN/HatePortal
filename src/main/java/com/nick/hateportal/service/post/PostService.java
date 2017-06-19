@@ -21,5 +21,5 @@ public interface PostService {
 
     List<Post> getFivePostsWithBoundaries(int page);
 
-    List<Post> getStartPosts();
+    List<Post> getStartPosts(int n);
 }

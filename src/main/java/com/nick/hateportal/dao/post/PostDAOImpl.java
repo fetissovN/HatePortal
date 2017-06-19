@@ -61,6 +61,15 @@ public class PostDAOImpl implements PostDAO{
     public void deletePost(Post post) {
         sessionFactory.getCurrentSession().delete(post);
         LOGGER.info(messageSource.getMessage("log.delete.post", new Object[] {post}, Locale.ENGLISH));
+    }
 
+    @Override
+    public List<Post> getStartPosts(int n){
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Post.class);
+        criteria.addOrder(Order.desc("postDate"));
+        criteria.setMaxResults(n);
+        List result = criteria.list();
+        LOGGER.info(messageSource.getMessage("log.get.posts.start", new Object[] {result}, Locale.ENGLISH));
+        return result;
     }
 }

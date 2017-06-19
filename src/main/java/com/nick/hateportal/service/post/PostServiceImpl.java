@@ -83,20 +83,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getStartPosts() {
-        List<Post> allPosts = getAllPosts();
-        List<Post> startPosts = new ArrayList<>(5);
-        if (allPosts.size()<5){
-            for (int i=0; i<allPosts.size();i++){
-                startPosts.add(allPosts.get(i));
-                return startPosts;
-            }
-        }else {
-            for (int i=0; i<5;i++){
-                startPosts.add(allPosts.get(i));
-            }
-        }
-
-        return startPosts;
+    public List<Post> getStartPosts(int n) {
+        return postDAO.getStartPosts(n);
     }
 }

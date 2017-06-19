@@ -20,7 +20,7 @@ public class MainController extends ExceptionsController{
 
     @RequestMapping(value = "/")
     public String redirectToHome(HttpSession session, Model model ){
-        List<Post> list = postService.getStartPosts();
+        List<Post> list = postService.getStartPosts(5);
         model.addAttribute("posts", list);
         model.addAttribute("postForm", new Post());
         model.addAttribute("barUserInfo", new User());
