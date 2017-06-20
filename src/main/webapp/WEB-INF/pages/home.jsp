@@ -8,10 +8,6 @@
 <html>
 <head>
     <title>Hate</title>
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>--%>
-    <%--<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/foundation.min.css"/> ">--%>
-    <%--<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/app.css"/> ">--%>
-    <%--<script src="<c:url value="/resources/js/app.js"/>"></script>--%>
     <style type="text/css">
         span.error {
             color: red;
@@ -43,9 +39,6 @@
                     <td><p><spring:message code="label.post.message"/></p></td>
                     <td><s:textarea path="post"/></td>
                     <td><span class="error"><s:errors path="post" /></span></td>
-                        <%--<td><span class="error"><c:if test="${loginErr eq 'loginErr'}">--%>
-                        <%--<spring:message code="label.login.error"/>--%>
-                        <%--</c:if></span></td>--%>
                 </tr>
                 <tr>
                     <td><p><spring:message code="label.post.message"/></p></td>
@@ -57,7 +50,7 @@
                 </tr>
                 <tr>
                     <td><input id="submitForm" class="button" type="submit" value="Ok"/></td>
-                    <td><input style="float: right" id="closePostForm" class="button" type="button" value="Later"/></td>
+                    <td><button style="float: right" id="closePostForm" class="button" type="button"><spring:message code="label.post.later"/></button></td>
                 </tr>
                 </table>
             </s:form>
@@ -74,7 +67,7 @@
     <div class="large-10 column">
 <div class="article-row-section">
     <div class="article-row-section-inner">
-        <h2 class="article-row-section-header">Hate Posts</h2>
+        <h2 class="article-row-section-header"><spring:message code="label.main.posts"/></h2>
 <c:forEach items="${posts}" var="postMain">
         <a href="<c:url value="post/post/${postMain.id}"/>">
             <article class="article-row">

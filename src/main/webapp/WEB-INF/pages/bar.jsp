@@ -1,6 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>--%>
-<%--<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>--%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
@@ -17,7 +15,6 @@
     <script type="text/javascript" src="<c:url value="/resources/js/feedback.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/postUpdate.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/messageUpdate.js"/>"></script>
-    <%--<script type="text/javascript" src="<c:url value="/resources/js/"/>"></script>--%>
 
 </head>
 <body>
@@ -55,7 +52,7 @@
                                 ${sessionScope.get("auth").nickname}
                             </c:when>
                             <c:otherwise>
-                                INF
+                                <spring:message code="label.bar.inf"/>
                             </c:otherwise>
                         </c:choose></span>
                         <div class="hamburger">
