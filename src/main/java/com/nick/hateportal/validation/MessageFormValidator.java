@@ -8,7 +8,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-public class MessageFormValidator implements Validator {
+public class MessageFormValidator extends ValidatorSample implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
         return Message.class.isAssignableFrom(aClass);
@@ -18,7 +18,8 @@ public class MessageFormValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Message post = (Message) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "message", "post.message.empty", "Title must not be empty.");
+        validNotBlank(errors,post.getMessage(),"message", "post.message.empty", "Title must not be empty.");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "message", "post.message.empty", "Title must not be empty.");
 
     }
 }
