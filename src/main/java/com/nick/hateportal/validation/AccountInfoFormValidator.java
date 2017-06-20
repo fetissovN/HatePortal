@@ -9,7 +9,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
-public class AccountInfoFormValidator implements Validator {
+public class AccountInfoFormValidator extends ValidatorSample implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
         return UserRegDTO.class.isAssignableFrom(aClass);
@@ -19,27 +19,18 @@ public class AccountInfoFormValidator implements Validator {
     public void validate(Object o, Errors errors) {
         User user = (User) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nickname", "reg.nickname.empty", "Nickname must not be empty.");
-        String nickname= user.getNickname();
-        if (nickname.length() > 20){
-            errors.rejectValue("nickname", "reg.nickname.tooLong", "Nickname must not more than 20 characters.");
-        }
+        validNotBlank(errors, "nickname", "reg.nickname.empty", "Nickname must not be empty.");
+        valid(errors,user.getNickname(),"nickname", "reg.nickname.tooLong", "Nickname must not more than 20 characters.",20);
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "reg.username.empty", "Username must not be empty.");
-        String username = user.getUsername();
-        if (username.length() > 20){
-            errors.rejectValue("username", "reg.username.tooLong", "Username must not more than 20 characters.");
-        }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "reg.phone.empty", "Phone must not be empty.");
-        String phone = user.getPhone();
-        if (phone.length() > 20){
-            errors.rejectValue("phone", "reg.phone.tooLong", "Phone must not more than 20 characters.");
-        }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "surname", "reg.surname.empty", "Surname must not be empty.");
-        String surname = user.getSurname();
-        if (surname.length() > 30){
-            errors.rejectValue("surname", "reg.surname.tooLong", "Surname must not more than 30 characters.");
-        }
+        validNotBlank(errors, "username", "reg.username.empty", "Username must not be empty.");
+        valid(errors,user.getUsername(),"username", "reg.username.tooLong", "Username must not more than 20 characters.",20);
+
+        validNotBlank(errors, "phone", "reg.phone.empty", "Phone must not be empty.");
+        valid(errors,user.getPhone(), "username", "reg.username.tooLong", "Username must not more than 20 characters.",20);
+
+        validNotBlank(errors,"surname", "reg.surname.empty", "Surname must not be empty.");
+        valid(errors,user.getSurname(), "surname", "reg.surname.tooLong", "Surname must not more than 30 characters.",30);
+
         if(user.getPassword().equals("") && user.getPasswordCheck().equals("")){
         }else {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "reg.password.empty", "Password must not be empty.");
