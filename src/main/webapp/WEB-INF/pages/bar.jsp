@@ -29,6 +29,10 @@
     <div class="nav-bar">
         <div class="nav-bar-left">
             <a style="margin-left: 50px" class="nav-bar-logo" href="/"><img class="logo" src="<c:url value="/resources/images/logo.png"/>"></a>
+
+            <c:if test="${sessionScope.get('auth').role eq 0}">
+                <a style="margin-left: 50px" class="nav-bar-logo" href="/admin/">Admin</a>
+            </c:if>
         </div>
         <div class="nav-bar-right">
             <ul class="menu">
