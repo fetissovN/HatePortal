@@ -1,14 +1,19 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.UserDTO;
+import com.nick.hateportal.converter.SpringConverterUserDTOToUser;
+import com.nick.hateportal.converter.SpringConverterUserToUserDTO;
 import com.nick.hateportal.entity.Message;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.message.MessageService;
 import com.nick.hateportal.service.post.PostService;
 import com.nick.hateportal.service.user.UserService;
+import com.nick.hateportal.utils.login.SessionCheckLogin;
+import com.nick.hateportal.utils.login.SessionCheckUserInfo;
 import com.nick.hateportal.validation.MessageFormValidator;
 import com.nick.hateportal.validation.PostFormValidator;
+import javafx.geometry.Pos;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,9 +46,15 @@ public class PostController extends ExceptionsController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private SpringConverterUserDTOToUser converterUserDTOToUser;
+
+    @Autowired
+    private SessionCheckUserInfo sessionCheckUserInfo;
+
     @RequestMapping(value = "/")
     public String showForm(Model model, HttpSession session){
-        if (session.getAttribute("auth")==null){
+        if (!SessionCheckLogin.checkLoggedInEither(session)){
             return "redirect:/log/";
         }
         model.addAttribute("postForm", new Post());
@@ -52,19 +63,24 @@ public class PostController extends ExceptionsController {
 
     @RequestMapping(value = "/create")
     public String createPost(@ModelAttribute(value = "postForm") Post post, Model model, HttpSession session, BindingResult result){
-        postFormValidator.validate(post, result);
-        if (result.hasErrors()){
-            List<Post> list = postService.getAllPosts();
-            model.addAttribute("posts", list);
-            return "home";
+        if (SessionCheckLogin.checkLoggedInUser(session)){
+            postFormValidator.validate(post, result);
+            if (result.hasErrors()){
+                List<Post> list = postService.getAllPosts();
+                model.addAttribute("posts", list);
+                return "home";
+            }
+            Date date = new Date();
+            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
+            User user = userService.getUserByEmail(userDTO.getEmail());
+            post.setPostDate(new java.sql.Date(date.getTime()));
+            post.setUserId(user);
+            postService.createPost(post);
+            return "redirect:/";
+        }else {
+            return "redirect:/log/";
         }
-        Date date = new Date();
-        UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-        User user = userService.getUserByEmail(userDTO.getEmail());
-        post.setPostDate(new java.sql.Date(date.getTime()));
-        post.setUserId(user);
-        postService.createPost(post);
-        return "redirect:/";
+
     }
 
     @RequestMapping(value = "/post/{id}")
@@ -119,24 +135,60 @@ public class PostController extends ExceptionsController {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public String deletePost(@PathVariable("id") Long id){
-        postService.deletePost(id);
-        return "redirect:/";
+    public String deletePost(@PathVariable("id") Long id, HttpSession session){
+        if (SessionCheckLogin.checkLoggedInAdmin(session)){
+            postService.deletePost(id);
+            return "redirect:/";
+        }else if (SessionCheckLogin.checkLoggedInUser(session)){
+//            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
+//            User user = converterUserDTOToUser.convert(userDTO);
+            if (SessionCheckUserInfo.checkUserRelatedToPost(id,session)){
+                postService.deletePost(id);
+            }
+            return "redirect:/";
+        }else {
+            return "redirect:/";
+        }
+
     }
 
     @RequestMapping(value = "/message/delete/{messageId}/{postId}")
-    public String deleteMessage(HttpServletRequest request, @PathVariable("messageId") Long messageId, @PathVariable("postId") Long postId){
-        messageService.deleteMessage(messageId);
-        String post = String.valueOf(postId);
-        request.toString();
-        return "redirect:/post/post/" + post;
+    public String deleteMessage(HttpSession session, @PathVariable("messageId") Long messageId, @PathVariable("postId") Long postId){
+        if (SessionCheckLogin.checkLoggedInAdmin(session)){
+            messageService.deleteMessage(messageId);
+            String post = String.valueOf(postId);
+            return "redirect:/post/post/" + post;
+        }else if (SessionCheckLogin.checkLoggedInUser(session)){
+            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
+            User user = converterUserDTOToUser.convert(userDTO);
+            if (SessionCheckUserInfo.checkUserRelatedToMessage(messageId,postId,user)){
+                messageService.deleteMessage(messageId);
+                String post = String.valueOf(postId);
+                return "redirect:/post/post/" + post;
+            }else {
+                return "redirect:/";
+            }
+        }else {
+            return "redirect:/";
+        }
+
     }
 
     @RequestMapping(value = "/updateShow/{postId}", method = RequestMethod.GET)
-    public String showUpdatePostFrom(@PathVariable("postId") Long postId, Model model){
-        Post post = postService.getPostById(postId);
-        model.addAttribute("postForm", post);
-        return "formSample/postForm";
+    public String showUpdatePostFrom(@PathVariable("postId") Long postId, Model model, HttpSession session){
+
+        if (SessionCheckLogin.checkLoggedInEither(session)){
+            Post post = postService.getPostById(postId);
+            model.addAttribute("postForm", post);
+            return "formSample/postForm";
+        }else if (SessionCheckUserInfo.checkUserRelatedToPost(postId,session)){
+            Post post = postService.getPostById(postId);
+            model.addAttribute("postForm", post);
+            return "formSample/postForm";
+        }else {
+            return "redirect:/log/";
+        }
+
     }
 
     @RequestMapping(value = "/update/{postId}", method = RequestMethod.POST)
@@ -157,8 +209,11 @@ public class PostController extends ExceptionsController {
         return "formSample/messageUpdate";
     }
 
-    @RequestMapping(value = "/comment/update",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message, HttpServletResponse response){
+    @RequestMapping(value = "/comment/update",method = RequestMethod.POST,
+            produces = "application/json; charset=utf-8")
+    public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message,
+                                              HttpSession session){
+
         messageService.updateMessage(message, message.getId());
         JSONObject object = new JSONObject();
         object.put("id", message.getId());

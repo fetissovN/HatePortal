@@ -4,6 +4,7 @@ import com.nick.hateportal.DTO.UserLoginDTO;
 import com.nick.hateportal.converter.SpringConverterUserToUserDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
+import com.nick.hateportal.utils.login.SessionCheckLogin;
 import com.nick.hateportal.utils.password.PassHash;
 import com.nick.hateportal.utils.vk.Vk;
 import com.nick.hateportal.utils.exception.MailingException;
@@ -34,7 +35,7 @@ public class LoginController extends ExceptionsController {
     @RequestMapping(value = "/")
     public String showLoginFrom(HttpServletRequest request , HttpServletResponse response, HttpSession session, Model model){
 
-        if (session.getAttribute("auth")!=null){
+        if (SessionCheckLogin.checkLoggedInEither(session)){
             session.removeAttribute("auth");
             Cookie[] cookies = request.getCookies();
             for (int i = 0; i < cookies.length; i++) {

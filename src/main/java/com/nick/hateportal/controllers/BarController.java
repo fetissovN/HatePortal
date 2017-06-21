@@ -5,6 +5,7 @@ import com.nick.hateportal.converter.SpringConverterUserDTOToUser;
 import com.nick.hateportal.converter.SpringConverterUserToUserDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
+import com.nick.hateportal.utils.login.SessionCheckLogin;
 import com.nick.hateportal.utils.mail.Mailing;
 import com.nick.hateportal.utils.exception.MailingException;
 import com.nick.hateportal.validation.AccountInfoFormValidator;
@@ -29,22 +30,27 @@ public class BarController extends ExceptionsController {
 
     @RequestMapping(value = "/infoCh", method = RequestMethod.POST)
     public String saveChanges(@ModelAttribute("barUserInfo") User user, HttpSession session, BindingResult result){
-        validator.validate(user,result);
-        if (result.hasErrors()){
-            return "formSample/infoFrom";
-        }
-        User userDb = userService.getUserByEmail(user.getEmail());
-        if (userService.getUserByEmail(user.getEmail())!=null){
-            user.setId(userDb.getId());
-            user.setRate(userDb.getRate());
-            user.setRole(userDb.getRole());
-            userService.updateUser(user);
-            session.removeAttribute("auth");
-            session.setAttribute("auth", new SpringConverterUserToUserDTO().convert(user));
-            return "redirect:/info_save_ok1";
+        if (SessionCheckLogin.checkLoggedInEither(session)){
+            validator.validate(user,result);
+            if (result.hasErrors()){
+                return "formSample/infoFrom";
+            }
+            User userDb = userService.getUserByEmail(user.getEmail());
+            if (userService.getUserByEmail(user.getEmail())!=null){
+                user.setId(userDb.getId());
+                user.setRate(userDb.getRate());
+                user.setRole(userDb.getRole());
+                userService.updateUser(user);
+                session.removeAttribute("auth");
+                session.setAttribute("auth", new SpringConverterUserToUserDTO().convert(user));
+                return "redirect:/info_save_ok1";
+            }else {
+                return "redirect:/info_save_ok0";
+            }
         }else {
-            return "redirect:/info_save_ok0";
+            return "redirect:/";
         }
+
     }
 
     @RequestMapping(value = "/info_save_ok{status}")
@@ -61,7 +67,7 @@ public class BarController extends ExceptionsController {
                 return "formSample/infoFrom";
             }
         }
-        if (session.getAttribute("auth")==null){
+        if (!SessionCheckLogin.checkLoggedInEither(session)){
             return null;
         }else {
             model.addAttribute("barUserInfo", new User());
