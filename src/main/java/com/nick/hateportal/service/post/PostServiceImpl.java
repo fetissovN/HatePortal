@@ -2,9 +2,7 @@ package com.nick.hateportal.service.post;
 
 import com.nick.hateportal.dao.post.PostDAO;
 import com.nick.hateportal.entity.Post;
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -57,6 +55,10 @@ public class PostServiceImpl implements PostService {
         postDAO.updatePost(postDB);
     }
 
+    /**
+     * Deprecated method, use link further {@link PostServiceImpl#getFivePostsDB(int)}
+     */
+    @Deprecated
     @Override
     public List<Post> getFivePostsWithBoundaries(int page) {
         List<Post> allPosts = getAllPosts();
@@ -86,4 +88,9 @@ public class PostServiceImpl implements PostService {
     public List<Post> getStartPosts(int n) {
         return postDAO.getStartPosts(n);
     }
+
+    public List<Post> getFivePostsDB(int page){
+        return postDAO.getFivePostsDB(page);
+    }
 }
+

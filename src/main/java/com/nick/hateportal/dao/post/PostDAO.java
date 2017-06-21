@@ -19,4 +19,6 @@ public interface PostDAO {
     void deletePost(Post post);
 
     List<Post> getStartPosts(int n);
+
+    List<Post> getFivePostsDB(int page);
 }

@@ -44,7 +44,7 @@ public class MainController extends ExceptionsController{
 
     @RequestMapping(value = "/loadPosts",method = RequestMethod.GET)
     public String loadPosts(Model model, @RequestParam("page") String page){
-        List<Post> loadedPosts = postService.getFivePostsWithBoundaries(Integer.parseInt(page));
+        List<Post> loadedPosts = postService.getFivePostsDB(Integer.parseInt(page));
         model.addAttribute("posts",loadedPosts);
         model.addAttribute("page", page);
         return "formSample/mainPostsAjax";
