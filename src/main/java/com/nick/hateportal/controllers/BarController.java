@@ -1,28 +1,24 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.FeedbackDTO;
-import com.nick.hateportal.DTO.UserDTO;
-import com.nick.hateportal.converter.DTOConverter;
+import com.nick.hateportal.converter.SpringConverterUserDTOToUser;
+import com.nick.hateportal.converter.SpringConverterUserToUserDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
-import com.nick.hateportal.utils.Mailing;
+import com.nick.hateportal.utils.mail.Mailing;
+import com.nick.hateportal.utils.exception.MailingException;
 import com.nick.hateportal.validation.AccountInfoFormValidator;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class BarController {
+public class BarController extends ExceptionsController {
 
     @Autowired
     private AccountInfoFormValidator validator;
@@ -32,19 +28,19 @@ public class BarController {
 
 
     @RequestMapping(value = "/infoCh", method = RequestMethod.POST)
-    public String saveChanges(@ModelAttribute("barUserInfo") User user, Model model, HttpSession session, BindingResult result){
+    public String saveChanges(@ModelAttribute("barUserInfo") User user, HttpSession session, BindingResult result){
         validator.validate(user,result);
         if (result.hasErrors()){
             return "formSample/infoFrom";
         }
+        User userDb = userService.getUserByEmail(user.getEmail());
         if (userService.getUserByEmail(user.getEmail())!=null){
-            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-            user.setId(userDTO.getId());
-            user.setRate(userDTO.getRate());
-            user.setRole(userDTO.getRole());
+            user.setId(userDb.getId());
+            user.setRate(userDb.getRate());
+            user.setRole(userDb.getRole());
             userService.updateUser(user);
             session.removeAttribute("auth");
-            session.setAttribute("auth", DTOConverter.convertUserToUserDto(user));
+            session.setAttribute("auth", new SpringConverterUserToUserDTO().convert(user));
             return "redirect:/info_save_ok1";
         }else {
             return "redirect:/info_save_ok0";
@@ -66,13 +62,11 @@ public class BarController {
             }
         }
         if (session.getAttribute("auth")==null){
-//            model.addAttribute("auth", "1");
             return null;
         }else {
             model.addAttribute("barUserInfo", new User());
             return "formSample/infoFrom";
         }
-
     }
 
     @RequestMapping(value = "/showFeedback", method = RequestMethod.GET)
@@ -83,9 +77,14 @@ public class BarController {
 
     @RequestMapping(value = "/sendFeedback", method = RequestMethod.POST)
     @ResponseBody
-    public String sendFeedback(@ModelAttribute("barFeedback") FeedbackDTO feedbackDTO){
+    public String sendFeedback(@ModelAttribute("barFeedback") FeedbackDTO feedbackDTO) throws MailingException{
             Mailing mailing = new Mailing();
+        try {
             mailing.send("test",feedbackDTO.getFeedback(),"asd",feedbackDTO.getEmail());
-            return "1";
+        } catch (MailingException e) {
+
+            throw new MailingException();
+        }
+        return "1";
     }
 }

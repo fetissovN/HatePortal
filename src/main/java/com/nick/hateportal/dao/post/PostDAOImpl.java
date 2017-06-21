@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
 
 @Repository("postDAOImpl")
 @Transactional
@@ -61,6 +61,24 @@ public class PostDAOImpl implements PostDAO{
     public void deletePost(Post post) {
         sessionFactory.getCurrentSession().delete(post);
         LOGGER.info(messageSource.getMessage("log.delete.post", new Object[] {post}, Locale.ENGLISH));
+    }
 
+    @Override
+    public List<Post> getStartPosts(int n){
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Post.class);
+        criteria.addOrder(Order.desc("postDate"));
+        criteria.setMaxResults(n);
+        List result = criteria.list();
+        LOGGER.info(messageSource.getMessage("log.get.posts.start", new Object[] {result}, Locale.ENGLISH));
+        return result;
+    }
+
+    public List<Post> getFivePostsDB(int page){
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Post.class);
+        criteria.addOrder(Order.desc("postDate"))
+        .setFirstResult(page*5)
+        .setMaxResults(5);
+        List result = criteria.list();
+        return result;
     }
 }

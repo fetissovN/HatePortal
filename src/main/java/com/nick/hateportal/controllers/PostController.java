@@ -30,7 +30,7 @@ public class PostController extends ExceptionsController {
     private PostFormValidator postFormValidator;
 
     @Autowired
-    private MessageFormValidator messgeFormValidator;
+    private MessageFormValidator messageFormValidator;
 
     @Autowired
     private PostService postService;
@@ -83,7 +83,7 @@ public class PostController extends ExceptionsController {
         if (session.getAttribute("auth")==null){
             return "redirect:/log/";
         }
-        messgeFormValidator.validate(message, result);
+        messageFormValidator.validate(message, result);
         Post post = postService.getPostById(id);
         if (result.hasErrors()){
             List<Message> messages = messageService.getAllMessagesByPostId(post);
@@ -154,16 +154,11 @@ public class PostController extends ExceptionsController {
     public String updateMessageShow(Model model, @PathVariable("messageId") Long messageId){
         Message message = messageService.getMessageById(messageId);
         model.addAttribute("messageUpdate", message);
-//        JSONObject object = new JSONObject();
-//        object.put("id", message.getId());
-//        object.put("message", message.getMessage());
-//        return object.toString();
         return "formSample/messageUpdate";
     }
 
     @RequestMapping(value = "/comment/update",method = RequestMethod.POST, produces = "application/json; charset=utf-8")
     public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message, HttpServletResponse response){
-//        response.setCharacterEncoding("UTF-8");
         messageService.updateMessage(message, message.getId());
         JSONObject object = new JSONObject();
         object.put("id", message.getId());

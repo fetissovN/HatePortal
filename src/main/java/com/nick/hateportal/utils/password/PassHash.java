@@ -1,5 +1,4 @@
-package com.nick.hateportal.utils;
-
+package com.nick.hateportal.utils.password;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -17,7 +16,6 @@ public class PassHash {
             while(hashtext.length() < 32 ){
                 hashtext = "0"+hashtext;
             }
-            System.out.println(hashtext);
             return hashtext;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -1,20 +1,15 @@
 package com.nick.hateportal.controllers;
 
 import com.nick.hateportal.DTO.UserDTO;
-import com.nick.hateportal.comparators.forUser.UserIdAscComparator;
-import com.nick.hateportal.comparators.forUser.UserIdDescComparator;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
-import com.nick.hateportal.service.user.UserService;
-import com.nick.hateportal.utils.admin.AdminListHandler;
-import com.nick.hateportal.utils.admin.ListAdminEntitySortPossibilities;
+import com.nick.hateportal.utils.admin.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -23,16 +18,10 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private UserService userService;
+    private AdminListHandlerUser adminListHandlerUser;
 
     @Autowired
-    private UserIdAscComparator userIdAscComparator;
-
-    @Autowired
-    private UserIdDescComparator userIdDescComparator;
-
-    @Autowired
-    private AdminListHandler adminListHandler;
+    private AdminListHandlerPost adminListHandlerPost;
 
     @RequestMapping(value = "/reload")
     public String reload(HttpSession session){
@@ -44,8 +33,8 @@ public class AdminController {
     public String showStartScreen(Model model, HttpSession session){
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         if (userDTO.getRole() == 0) {
-            List<User> listUsers = adminListHandler.listUserSortBy(session, ListAdminEntitySortPossibilities.SORT_USER_ID_UP);
-            List<Post> listPosts = adminListHandler.adminPostSortBy(session, ListAdminEntitySortPossibilities.SORT_POST_ID_UP);
+            List<User> listUsers = adminListHandlerUser.listUserSortBy(ListAdminUserSortPossibilities.SORT_USER_ID_UP);
+            List<Post> listPosts = adminListHandlerPost.adminPostSortBy(ListAdminPostSortPossibilities.SORT_POST_ID_UP,-1);
             model.addAttribute("countUsers", listUsers.size());
             model.addAttribute("countPosts", listPosts.size());
 
@@ -55,7 +44,6 @@ public class AdminController {
         }else {
             return "home";
         }
-
     }
 
     @RequestMapping(value = "",params = "n")
@@ -63,10 +51,11 @@ public class AdminController {
 
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         if (userDTO.getRole()==0){
-            List<User> list = adminListHandler.listUserSortBy(session, ListAdminEntitySortPossibilities.getMask(n));
+
+            List<User> list = adminListHandlerUser.listUserSortBy(ListAdminUserSortPossibilities.getMask(n));
             model.addAttribute("countUsers", list.size());
             model.addAttribute("list", list);
-            return "admin";
+            return "formSample/admin/users";
         }else {
             return "home";
         }
@@ -74,18 +63,30 @@ public class AdminController {
 
     @RequestMapping(value = "",params = "p")
     public String showPostsAsc(@RequestParam(value = "p") int p ,HttpSession session, Model model){
-
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
         if (userDTO.getRole()==0){
-            List<User> listUser = (List<User>) session.getAttribute("listUsers");
-
-            List<Post> list = adminListHandler.adminPostSortBy(session, ListAdminEntitySortPossibilities.getMask(p));
-
+            List<Post> list = adminListHandlerPost.adminPostSortBy(ListAdminPostSortPossibilities.getMask(p),-1);
             model.addAttribute("countPosts", list.size());
-            model.addAttribute("countUsers", listUser.size());
             model.addAttribute("listPosts", list);
-            model.addAttribute("list", listUser);
-            return "admin";
+            return "formSample/admin/posts";
+        }else {
+            return "home";
+        }
+    }
+
+    @RequestMapping(value = "",params = {"p","user"})
+    public String showPostsAsc(@RequestParam(value = "p") int p ,@RequestParam(value = "user") int userId,HttpSession session, Model model){
+        UserDTO userDTO = (UserDTO) session.getAttribute("auth");
+        if (userDTO.getRole()==0){
+            int userIdSort = -1;
+            if (userId>=0){
+                userIdSort=userId;
+            }
+            List<Post> list = adminListHandlerPost.adminPostSortBy(ListAdminPostSortPossibilities.getMask(p),userIdSort);
+            model.addAttribute("countPosts", list.size());
+            model.addAttribute("listPosts", list);
+            model.addAttribute("postOfUser","true");
+            return "formSample/admin/posts";
         }else {
             return "home";
         }
@@ -93,14 +94,15 @@ public class AdminController {
 
     @RequestMapping(value = "/userPosts{idUser}")
     public String showUserPosts(@PathVariable(value = "idUser") Long id, HttpSession session, Model model){
-        List<User> listUser = (List<User>) session.getAttribute("listUsers");
-
-        List<Post> list = adminListHandler.userPosts(session, id);
+        List<Post> list = adminListHandlerPost.userPosts(id);
         model.addAttribute("countPosts", list.size());
-        model.addAttribute("countUsers", listUser.size());
         model.addAttribute("listPosts", list);
-        model.addAttribute("list", listUser);
-        return "admin";
+        if (list.size()==0){
+            model.addAttribute("postOfUser","false");
+        }else {
+            model.addAttribute("postOfUser","true");
+        }
+        return "formSample/admin/posts";
     }
 
 }

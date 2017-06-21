@@ -23,7 +23,6 @@ function ajaxRequestMessUpdShow(urlFrom){
     $.ajax({
         type: 'GET',
         url: urlFrom,
-        // data: {'s': term},
         success: function(data){
             var id = $(data).find( ".supportId").html();
             $('#updMessPlace'+id).append(data);
@@ -50,7 +49,6 @@ function ajaxRequestUpdMess(){
                 $('#mess'+data.id).html(data.message);
                 $('#adminMessUpdate'+data.id).show();
                 $('#messageAjaxId').remove();
-
         },
         error: function () {
             alert("fail!");

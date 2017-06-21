@@ -6,3 +6,20 @@ hr {
     margin: 1em 0;
     padding: 0;
 }
+
+.postLinkMethod button{
+    padding: 5px
+}
+
+.large-8 {
+    border-right: 1px solid black;
+    position: inherit;
+}
+.large-8 table {
+    font-size: xx-small;
+    margin-right: 20px;
+}
+.userAdminAjax table {
+    font-size: xx-small;
+    margin-right: 20px;
+}

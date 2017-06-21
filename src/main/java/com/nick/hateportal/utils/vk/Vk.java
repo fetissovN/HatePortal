@@ -1,4 +1,4 @@
-package com.nick.hateportal.utils;
+package com.nick.hateportal.utils.vk;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -23,7 +23,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Vk {
     private static final String SEC_KEY = "c5gxoDRIDhSuYbTKckS7";
@@ -66,8 +65,7 @@ public class Vk {
         {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
         }
-        catch (UnsupportedEncodingException e)
-        {
+        catch (UnsupportedEncodingException e) {
             System.out.println("Fail to send request");
         }
         HttpClient client = HttpClientBuilder.create().build();

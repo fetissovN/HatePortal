@@ -2,10 +2,11 @@ package com.nick.hateportal.service.user;
 
 import com.nick.hateportal.dao.user.UserDAO;
 import com.nick.hateportal.entity.User;
-import com.nick.hateportal.utils.Mailing;
-import com.nick.hateportal.utils.PassHash;
-import com.nick.hateportal.utils.PasswordGenetator;
+import com.nick.hateportal.utils.mail.Mailing;
+import com.nick.hateportal.utils.password.PassHash;
+import com.nick.hateportal.utils.password.PasswordGenetator;
 import com.nick.hateportal.utils.Utils;
+import com.nick.hateportal.utils.exception.MailingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,12 @@ public class UserServiceImpl implements UserService {
     public User getUserByEmail(String email) {
         String refactorEmail = utils.stringToLowerCase(email);
         User user = userDao.getUserByEmail(refactorEmail);
+        return user;
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        User user = userDao.getUserById(id);
         return user;
     }
 
@@ -63,16 +70,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void sendEmailToNewVkUser(String email, String newPass) {
-        Mailing mailing = new Mailing();
-        mailing.sendVkAuthMessageWithPassword(email, newPass);
+    public void sendEmailToNewVkUser(String email, String newPass) throws MailingException {
+        Mailing.sendVkAuthMessageWithPassword(email, newPass);
     }
 
-    @Override
-    public List<User> getAllUsersDescId() {
-        List<User> list = userDao.getAllUsersDecrId();
-        return list;
-    }
+//    @Override
+//    public List<User> getAllUsersDescId() {
+//        List<User> list = userDao.getAllUsersDecrId();
+//        return list;
+//    }
 
     @Override
     public List<User> getAllUsersAscId() {

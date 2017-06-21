@@ -2,18 +2,7 @@ $(document).ready(function () {
     $('#adminUpd').on('click', function(e){
         var addressValue = $(this).attr("href");
         e.preventDefault();
-
         ajaxRequestPostUpdShow(addressValue);
-        // var feedExist = $('.translucent-form-overlay-feed');
-        // var infExist = $('.translucent-form-overlay');
-        // if(feedExist.length > 0){
-        //     $('.translucent-form-overlay-feed').remove();
-        // }else if (infExist.length > 0){
-        //     $('.translucent-form-overlay').remove();
-        //     ajaxRequestFeed();
-        // }else {
-        //     ajaxRequestFeed();
-        // }
     });
 });
 
@@ -26,14 +15,11 @@ $('body').on('click', '#closePostFormUpdate', function(){
     $('#ajaxPostFormSample').remove();
 });
 
-
-
 function ajaxRequestPostUpdShow(urlFrom){
 
     $.ajax({
         type: 'GET',
         url: urlFrom,
-        // data: {'s': term},
         success: function(data){
             $('.article-row').hide();
             $('#updatePost').append(data);
@@ -62,6 +48,5 @@ function ajaxRequestUpdPost(){
         error: function () {
             alert("fail!");
         }
-
     });
 }

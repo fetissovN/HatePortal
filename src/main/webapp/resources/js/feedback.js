@@ -23,7 +23,6 @@ function ajaxRequestFeed(){
     $.ajax({
         type: 'GET',
         url: '/showFeedback',
-        // data: {'s': term},
         success: function(data){
             $('#formFeed').append(data);
         }
@@ -40,11 +39,12 @@ function ajaxRequestFeedSend(){
             if (data==1){
                 $('.translucent-form-overlay-feed').remove();
                 alert("saved!");
+            }else {
+                alert(data);
             }
         },
         error: function () {
             alert("fail!");
         }
-
     });
 }
