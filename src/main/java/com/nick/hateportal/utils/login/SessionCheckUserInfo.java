@@ -6,6 +6,7 @@ import com.nick.hateportal.entity.Message;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import java.util.List;
 public class SessionCheckUserInfo {
 
     @Autowired
+    @Qualifier(value = "springConverterUserDTOToUser")
     private static SpringConverterUserDTOToUser converterUserDTOToUser;
 
     public static boolean checkUserRelatedToPost(Long id, User user){
@@ -29,7 +31,9 @@ public class SessionCheckUserInfo {
 
     public static boolean checkUserRelatedToPost(Long id, HttpSession session){
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
+//        SpringConverterUserDTOToUser springConverterUserDTOToUser = new SpringConverterUserDTOToUser();
         User user = converterUserDTOToUser.convert(userDTO);
+//        User user = SpringConverterUserDTOToUser.convert(userDTO);
 
         List<Post> list = user.getSentPosts();
         for (Post p: list){

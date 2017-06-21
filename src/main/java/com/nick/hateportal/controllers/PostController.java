@@ -142,7 +142,7 @@ public class PostController extends ExceptionsController {
         }else if (SessionCheckLogin.checkLoggedInUser(session)){
 //            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
 //            User user = converterUserDTOToUser.convert(userDTO);
-            if (SessionCheckUserInfo.checkUserRelatedToPost(id,session)){
+            if (sessionCheckUserInfo.checkUserRelatedToPost(id, session)){
                 postService.deletePost(id);
             }
             return "redirect:/";
@@ -181,7 +181,7 @@ public class PostController extends ExceptionsController {
             Post post = postService.getPostById(postId);
             model.addAttribute("postForm", post);
             return "formSample/postForm";
-        }else if (SessionCheckUserInfo.checkUserRelatedToPost(postId,session)){
+        }else if (sessionCheckUserInfo.checkUserRelatedToPost(postId,session)){
             Post post = postService.getPostById(postId);
             model.addAttribute("postForm", post);
             return "formSample/postForm";

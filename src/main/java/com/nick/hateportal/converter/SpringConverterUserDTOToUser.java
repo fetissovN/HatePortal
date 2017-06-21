@@ -4,15 +4,16 @@ import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SpringConverterUserDTOToUser implements Converter<UserDTO, User>{
 
-
     @Autowired
-    private UserService userService;
+    @Qualifier(value = "userServiceImpl")
+    private  UserService userService;
 
 
     public User convert(UserDTO userDTO){
