@@ -81,7 +81,7 @@
                                 </c:if>
                                 <c:if test="${sessionScope.get('auth').role eq 0}">
                                     <a style="color: #cc8b00" id="adminDel" href="/post/message/delete/${message.id}/${post.id}">delete</a>
-                                    <a style="color: darkblue" id="adminMessUpdate" href="/post/message/updateShow/${message.id}">update</a>
+                                    <a style="color: darkblue" class="updMess" id="adminMessUpdate" href="/post/message/updateShow/${message.id}">update</a>
                                 </c:if>
                             </div>
                         </div>

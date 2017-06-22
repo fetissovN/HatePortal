@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 public class SpringConverterUserDTOToUser implements Converter<UserDTO, User>{
 
     @Autowired
-    @Qualifier(value = "userServiceImpl")
-    private  UserService userService;
-
+    private UserService userService;
 
     public User convert(UserDTO userDTO){
         User user = userService.getUserById(userDTO.getId());

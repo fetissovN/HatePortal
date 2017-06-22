@@ -6,7 +6,6 @@ import com.nick.hateportal.entity.Message;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
@@ -16,10 +15,9 @@ import java.util.List;
 public class SessionCheckUserInfo {
 
     @Autowired
-    @Qualifier(value = "springConverterUserDTOToUser")
-    private static SpringConverterUserDTOToUser converterUserDTOToUser;
+    private SpringConverterUserDTOToUser converterUserDTOToUser;
 
-    public static boolean checkUserRelatedToPost(Long id, User user){
+    private boolean checkUserRelatedToPost(Long id, User user){
         List<Post> list = user.getSentPosts();
         for (Post p: list){
             if (p.getId()==id){
@@ -29,22 +27,18 @@ public class SessionCheckUserInfo {
         return false;
     }
 
-    public static boolean checkUserRelatedToPost(Long id, HttpSession session){
+    private User getUserFromSession(HttpSession session){
         UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-//        SpringConverterUserDTOToUser springConverterUserDTOToUser = new SpringConverterUserDTOToUser();
-        User user = converterUserDTOToUser.convert(userDTO);
-//        User user = SpringConverterUserDTOToUser.convert(userDTO);
-
-        List<Post> list = user.getSentPosts();
-        for (Post p: list){
-            if (p.getId()==id){
-                return true;
-            }
-        }
-        return false;
+        return converterUserDTOToUser.convert(userDTO);
     }
 
-    public static boolean checkUserRelatedToMessage(Long messageId, Long postId, User user){
+    public boolean checkUserRelatedToPost(Long id, HttpSession session){
+        User user = getUserFromSession(session);
+        return checkUserRelatedToPost(id,user);
+    }
+
+    public boolean checkUserRelatedToMessage(Long messageId, Long postId, HttpSession session){
+        User user = getUserFromSession(session);
         if (checkUserRelatedToPost(postId,user)){
             Post post = user.getSentPosts().get(Math.toIntExact(postId)-1);
             List<Message> messages = post.getPostRelatedMessages();

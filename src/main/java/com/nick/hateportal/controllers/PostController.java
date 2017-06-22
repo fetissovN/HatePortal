@@ -63,7 +63,7 @@ public class PostController extends ExceptionsController {
 
     @RequestMapping(value = "/create")
     public String createPost(@ModelAttribute(value = "postForm") Post post, Model model, HttpSession session, BindingResult result){
-        if (SessionCheckLogin.checkLoggedInUser(session)){
+        if (SessionCheckLogin.checkLoggedInUser(session) || SessionCheckLogin.checkLoggedInAdmin(session)){
             postFormValidator.validate(post, result);
             if (result.hasErrors()){
                 List<Post> list = postService.getAllPosts();
@@ -140,8 +140,6 @@ public class PostController extends ExceptionsController {
             postService.deletePost(id);
             return "redirect:/";
         }else if (SessionCheckLogin.checkLoggedInUser(session)){
-//            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-//            User user = converterUserDTOToUser.convert(userDTO);
             if (sessionCheckUserInfo.checkUserRelatedToPost(id, session)){
                 postService.deletePost(id);
             }
@@ -159,9 +157,7 @@ public class PostController extends ExceptionsController {
             String post = String.valueOf(postId);
             return "redirect:/post/post/" + post;
         }else if (SessionCheckLogin.checkLoggedInUser(session)){
-            UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-            User user = converterUserDTOToUser.convert(userDTO);
-            if (SessionCheckUserInfo.checkUserRelatedToMessage(messageId,postId,user)){
+            if (sessionCheckUserInfo.checkUserRelatedToMessage(messageId,postId,session)){
                 messageService.deleteMessage(messageId);
                 String post = String.valueOf(postId);
                 return "redirect:/post/post/" + post;
@@ -213,11 +209,24 @@ public class PostController extends ExceptionsController {
             produces = "application/json; charset=utf-8")
     public @ResponseBody String updateMessage(@ModelAttribute(value = "messageUpdate") Message message,
                                               HttpSession session){
+        if (SessionCheckLogin.checkLoggedInUser(session)) {
+            if (sessionCheckUserInfo.checkUserRelatedToMessage(message.getId(), message.getPost_id().getId(), session)) {
+                return convertMessageToJson(message).toString();
+            } else {
+                return null;
+            }
+        }else if (SessionCheckLogin.checkLoggedInAdmin(session)){
+            return convertMessageToJson(message).toString();
+        }else {
+            return "redirect:/";
+        }
+    }
 
+    private JSONObject convertMessageToJson(Message message){
         messageService.updateMessage(message, message.getId());
         JSONObject object = new JSONObject();
         object.put("id", message.getId());
         object.put("message", message.getMessage());
-        return object.toString();
+        return object;
     }
 }
