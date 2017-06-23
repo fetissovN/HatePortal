@@ -9,7 +9,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SpringConverterUserDTOToUser implements Converter<UserDTO, User>{
+public class SpringConverterUserDTOToUser<T extends User> implements Converter<UserDTO, User>{
 
     @Autowired
     private UserService userService;
