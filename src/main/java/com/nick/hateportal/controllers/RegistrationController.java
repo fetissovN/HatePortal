@@ -3,6 +3,7 @@ package com.nick.hateportal.controllers;
 import com.nick.hateportal.DTO.UserRegDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
+import com.nick.hateportal.utils.login.ConvertNewUserRegDtoToUser;
 import com.nick.hateportal.utils.password.PassHash;
 import com.nick.hateportal.validation.RegFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class RegistrationController extends ExceptionsController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ConvertNewUserRegDtoToUser convertNewUserRegDtoToUser;
+
     @RequestMapping(value = "/")
     public String showRegPage(Model model){
         model.addAttribute("regForm", new UserRegDTO());
@@ -40,15 +44,8 @@ public class RegistrationController extends ExceptionsController {
             try{
                 PassHash passHash = new PassHash();
                 String pass = passHash.stringPassToHash(userRegDTO.getPassword());
-                User user = new User();
-                user.setNickname(userRegDTO.getNickname());
-                user.setEmail(userRegDTO.getEmail());
-                user.setPassword(pass);
-                user.setPhone(userRegDTO.getPhone());
-                user.setRate(0.0);
-                user.setUsername(userRegDTO.getUsername());
-                user.setSurname(userRegDTO.getSurname());
-                user.setRole(1);
+                userRegDTO.setPassword(pass);
+                User user = convertNewUserRegDtoToUser.convert(userRegDTO);
                 userService.createUser(user);
             }catch (Exception e){
                 e.printStackTrace();
@@ -58,7 +55,6 @@ public class RegistrationController extends ExceptionsController {
             model.addAttribute("userExist", "Exist");
             return "register";
         }
-
         return "redirect:/log/";
     }
 }

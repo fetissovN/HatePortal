@@ -4,6 +4,7 @@ import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.utils.admin.*;
+import com.nick.hateportal.utils.login.SessionCheckLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,10 +32,11 @@ public class AdminController {
 
     @RequestMapping(value = "/")
     public String showStartScreen(Model model, HttpSession session){
-        UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-        if (userDTO.getRole() == 0) {
+
+        if (SessionCheckLogin.checkLoggedInAdmin(session)) {
             List<User> listUsers = adminListHandlerUser.listUserSortBy(ListAdminUserSortPossibilities.SORT_USER_ID_UP);
             List<Post> listPosts = adminListHandlerPost.adminPostSortBy(ListAdminPostSortPossibilities.SORT_POST_ID_UP,-1);
+
             model.addAttribute("countUsers", listUsers.size());
             model.addAttribute("countPosts", listPosts.size());
 
@@ -42,42 +44,39 @@ public class AdminController {
             model.addAttribute("listPosts", listPosts);
             return "admin";
         }else {
-            return "home";
+            return "redirect:/";
         }
     }
 
     @RequestMapping(value = "",params = "n")
     public String showUsersAsc(@RequestParam(value = "n") int n ,HttpSession session, Model model){
 
-        UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-        if (userDTO.getRole()==0){
-
+        if (SessionCheckLogin.checkLoggedInAdmin(session)){
             List<User> list = adminListHandlerUser.listUserSortBy(ListAdminUserSortPossibilities.getMask(n));
             model.addAttribute("countUsers", list.size());
             model.addAttribute("list", list);
             return "formSample/admin/users";
         }else {
-            return "home";
+            return "redirect:/";
         }
     }
 
     @RequestMapping(value = "",params = "p")
     public String showPostsAsc(@RequestParam(value = "p") int p ,HttpSession session, Model model){
-        UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-        if (userDTO.getRole()==0){
+
+        if (SessionCheckLogin.checkLoggedInAdmin(session)){
             List<Post> list = adminListHandlerPost.adminPostSortBy(ListAdminPostSortPossibilities.getMask(p),-1);
             model.addAttribute("countPosts", list.size());
             model.addAttribute("listPosts", list);
             return "formSample/admin/posts";
         }else {
-            return "home";
+            return "redirect:/";
         }
     }
 
     @RequestMapping(value = "",params = {"p","user"})
     public String showPostsAsc(@RequestParam(value = "p") int p ,@RequestParam(value = "user") int userId,HttpSession session, Model model){
-        UserDTO userDTO = (UserDTO) session.getAttribute("auth");
-        if (userDTO.getRole()==0){
+        if (SessionCheckLogin.checkLoggedInAdmin(session)){
             int userIdSort = -1;
             if (userId>=0){
                 userIdSort=userId;
@@ -88,21 +87,25 @@ public class AdminController {
             model.addAttribute("postOfUser","true");
             return "formSample/admin/posts";
         }else {
-            return "home";
+            return "redirect:/";
         }
     }
 
     @RequestMapping(value = "/userPosts{idUser}")
     public String showUserPosts(@PathVariable(value = "idUser") Long id, HttpSession session, Model model){
-        List<Post> list = adminListHandlerPost.userPosts(id);
-        model.addAttribute("countPosts", list.size());
-        model.addAttribute("listPosts", list);
-        if (list.size()==0){
-            model.addAttribute("postOfUser","false");
+        if (SessionCheckLogin.checkLoggedInAdmin(session)){
+            List<Post> list = adminListHandlerPost.userPosts(id);
+            model.addAttribute("countPosts", list.size());
+            model.addAttribute("listPosts", list);
+            if (list.size()==0){
+                model.addAttribute("postOfUser","false");
+            }else {
+                model.addAttribute("postOfUser","true");
+            }
+            return "formSample/admin/posts";
         }else {
-            model.addAttribute("postOfUser","true");
+            return "redirect:/";
         }
-        return "formSample/admin/posts";
     }
 
 }

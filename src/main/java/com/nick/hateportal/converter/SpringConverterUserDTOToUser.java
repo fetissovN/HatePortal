@@ -1,21 +1,18 @@
 package com.nick.hateportal.converter;
 
-
 import com.nick.hateportal.DTO.UserDTO;
 import com.nick.hateportal.entity.User;
 import com.nick.hateportal.service.user.UserService;
-import com.nick.hateportal.utils.UtilsDB;
-import com.nick.hateportal.utils.exception.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
-
-public class SpringConverterUserDTOToUser implements Converter<UserDTO, User>{
-
+@Component
+public class SpringConverterUserDTOToUser<T extends User> implements Converter<UserDTO, User>{
 
     @Autowired
     private UserService userService;
-
 
     public User convert(UserDTO userDTO){
         User user = userService.getUserById(userDTO.getId());
