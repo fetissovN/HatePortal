@@ -84,18 +84,18 @@ public class Vk {
                 JsonElement accessToken = element.get("access_token");
                 if (accessToken != null && accessToken.isJsonPrimitive())
                 {
-                    System.out.println(accessToken.getAsString());
+//                    System.out.println(accessToken.getAsString());
                 }
                 JsonElement userId = element.get("user_id");
                 if (userId != null && userId.isJsonPrimitive())
                 {
                     list.putAll(getVkUserInfo(userId.toString()));
-                    System.out.println(userId.getAsString());
+//                    System.out.println(userId.getAsString());
                 }
                 JsonElement email = element.get("email");
                 if (userId != null && userId.isJsonPrimitive())
                 {
-                    System.out.println(email.getAsString());
+//                    System.out.println(email.getAsString());
                     list.put("email",email.getAsString());
                 }
                 else
