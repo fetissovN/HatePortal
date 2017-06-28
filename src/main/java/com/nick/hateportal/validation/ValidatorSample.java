@@ -5,10 +5,10 @@ import org.springframework.validation.ValidationUtils;
 
 public abstract class ValidatorSample {
 
-    public void valid(Errors errors,String strVal, String field, String logLong, String messaheLong, int numberOfChars) {
+    public void valid(Errors errors,String strVal, String field, String logLong, String messageLong, int numberOfChars) {
 
         if (strVal.length() > numberOfChars){
-            errors.rejectValue(field, logLong, messaheLong);
+            errors.rejectValue(field, logLong, messageLong);
         }
     }
 
