@@ -13,7 +13,6 @@ import com.nick.hateportal.utils.login.SessionCheckLogin;
 import com.nick.hateportal.utils.login.SessionCheckUserInfo;
 import com.nick.hateportal.validation.MessageFormValidator;
 import com.nick.hateportal.validation.PostFormValidator;
-import javafx.geometry.Pos;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
