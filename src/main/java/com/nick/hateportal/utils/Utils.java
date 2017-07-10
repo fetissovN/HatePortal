@@ -6,18 +6,13 @@ import org.springframework.stereotype.Component;
 public class Utils {
 
     public static String stringToLowerCase(String s){
-        String newString = s.toLowerCase();
-        return newString;
+        return s.toLowerCase();
     }
 
     public static String firstLetterToHighCase(String s){
         String str = stringToLowerCase(s);
-
         Character firstChar = str.charAt(0);
         Character firstCapitalChar = Character.toUpperCase(firstChar);
-
-        String result = firstCapitalChar + str.substring(1);
-
-        return result;
+        return firstCapitalChar + str.substring(1);
     }
 }

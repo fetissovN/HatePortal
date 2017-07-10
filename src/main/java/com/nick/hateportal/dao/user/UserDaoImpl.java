@@ -70,6 +70,12 @@ public class UserDaoImpl implements UserDAO {
     }
 
     @Override
+    public void deleteUser(User user) {
+        sessionFactory.getCurrentSession().delete(user);
+        LOGGER.info(messageSource.getMessage("log.deleteUser", new Object[] {user}, Locale.ENGLISH));
+    }
+
+    @Override
     public void updateUserInfoWithoutPassword(User user) {
 
     }
