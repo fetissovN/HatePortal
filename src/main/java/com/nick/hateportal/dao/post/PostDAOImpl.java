@@ -35,6 +35,17 @@ public class PostDAOImpl implements PostDAO{
     }
 
     @Override
+    public Post getLastPost() {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Post.class);
+        criteria.addOrder(Order.desc("postDate"));
+        criteria.setMaxResults(1);
+        List<Post> result = criteria.list();
+        return result.get(0);
+
+    }
+
+
+    @Override
     public List<Post> getAllPosts() {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Post.class);
         criteria.addOrder(Order.desc("postDate"));

@@ -10,6 +10,8 @@ public interface UserDAO {
 
     void createUser(User user);
 
+    void persistUser(User user);
+
     User getUserByEmail(String email);
 
     void updateUser(User user);

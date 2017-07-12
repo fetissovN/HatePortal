@@ -134,11 +134,11 @@ public class PostController extends ExceptionsController {
     @RequestMapping(value = "/delete/{id}")
     public String deletePost(@PathVariable("id") Long id, HttpSession session){
         if (SessionCheckLogin.checkLoggedInAdmin(session)){
-            postService.deletePost(id);
+            postService.deletePostById(id);
             return "redirect:/";
         }else if (SessionCheckLogin.checkLoggedInUser(session)){
             if (sessionCheckUserInfo.checkUserRelatedToPost(id, session)){
-                postService.deletePost(id);
+                postService.deletePostById(id);
             }
             return "redirect:/";
         }else {

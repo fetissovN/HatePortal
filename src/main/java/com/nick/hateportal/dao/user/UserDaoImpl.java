@@ -1,7 +1,5 @@
 package com.nick.hateportal.dao.user;
 
-import com.nick.hateportal.DTO.UserRegDTO;
-import com.nick.hateportal.entity.Post;
 import com.nick.hateportal.entity.User;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -16,9 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Locale;
-
-import static org.hibernate.hql.internal.antlr.HqlTokenTypes.FROM;
-import static org.hibernate.hql.internal.antlr.HqlTokenTypes.WHERE;
 
 @Repository("userDaoImpl")
 @Transactional
@@ -36,6 +31,12 @@ public class UserDaoImpl implements UserDAO {
     @Override
     public void createUser(User user) {
         sessionFactory.getCurrentSession().save(user);
+        LOGGER.info(messageSource.getMessage("log.new.user", new Object[] {user}, Locale.ENGLISH));
+    }
+
+    @Override
+    public void persistUser(User user){
+        sessionFactory.getCurrentSession().persist(user);
         LOGGER.info(messageSource.getMessage("log.new.user", new Object[] {user}, Locale.ENGLISH));
     }
 

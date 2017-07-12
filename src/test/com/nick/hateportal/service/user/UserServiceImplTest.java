@@ -38,16 +38,16 @@ public class UserServiceImplTest extends TestCase {
     public void testCreateUser() throws Exception {
         User userTest = testUser.getTestUser();
         userDAO.createUser(userTest);
-        User user = userDAO.getUserByEmail(testUser.email);
+        User user = userDAO.getUserByEmail(testUser.EMAIL);
         if (user==null){
             fail("User was not saved");
         }else {
-            assertTrue("Err",user.getNickname().equals(testUser.nick));
-            assertTrue("Err",user.getUsername().equals(testUser.name));
-            assertTrue("Err",user.getSurname().equals(testUser.surname));
-            assertTrue("Err",user.getEmail().equals(testUser.email));
-            assertTrue("Err",user.getPhone().equals(testUser.phone));
-            assertTrue("Err",user.getPassword().equals(testUser.password));
+            assertTrue("Err",user.getNickname().equals(testUser.NICK));
+            assertTrue("Err",user.getUsername().equals(testUser.NAME));
+            assertTrue("Err",user.getSurname().equals(testUser.SURNAME));
+            assertTrue("Err",user.getEmail().equals(testUser.EMAIL));
+            assertTrue("Err",user.getPhone().equals(testUser.PHONE));
+            assertTrue("Err",user.getPassword().equals(testUser.PASSWORD));
             assertTrue("Err",user.getRole()==1);
             assertTrue("Err",user.getRate()==0.0);
         }

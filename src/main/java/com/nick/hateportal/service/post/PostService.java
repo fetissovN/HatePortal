@@ -9,13 +9,17 @@ public interface PostService {
 
     void createPost(Post post);
 
+    Post getLastPost();
+
     List<Post> getAllPosts();
 
     Post getPostById(Long postId);
 
     void likePost(Long id);
 
-    void deletePost(Long id);
+    void deletePostById(Long id);
+
+    void deletePost(Post post);
 
     void updatePost(Post post, Long id);
 

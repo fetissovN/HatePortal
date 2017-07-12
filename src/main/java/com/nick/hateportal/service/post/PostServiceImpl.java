@@ -20,6 +20,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post getLastPost(){
+        return postDAO.getLastPost();
+    }
+
+    @Override
     public List<Post> getAllPosts() {
         return postDAO.getAllPosts();
     }
@@ -40,8 +45,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deletePost(Long id) {
+    public void deletePostById(Long id) {
         Post post = getPostById(id);
+        postDAO.deletePost(post);
+    }
+
+    @Override
+    public void deletePost(Post post) {
         postDAO.deletePost(post);
     }
 

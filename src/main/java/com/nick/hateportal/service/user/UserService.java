@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface UserService {
 
+    void persistUser(User user);
+
     void createUser(User user);
 
     User getUserByEmail(String email);
@@ -22,4 +24,6 @@ public interface UserService {
     void sendEmailToNewVkUser(String email, String pass) throws MailingException;
 
     List<User> getAllUsersAscId();
+
+    void deleteUser(User user);
 }

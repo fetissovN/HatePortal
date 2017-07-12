@@ -22,6 +22,11 @@ public class UserServiceImpl implements UserService {
     Utils utils;
 
     @Override
+    public void persistUser(User user) {
+        userDao.persistUser(user);
+    }
+
+    @Override
     public void createUser(User user) {
         userDao.createUser(user);
     }
@@ -84,6 +89,11 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsersAscId() {
         List<User> list = userDao.getAllUsersAscId();
         return list;
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        userDao.deleteUser(user);
     }
 
 
