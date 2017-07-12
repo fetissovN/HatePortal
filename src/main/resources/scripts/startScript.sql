@@ -61,7 +61,7 @@ CREATE TABLE hate.users_posts(
   target VARCHAR(255) NOT NULL ,
   title VARCHAR(100) NOT NULL ,
   post VARCHAR(1000) NOT NULL ,
-  user_id INT NOT NULL ,
+  user_id INT ,
   post_date DATETIME NOT NULL,
   like_count INT NOT NULL DEFAULT 0,
   photo LONGBLOB,
